@@ -129,7 +129,7 @@ public class PlayerInputManager : MonoBehaviour
     }
 
     // Stop the player's ability to select after the time runs out
-    void StopSelecting()
+    public void StopSelecting()
     {
         isSelecting = false;
 
@@ -151,5 +151,21 @@ public class PlayerInputManager : MonoBehaviour
     public int[] GetPlayerChoices()
     {
         return playerChoices;
+    }
+
+    // Reset the player's choices after a round ends
+    public void ResetSelection()
+    {
+        playerChoices = new int[3];  // Reset the array
+        currentSelection = 0;  // Reset the current selection index
+
+        // Hide all choices and reset placeholders
+        rockImage.gameObject.SetActive(false);
+        paperImage.gameObject.SetActive(false);
+        scissorsImage.gameObject.SetActive(false);
+
+        rockImagePlaceholder.gameObject.SetActive(true);
+        paperImagePlaceholder.gameObject.SetActive(true);
+        scissorsImagePlaceholder.gameObject.SetActive(true);
     }
 }
