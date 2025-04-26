@@ -24,9 +24,8 @@ public class PlayerInputManager : MonoBehaviour
     public KeyCode keyToSelectPaperPlayer2 = KeyCode.Keypad2;
     public KeyCode keyToSelectScissorsPlayer2 = KeyCode.Keypad3;
 
-    // Make playerChoices public so that SpiderGameManager can access it
-    public int[] playerChoices = new int[3];  // Array to store the player's 3 choices (1=Rock, 2=Paper, 3=Scissors)
-    private int currentSelection = 0;  // Tracks which choice the player is making (0 for first, 1 for second, 2 for third)
+    // Single variable to store player's choice (1=Rock, 2=Paper, 3=Scissors)
+    private int playerChoice = 0;  // Tracks the player's current choice (1 for Rock, 2 for Paper, 3 for Scissors)
     private bool isSelecting = true;  // Flag to allow selection of the player's action
 
     private float timeToChoose = 5f;  // Time limit for making a choice (in seconds)
@@ -39,7 +38,8 @@ public class PlayerInputManager : MonoBehaviour
         paperImage.gameObject.SetActive(false);
         scissorsImage.gameObject.SetActive(false);
 
-        rockImagePlaceholder.gameObject.SetActive(true);  // Show placeholders for selection
+        // Initially show placeholders for selection
+        rockImagePlaceholder.gameObject.SetActive(true);
         paperImagePlaceholder.gameObject.SetActive(true);
         scissorsImagePlaceholder.gameObject.SetActive(true);
 
@@ -95,37 +95,29 @@ public class PlayerInputManager : MonoBehaviour
     }
 
     // Method to handle player's choice
-    void SetChoice(int choice)
+    // Make this method public so SpiderGameManager can access it
+    public void SetChoice(int choice)
     {
-        if (currentSelection < 3)
+        playerChoice = choice;
+
+        // Show the corresponding image based on the choice
+        switch (choice)
         {
-            playerChoices[currentSelection] = choice;
-
-            // Show the corresponding image based on the choice
-            switch (choice)
-            {
-                case 1:
-                    rockImage.gameObject.SetActive(true);
-                    break;
-                case 2:
-                    paperImage.gameObject.SetActive(true);
-                    break;
-                case 3:
-                    scissorsImage.gameObject.SetActive(true);
-                    break;
-            }
-
-            // Move to the next selection
-            currentSelection++;
-
-            // Hide the images for the other selections
-            if (currentSelection < 3)
-            {
-                rockImage.gameObject.SetActive(false);
-                paperImage.gameObject.SetActive(false);
-                scissorsImage.gameObject.SetActive(false);
-            }
+            case 1:
+                rockImage.gameObject.SetActive(true);
+                break;
+            case 2:
+                paperImage.gameObject.SetActive(true);
+                break;
+            case 3:
+                scissorsImage.gameObject.SetActive(true);
+                break;
         }
+
+        // Hide the images for the other selections (only one choice can be shown at a time)
+        rockImage.gameObject.SetActive(choice == 1);
+        paperImage.gameObject.SetActive(choice == 2);
+        scissorsImage.gameObject.SetActive(choice == 3);
     }
 
     // Stop the player's ability to select after the time runs out
@@ -147,19 +139,19 @@ public class PlayerInputManager : MonoBehaviour
         SpiderGameManager.Instance.CompareSelections();
     }
 
-    // Getter method for playerChoices
-    public int[] GetPlayerChoices()
+    // Getter method for playerChoice
+    public int GetPlayerChoice()
     {
-        return playerChoices;
+        return playerChoice;
     }
 
     // Reset the player's choices after a round ends
     public void ResetSelection()
     {
-        playerChoices = new int[3];  // Reset the array
-        currentSelection = 0;  // Reset the current selection index
+        // Reset the player's current selection (so they can pick again)
+        playerChoice = 0;
 
-        // Hide all choices and reset placeholders
+        // Reset the UI to show placeholders and hide selections
         rockImage.gameObject.SetActive(false);
         paperImage.gameObject.SetActive(false);
         scissorsImage.gameObject.SetActive(false);
@@ -167,5 +159,12 @@ public class PlayerInputManager : MonoBehaviour
         rockImagePlaceholder.gameObject.SetActive(true);
         paperImagePlaceholder.gameObject.SetActive(true);
         scissorsImagePlaceholder.gameObject.SetActive(true);
+    }
+
+    // Method to allow player to start selecting again
+    public void StartSelecting()
+    {
+        isSelecting = true;  // Re-enable selection
+        timer = timeToChoose;  // Reset the timer for this new round
     }
 }
