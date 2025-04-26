@@ -13,8 +13,9 @@
 //    // UI Elements
 //    public TextMeshProUGUI resultText;  // Result UI text for displaying winner of the round
 //    public TextMeshProUGUI roundText;  // Text to display the current round
-//    public Slider player1HealthSlider; // Player 1 health bar
-//    public Slider player2HealthSlider; // Player 2 health bar
+
+//    public Image player1HealthImage; // Player 1 health image (instead of Slider)
+//    public Image player2HealthImage; // Player 2 health image (instead of Slider)
 
 //    public TextMeshProUGUI player1HealthText; // Player 1 health text
 //    public TextMeshProUGUI player2HealthText; // Player 2 health text
@@ -45,9 +46,9 @@
 
 //    void Start()
 //    {
-//        // Set initial health values
-//        player1HealthSlider.value = player1Health;
-//        player2HealthSlider.value = player2Health;
+//        // Set initial health values using fillAmount
+//        player1HealthImage.fillAmount = player1Health / 100f;
+//        player2HealthImage.fillAmount = player2Health / 100f;
 
 //        // Initialize health text (whole numbers)
 //        player1HealthText.text = "Player 1 Health: " + player1Health;
@@ -159,7 +160,7 @@
 //            player1Health -= damagePerAttack;
 //            player1Health = Mathf.Clamp(player1Health, 0, 100); // Ensure health doesn't go below 0
 
-//            player1HealthSlider.value = player1Health;
+//            player1HealthImage.fillAmount = player1Health / 100f;
 //            player1HealthText.text = "Player 1 Health: " + player1Health;
 //        }
 //        else if (player == 2)
@@ -167,7 +168,7 @@
 //            player2Health -= damagePerAttack;
 //            player2Health = Mathf.Clamp(player2Health, 0, 100); // Ensure health doesn't go below 0
 
-//            player2HealthSlider.value = player2Health;
+//            player2HealthImage.fillAmount = player2Health / 100f;
 //            player2HealthText.text = "Player 2 Health: " + player2Health;
 //        }
 //    }
@@ -232,6 +233,7 @@ public class SpiderGameManager : MonoBehaviour
     private float timer;  // Timer to show countdown
 
     private bool isSelecting = true;  // Flag to track if players can select their moves
+    private bool isProcessingRound = false; // Flag to prevent multiple calls to CompareSelections
 
     private void Awake()
     {
@@ -278,7 +280,10 @@ public class SpiderGameManager : MonoBehaviour
     // Method to compare selections after players make their choice
     public void CompareSelections()
     {
-        if (gameOver) return;  // If the game is over, stop comparing selections
+        // Prevent multiple calls to this method within the same round
+        if (gameOver || isProcessingRound) return;
+
+        isProcessingRound = true;  // Set flag to prevent multiple executions
 
         int player1Choice = player1Input.GetPlayerChoice();
         int player2Choice = player2Input.GetPlayerChoice();
@@ -310,13 +315,13 @@ public class SpiderGameManager : MonoBehaviour
         if (player1Health <= 0)
         {
             Invoke("ShowWinnerPanelWithDelay", winnerDelay);
-            winnerText.text = "Player 2 Wins the Game!";
+            winnerText.text = "Player 1 Loses the Game!";
             gameOver = true; // End the game
         }
         else if (player2Health <= 0)
         {
             Invoke("ShowWinnerPanelWithDelay", winnerDelay);
-            winnerText.text = "Player 1 Wins the Game!";
+            winnerText.text = "Player 2 Loses the Game!";
             gameOver = true; // End the game
         }
         else
@@ -343,6 +348,7 @@ public class SpiderGameManager : MonoBehaviour
 
         // Re-enable player selection
         isSelecting = true;
+        isProcessingRound = false; // Reset the processing flag
         player1Input.StartSelecting();
         player2Input.StartSelecting();
     }
@@ -371,14 +377,13 @@ public class SpiderGameManager : MonoBehaviour
     // Stop the player's ability to select after the time runs out
     public void StopSelecting()
     {
+        if (!isSelecting) return; // Prevent multiple calls
+
         isSelecting = false;
         player1Input.StopSelecting();
         player2Input.StopSelecting();
 
-        // Show the players' choices after the time runs out using SetChoice
-        player1Input.SetChoice(player1Input.GetPlayerChoice());
-        player2Input.SetChoice(player2Input.GetPlayerChoice());
-
+        // Compare selections after both players have made their choices
         CompareSelections();
     }
 
