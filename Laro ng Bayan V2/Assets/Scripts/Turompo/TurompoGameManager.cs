@@ -623,12 +623,17 @@ public class TurompoGameManager : MonoBehaviour
         {
             // Update timer
             remainingTime -= Time.deltaTime;
-            UpdateTimerUI();
 
-            // Check if time is up
+            // Check if time is up before updating UI to prevent negative values
             if (remainingTime <= 0)
             {
+                remainingTime = 0;
+                UpdateTimerUI();
                 GameTimeOver();
+            }
+            else
+            {
+                UpdateTimerUI();
             }
         }
     }
@@ -742,7 +747,16 @@ public class TurompoGameManager : MonoBehaviour
         // Display winner message
         string winner = "Player " + winnerIndex;
         winnerText.text = winner + " Wins!";
-        gameOverPanel.SetActive(true);
+
+        // Make sure the panel is active
+        if (gameOverPanel != null)
+        {
+            gameOverPanel.SetActive(true);
+        }
+        else
+        {
+            Debug.LogError("Game Over Panel is null!");
+        }
 
         // Stop all coroutines to prevent further difficulty increases
         StopAllCoroutines();
@@ -750,34 +764,48 @@ public class TurompoGameManager : MonoBehaviour
 
     public void GameTimeOver()
     {
+        // Only process once
         if (!isGameActive) return;
 
         isGameActive = false;
 
         // Determine winner based on score
-        string winner;
+        int winnerIndex = 0;
+        string winnerMessage;
+
         if (player1Score > player2Score)
         {
-            winner = "Player 1";
+            winnerIndex = 1;
+            winnerMessage = "Player 1 Wins!";
             // Keep player 1's torompo spinning
             if (player2Torompo != null)
                 player2Torompo.StopSpinning();
         }
         else if (player2Score > player1Score)
         {
-            winner = "Player 2";
+            winnerIndex = 2;
+            winnerMessage = "Player 2 Wins!";
             // Keep player 2's torompo spinning
             if (player1Torompo != null)
                 player1Torompo.StopSpinning();
         }
         else
         {
-            winner = "DRAW!";
+            winnerMessage = "DRAW!";
             // You might want to keep both spinning or stop both
         }
 
-        winnerText.text = winner + " Wins!";
-        gameOverPanel.SetActive(true);
+        winnerText.text = winnerMessage;
+
+        // Make sure the panel is active
+        if (gameOverPanel != null)
+        {
+            gameOverPanel.SetActive(true);
+        }
+        else
+        {
+            Debug.LogError("Game Over Panel is null!");
+        }
 
         // Clear all rhythm notes
         if (player1Rhythm != null)

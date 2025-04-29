@@ -5884,6 +5884,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1256976538}
   - component: {fileID: 1256976537}
+  - component: {fileID: 1256976539}
   m_Layer: 0
   m_Name: Turompo GAME MANAGER
   m_TagString: Untagged
@@ -5910,10 +5911,10 @@ MonoBehaviour:
   player1ScoreText: {fileID: 33695223}
   player2ScoreText: {fileID: 624365775}
   timerText: {fileID: 98050223}
-  levelText: {fileID: 0}
+  levelText: {fileID: 98050223}
   gameOverPanel: {fileID: 1986976643}
   winnerText: {fileID: 1831810108}
-  gameDuration: 120
+  gameDuration: 60
   progressionInterval: 15
   spinDecayIncrease: 2
   noteSpeedIncrease: 0.5
@@ -5933,6 +5934,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1256976539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1256976536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4832b5d43cf4fc64aa5cefa2c2e06865, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panelPrefab: {fileID: 1986976643}
+  activePanel: {fileID: 0}
+  winnerTextComponent: {fileID: 0}
+  mainCanvas: {fileID: 0}
 --- !u!1 &1278708925
 GameObject:
   m_ObjectHideFlags: 0
