@@ -748,10 +748,11 @@ public class TurompoGameManager : MonoBehaviour
         string winner = "Player " + winnerIndex;
         winnerText.text = winner + " Wins!";
 
-        // Make sure the panel is active
+        // Ensure the panel is active
         if (gameOverPanel != null)
         {
-            gameOverPanel.SetActive(true);
+            Debug.Log("Game Over Panel activated");
+            gameOverPanel.SetActive(true);  // Make sure the panel is activated
         }
         else
         {
@@ -797,10 +798,11 @@ public class TurompoGameManager : MonoBehaviour
 
         winnerText.text = winnerMessage;
 
-        // Make sure the panel is active
+        // Ensure the panel is active
         if (gameOverPanel != null)
         {
-            gameOverPanel.SetActive(true);
+            Debug.Log("Game Over Panel activated");
+            gameOverPanel.SetActive(true);  // Make sure the panel is activated
         }
         else
         {
