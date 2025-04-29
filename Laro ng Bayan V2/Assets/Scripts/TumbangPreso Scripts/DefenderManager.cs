@@ -277,7 +277,7 @@ public class DefenderManager : MonoBehaviour
         // Show feedback
         if (feedbackPanel != null && feedbackText != null)
         {
-            feedbackText.text = success ? "✅ BLOCK SUCCESSFUL!" : "❌ BLOCK FAILED!";
+            feedbackText.text = success ? "BLOCK SUCCESSFUL!" : "BLOCK FAILED!";
             feedbackPanel.SetActive(true);
         }
 
