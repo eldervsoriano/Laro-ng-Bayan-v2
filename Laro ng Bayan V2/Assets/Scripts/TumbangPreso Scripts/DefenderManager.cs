@@ -153,13 +153,13 @@ public class DefenderManager : MonoBehaviour
 
     [Header("Player Block Images")]
     [Tooltip("Image shown when Player 1 is attempting to block")]
-    public Image player1BlockAttemptImage;
+    public RawImage player1BlockAttemptImage;
     [Tooltip("Image shown when Player 1 successfully blocks")]
-    public Image player1BlockSuccessImage;
+    public RawImage player1BlockSuccessImage;
     [Tooltip("Image shown when Player 2 is attempting to block")]
-    public Image player2BlockAttemptImage;
+    public RawImage player2BlockAttemptImage;
     [Tooltip("Image shown when Player 2 successfully blocks")]
-    public Image player2BlockSuccessImage;
+    public RawImage player2BlockSuccessImage;
 
     private readonly KeyCode[] player1Keys = { KeyCode.A, KeyCode.W, KeyCode.S, KeyCode.D };
     private readonly KeyCode[] player2Keys = { KeyCode.LeftArrow, KeyCode.UpArrow, KeyCode.DownArrow, KeyCode.RightArrow };
@@ -175,8 +175,24 @@ public class DefenderManager : MonoBehaviour
         HideAllImages();
     }
 
+    private void OnEnable()
+    {
+        // Ensure images are hidden when the component is enabled
+        HideAllImages();
+    }
+
+    void Start()
+    {
+        // Make sure images are hidden at start as well
+        HideAllImages();
+
+        // Make sure the miniGameUI is hidden initially
+        if (miniGameUI != null) miniGameUI.SetActive(false);
+    }
+
     private void HideAllImages()
     {
+        // Make sure all block images are disabled
         if (player1BlockAttemptImage != null) player1BlockAttemptImage.gameObject.SetActive(false);
         if (player1BlockSuccessImage != null) player1BlockSuccessImage.gameObject.SetActive(false);
         if (player2BlockAttemptImage != null) player2BlockAttemptImage.gameObject.SetActive(false);
@@ -188,10 +204,13 @@ public class DefenderManager : MonoBehaviour
         onResultCallback = callback;
         currentDefendingPlayer = defendingPlayer;
 
+        // Ensure all images are hidden before starting
+        HideAllImages();
+
+        // Activate the mini-game UI
         if (miniGameUI != null) miniGameUI.SetActive(true);
 
-        // Show the appropriate attempting block image
-        HideAllImages();
+        // Only now that the mini-game UI is active, show the appropriate attempting block image
         if (defendingPlayer == 1 && player1BlockAttemptImage != null)
             player1BlockAttemptImage.gameObject.SetActive(true);
         else if (defendingPlayer == 2 && player2BlockAttemptImage != null)
@@ -232,18 +251,28 @@ public class DefenderManager : MonoBehaviour
     {
         inputAllowed = false;
 
-        // Hide attempt images and show success images if block was successful
+        // First hide the mini-game UI
+        if (miniGameUI != null)
+            miniGameUI.SetActive(false);
+
+        // Hide all attempt images first
+        if (player1BlockAttemptImage != null) player1BlockAttemptImage.gameObject.SetActive(false);
+        if (player2BlockAttemptImage != null) player2BlockAttemptImage.gameObject.SetActive(false);
+
+        // Show the appropriate success image if block was successful, otherwise hide all
         if (success)
         {
-            HideAllImages();
             if (currentDefendingPlayer == 1 && player1BlockSuccessImage != null)
                 player1BlockSuccessImage.gameObject.SetActive(true);
             else if (currentDefendingPlayer == 2 && player2BlockSuccessImage != null)
                 player2BlockSuccessImage.gameObject.SetActive(true);
         }
-
-        if (miniGameUI != null)
-            miniGameUI.SetActive(false);
+        else
+        {
+            // Ensure success images are also hidden on failure
+            if (player1BlockSuccessImage != null) player1BlockSuccessImage.gameObject.SetActive(false);
+            if (player2BlockSuccessImage != null) player2BlockSuccessImage.gameObject.SetActive(false);
+        }
 
         // Show feedback
         if (feedbackPanel != null && feedbackText != null)
@@ -259,7 +288,7 @@ public class DefenderManager : MonoBehaviour
     {
         yield return new WaitForSeconds(feedbackDelay);
 
-        // Hide any active images
+        // Hide any active images and panels
         HideAllImages();
 
         if (feedbackPanel != null)
