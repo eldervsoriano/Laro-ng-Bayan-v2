@@ -59,6 +59,10 @@
 //        winnerPanel.SetActive(false);
 //        timer = timeToChoose;
 
+//        // Hide result text at the start
+//        resultText.gameObject.SetActive(false);
+//        roundWinnerText.gameObject.SetActive(false);
+
 //        // Ensure spiders are in idle animations to start
 //        if (player1Spider != null) player1Spider.ResetToIdle();
 //        if (player2Spider != null) player2Spider.ResetToIdle();
@@ -71,6 +75,8 @@
 //            if (timer > 0f)
 //            {
 //                timer -= Time.deltaTime;
+//                // Only show time remaining during selection phase
+//                resultText.gameObject.SetActive(true);
 //                resultText.text = "Time: " + Mathf.Ceil(timer).ToString();
 //            }
 //            else
@@ -89,8 +95,14 @@
 
 //        isProcessingRound = true;
 
+//        // Hide the time display text
+//        resultText.gameObject.SetActive(false);
+
 //        int player1Choice = player1Input.GetPlayerChoice();
 //        int player2Choice = player2Input.GetPlayerChoice();
+
+//        // Note: The choices are now revealed when StopSelecting() is called
+//        // so no need to call RevealChoice() here
 
 //        string result = "It's a draw!";
 
@@ -99,6 +111,9 @@
 //        {
 //            result = "It's a draw!";
 //            // No animations for a draw, spiders remain in idle
+
+//            // Show result text after a short delay
+//            Invoke("ShowResultText", animationDelay);
 
 //            // FIX: Add a call to start a new round after a short delay
 //            Invoke("StartNewRound", drawDelay);
@@ -117,6 +132,9 @@
 
 //            // Player 2 takes damage
 //            Invoke("Player2TakesDamage", animationDelay * 3);
+
+//            // Show result text after animations start
+//            Invoke("ShowResultText", animationDelay * 2);
 //        }
 //        else
 //        {
@@ -130,10 +148,21 @@
 
 //            // Player 1 takes damage
 //            Invoke("Player1TakesDamage", animationDelay * 3);
+
+//            // Show result text after animations start
+//            Invoke("ShowResultText", animationDelay * 2);
 //        }
 
+//        // Store the result but don't show it yet
 //        resultText.text = result;
 //        roundWinnerText.text = result;
+//    }
+
+//    // Method to show result text at the appropriate time
+//    private void ShowResultText()
+//    {
+//        resultText.gameObject.SetActive(true);
+//        roundWinnerText.gameObject.SetActive(true);
 //    }
 
 //    // Animation trigger methods
@@ -219,6 +248,10 @@
 //        player1Input.ResetSelection();
 //        player2Input.ResetSelection();
 
+//        // Hide result texts for new round
+//        resultText.gameObject.SetActive(false);
+//        roundWinnerText.gameObject.SetActive(false);
+
 //        // Reset animations to idle
 //        if (player1Spider != null && !player1Spider.IsDead()) player1Spider.ResetToIdle();
 //        if (player2Spider != null && !player2Spider.IsDead()) player2Spider.ResetToIdle();
@@ -288,6 +321,10 @@
 //        player2HealthImage.fillAmount = player2Health / 100f;
 //        player1HealthText.text = "Player 1 Health: " + player1Health;
 //        player2HealthText.text = "Player 2 Health: " + player2Health;
+
+//        // Hide result texts
+//        resultText.gameObject.SetActive(false);
+//        roundWinnerText.gameObject.SetActive(false);
 
 //        // Reset round
 //        round = 1;
@@ -423,8 +460,50 @@ public class SpiderGameManager : MonoBehaviour
 
         string result = "It's a draw!";
 
-        // Compare choices and play appropriate animations with small delay
-        if (player1Choice == player2Choice)
+        // Fix: Check if either player didn't make a choice (choice = 0)
+        if (player1Choice == 0 && player2Choice == 0)
+        {
+            // Both players didn't choose - draw
+            result = "Neither player chose - It's a draw!";
+            Invoke("ShowResultText", animationDelay);
+            Invoke("StartNewRound", drawDelay);
+        }
+        else if (player1Choice == 0)
+        {
+            // Player 1 didn't choose - Player 2 wins by default
+            result = "Player 1 didn't choose - Player 2 Wins Round " + round + "!";
+
+            // Player 2 attacks
+            Invoke("PlayPlayer2AttackAnimation", animationDelay);
+
+            // Player 1 takes damage after a short delay
+            Invoke("PlayPlayer1DamageAnimation", animationDelay * 2);
+
+            // Player 1 takes damage
+            Invoke("Player1TakesDamage", animationDelay * 3);
+
+            // Show result text after animations start
+            Invoke("ShowResultText", animationDelay * 2);
+        }
+        else if (player2Choice == 0)
+        {
+            // Player 2 didn't choose - Player 1 wins by default
+            result = "Player 2 didn't choose - Player 1 Wins Round " + round + "!";
+
+            // Player 1 attacks
+            Invoke("PlayPlayer1AttackAnimation", animationDelay);
+
+            // Player 2 takes damage after a short delay
+            Invoke("PlayPlayer2DamageAnimation", animationDelay * 2);
+
+            // Player 2 takes damage
+            Invoke("Player2TakesDamage", animationDelay * 3);
+
+            // Show result text after animations start
+            Invoke("ShowResultText", animationDelay * 2);
+        }
+        // Compare choices only if both players made a selection
+        else if (player1Choice == player2Choice)
         {
             result = "It's a draw!";
             // No animations for a draw, spiders remain in idle
@@ -432,7 +511,7 @@ public class SpiderGameManager : MonoBehaviour
             // Show result text after a short delay
             Invoke("ShowResultText", animationDelay);
 
-            // FIX: Add a call to start a new round after a short delay
+            // Start a new round after a short delay
             Invoke("StartNewRound", drawDelay);
         }
         else if ((player1Choice == 1 && player2Choice == 3) || // Rock beats Scissors

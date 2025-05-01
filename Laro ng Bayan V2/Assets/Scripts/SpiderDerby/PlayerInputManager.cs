@@ -100,24 +100,17 @@
 //    {
 //        playerChoice = choice;
 
-//        // Show the corresponding image based on the choice
-//        switch (choice)
-//        {
-//            case 1:
-//                rockImage.gameObject.SetActive(true);
-//                break;
-//            case 2:
-//                paperImage.gameObject.SetActive(true);
-//                break;
-//            case 3:
-//                scissorsImage.gameObject.SetActive(true);
-//                break;
-//        }
+//        // During selection, don't show the choice yet
+//        // We'll reveal it when time runs out
+//    }
 
-//        // Hide the images for the other selections (only one choice can be shown at a time)
-//        rockImage.gameObject.SetActive(choice == 1);
-//        paperImage.gameObject.SetActive(choice == 2);
-//        scissorsImage.gameObject.SetActive(choice == 3);
+//    // New method to reveal the player's choice after time runs out
+//    public void RevealChoice()
+//    {
+//        // Show the corresponding image based on the choice
+//        rockImage.gameObject.SetActive(playerChoice == 1);
+//        paperImage.gameObject.SetActive(playerChoice == 2);
+//        scissorsImage.gameObject.SetActive(playerChoice == 3);
 //    }
 
 //    // Stop the player's ability to select after the time runs out
@@ -125,15 +118,13 @@
 //    {
 //        isSelecting = false;
 
-//        // Hide the placeholders and reveal actual selections after time is up
-//        rockImage.gameObject.SetActive(false);
-//        paperImage.gameObject.SetActive(false);
-//        scissorsImage.gameObject.SetActive(false);
-
-//        // Hide placeholders
+//        // Hide the placeholders
 //        rockImagePlaceholder.gameObject.SetActive(false);
 //        paperImagePlaceholder.gameObject.SetActive(false);
 //        scissorsImagePlaceholder.gameObject.SetActive(false);
+
+//        // Reveal the player's choice immediately when time runs out
+//        RevealChoice();
 
 //        // Trigger the game logic to compare selections
 //        SpiderGameManager.Instance.CompareSelections();
