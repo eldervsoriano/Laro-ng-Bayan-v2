@@ -85,6 +85,6 @@ public class UIManager : MonoBehaviour
     {
         yield return new WaitForSeconds(2f); // ⏳ delay duration
         winnerPanel.SetActive(true);
-        winnerText.text = $"🎉 Player {player} Wins!";
+        winnerText.text = $"Player {player} Wins!";
     }
 }
