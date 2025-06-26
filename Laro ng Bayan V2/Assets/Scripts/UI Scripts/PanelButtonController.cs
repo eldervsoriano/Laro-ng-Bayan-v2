@@ -51,3 +51,4 @@ public class PanelButtonController : MonoBehaviour
             closeButton.onClick.RemoveListener(ClosePanel);
     }
 }
+
