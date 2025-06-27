@@ -1081,6 +1081,7 @@ MonoBehaviour:
   panel: {fileID: 1774690840}
   openButton: {fileID: 289923745}
   closeButton: {fileID: 0}
+  pauseButton: {fileID: 0}
   startClosed: 1
 --- !u!114 &289923745
 MonoBehaviour:
@@ -1440,6 +1441,7 @@ MonoBehaviour:
   panel: {fileID: 308960608}
   openButton: {fileID: 329577413}
   closeButton: {fileID: 0}
+  pauseButton: {fileID: 0}
   startClosed: 1
 --- !u!114 &329577413
 MonoBehaviour:
@@ -1487,7 +1489,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 329577412}
         m_TargetAssemblyTypeName: PanelButtonController, Assembly-CSharp
-        m_MethodName: OpenPanel
+        m_MethodName: PauseGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4270,6 +4272,7 @@ MonoBehaviour:
   panel: {fileID: 1774690840}
   openButton: {fileID: 0}
   closeButton: {fileID: 816560576}
+  pauseButton: {fileID: 0}
   startClosed: 1
 --- !u!114 &816560576
 MonoBehaviour:
@@ -4966,6 +4969,7 @@ MonoBehaviour:
   panel: {fileID: 938633848}
   openButton: {fileID: 972287825}
   closeButton: {fileID: 0}
+  pauseButton: {fileID: 0}
   startClosed: 1
 --- !u!114 &972287825
 MonoBehaviour:
@@ -5011,9 +5015,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 972287825}
-        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
-        m_MethodName: Select
+      - m_Target: {fileID: 972287824}
+        m_TargetAssemblyTypeName: PanelButtonController, Assembly-CSharp
+        m_MethodName: PauseGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5305,6 +5309,7 @@ MonoBehaviour:
   panel: {fileID: 146209109}
   openButton: {fileID: 0}
   closeButton: {fileID: 1102907753}
+  pauseButton: {fileID: 0}
   startClosed: 1
 --- !u!114 &1102907753
 MonoBehaviour:
@@ -5708,6 +5713,7 @@ MonoBehaviour:
   panel: {fileID: 146209109}
   openButton: {fileID: 1153371675}
   closeButton: {fileID: 0}
+  pauseButton: {fileID: 0}
   startClosed: 1
 --- !u!114 &1153371675
 MonoBehaviour:
@@ -6395,6 +6401,7 @@ MonoBehaviour:
   panel: {fileID: 308960608}
   openButton: {fileID: 0}
   closeButton: {fileID: 1240566124}
+  pauseButton: {fileID: 0}
   startClosed: 1
 --- !u!114 &1240566124
 MonoBehaviour:
@@ -6442,7 +6449,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1240566123}
         m_TargetAssemblyTypeName: PanelButtonController, Assembly-CSharp
-        m_MethodName: ClosePanel
+        m_MethodName: ResumeGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6682,6 +6689,7 @@ MonoBehaviour:
   panel: {fileID: 938633848}
   openButton: {fileID: 0}
   closeButton: {fileID: 1301060420}
+  pauseButton: {fileID: 0}
   startClosed: 1
 --- !u!114 &1301060420
 MonoBehaviour:
@@ -6729,7 +6737,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1301060419}
         m_TargetAssemblyTypeName: PanelButtonController, Assembly-CSharp
-        m_MethodName: ClosePanel
+        m_MethodName: ResumeGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10035,6 +10043,6 @@ SceneRoots:
   - {fileID: 957106264}
   - {fileID: 1104591500}
   - {fileID: 516083628}
-  - {fileID: 441444197}
   - {fileID: 833865862550364425}
   - {fileID: 662917845}
+  - {fileID: 441444197}
