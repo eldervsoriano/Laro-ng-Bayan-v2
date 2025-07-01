@@ -510,6 +510,7 @@ GameObject:
   - component: {fileID: 127715137}
   - component: {fileID: 127715139}
   - component: {fileID: 127715140}
+  - component: {fileID: 127715141}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Untagged
@@ -621,6 +622,29 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &127715141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 127715136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da629fce6a06fe249bd42f5dcf0c9af4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDuration: 0.3
+  attackScaleMultiplier: 1.3
+  attackMoveDistance: 0.5
+  attackColor: {r: 0.074868485, g: 0.015686274, b: 1, a: 0}
+  attackRotationMultiplier: 2
+  attackParticles: {fileID: 0}
+  attackSound: {fileID: 0}
+  screenShakeIntensity: 0.1
+  turompoModel: {fileID: 1520372655}
+  turompoRenderer: {fileID: 1520372653}
+  audioSource: {fileID: 0}
 --- !u!1 &146209109
 GameObject:
   m_ObjectHideFlags: 0
@@ -2024,7 +2048,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 2190a16416696504f9b9384fcddf468a, type: 3}
       propertyPath: m_CastShadows
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 2190a16416696504f9b9384fcddf468a, type: 3}
       propertyPath: m_Name
@@ -7624,6 +7648,16 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 2190a16416696504f9b9384fcddf468a, type: 3}
   m_PrefabInstance: {fileID: 516083628}
   m_PrefabAsset: {fileID: 0}
+--- !u!23 &1520372653 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 2190a16416696504f9b9384fcddf468a, type: 3}
+  m_PrefabInstance: {fileID: 516083628}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1520372655 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2190a16416696504f9b9384fcddf468a, type: 3}
+  m_PrefabInstance: {fileID: 516083628}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1541842659
 GameObject:
   m_ObjectHideFlags: 0
@@ -8035,11 +8069,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1674401840 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 43a8e784fcb157448a8049aa507c31dc, type: 3}
-  m_PrefabInstance: {fileID: 1104591500}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1676788604
 GameObject:
   m_ObjectHideFlags: 0
@@ -8909,6 +8938,7 @@ GameObject:
   - component: {fileID: 1954651786}
   - component: {fileID: 1954651788}
   - component: {fileID: 1954651789}
+  - component: {fileID: 1954651790}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Untagged
@@ -8933,7 +8963,7 @@ MonoBehaviour:
   currentSpinSpeed: 0
   spinDecayRate: 10
   spinBoostPerMatch: 15
-  torompoModel: {fileID: 1674401840}
+  torompoModel: {fileID: 919132148112000989}
   spinParticles: {fileID: 0}
   spinAudio: {fileID: 0}
   successSound: {fileID: 0}
@@ -9020,6 +9050,29 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1954651790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1954651785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da629fce6a06fe249bd42f5dcf0c9af4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDuration: 0.3
+  attackScaleMultiplier: 1.3
+  attackMoveDistance: 0.5
+  attackColor: {r: 1, g: 1, b: 1, a: 0}
+  attackRotationMultiplier: 2
+  attackParticles: {fileID: 0}
+  attackSound: {fileID: 0}
+  screenShakeIntensity: 0.1
+  turompoModel: {fileID: 543450652637650279}
+  turompoRenderer: {fileID: 1954651789}
+  audioSource: {fileID: 0}
 --- !u!1 &1986976643
 GameObject:
   m_ObjectHideFlags: 0
@@ -9307,6 +9360,11 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!4 &543450652637650279 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 43a8e784fcb157448a8049aa507c31dc, type: 3}
+  m_PrefabInstance: {fileID: 1104591500}
+  m_PrefabAsset: {fileID: 0}
 --- !u!23 &686870150922421416
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -9418,6 +9476,11 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &919132148112000989 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 43a8e784fcb157448a8049aa507c31dc, type: 3}
+  m_PrefabInstance: {fileID: 1104591500}
+  m_PrefabAsset: {fileID: 0}
 --- !u!23 &1900397109411184507
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -10029,6 +10092,8 @@ SceneRoots:
   - {fileID: 701448017}
   - {fileID: 1208506313}
   - {fileID: 1145957950}
+  - {fileID: 1104591500}
+  - {fileID: 516083628}
   - {fileID: 1954651787}
   - {fileID: 127715138}
   - {fileID: 1666048132}
@@ -10041,8 +10106,6 @@ SceneRoots:
   - {fileID: 1447920102}
   - {fileID: 1320913771}
   - {fileID: 957106264}
-  - {fileID: 1104591500}
-  - {fileID: 516083628}
   - {fileID: 833865862550364425}
   - {fileID: 662917845}
   - {fileID: 441444197}
