@@ -129,6 +129,178 @@
 //    }
 //}
 
+//using System.Collections;
+//using System.Collections.Generic;
+//using UnityEngine;
+//using UnityEngine.UI;
+
+//public class TurompoController : MonoBehaviour
+//{
+//    // Player identification
+//    public int playerIndex = 1; // 1 for player 1, 2 for player 2
+
+//    // Spin mechanics
+//    public float maxSpinSpeed = 720f; // degrees per second (positive for clockwise rotation)
+//    public float currentSpinSpeed;
+//    public float spinDecayRate = 30f; // speed reduction per second (changed from 50f to 30f)
+//    public float spinBoostPerMatch = 50f; // speed boost for successful matches
+
+//    // Visual feedback
+//    public GameObject torompoModel;
+//    public ParticleSystem spinParticles;
+//    public AudioSource spinAudio;
+//    public AudioClip successSound;
+//    public AudioClip failSound;
+
+//    // Attack Animation System
+//    private TurompoAttackAnimator attackAnimator;
+
+//    // Gameplay state
+//    private bool isSpinning = false;
+//    private float minSpinSpeed = 50f; // minimum speed before game over
+
+//    void Start()
+//    {
+//        // Get the attack animator component
+//        attackAnimator = GetComponent<TurompoAttackAnimator>();
+
+//        ResetTorompo();
+//    }
+
+//    void Update()
+//    {
+//        if (isSpinning && TurompoGameManager.Instance.IsGameActive())
+//        {
+//            // Apply continuous spin decay (reducing positive value)
+//            currentSpinSpeed -= spinDecayRate * Time.deltaTime;
+
+//            // Ensure spin speed doesn't go negative
+//            if (currentSpinSpeed < 0f)
+//            {
+//                currentSpinSpeed = 0f;
+//            }
+
+//            // Update visual spin speed (using positive rotation)
+//            if (torompoModel != null)
+//            {
+//                torompoModel.transform.Rotate(Vector3.forward, currentSpinSpeed * Time.deltaTime);
+//            }
+
+//            // Adjust particle effects based on speed
+//            if (spinParticles != null)
+//            {
+//                var emission = spinParticles.emission;
+//                emission.rateOverTime = (currentSpinSpeed / maxSpinSpeed) * 50;
+//            }
+
+//            // Adjust audio pitch based on speed
+//            if (spinAudio != null)
+//            {
+//                spinAudio.pitch = 0.5f + (currentSpinSpeed / maxSpinSpeed);
+//            }
+
+//            // Check for game over condition (when speed drops below minimum)
+//            if (currentSpinSpeed <= minSpinSpeed)
+//            {
+//                StopSpinning();
+
+//                // Notify the game manager that this player lost (other player wins)
+//                if (TurompoGameManager.Instance != null)
+//                {
+//                    // Call PlayerGameOver directly with the current player index
+//                    TurompoGameManager.Instance.PlayerGameOver(playerIndex);
+
+//                    // Log for debugging
+//                    Debug.Log("Player " + playerIndex + " stopped spinning. Game over triggered.");
+//                }
+//            }
+//        }
+//    }
+
+//    public void ResetTorompo()
+//    {
+//        currentSpinSpeed = maxSpinSpeed;
+//        isSpinning = true;
+
+//        if (spinParticles != null)
+//            spinParticles.Play();
+
+//        if (spinAudio != null)
+//            spinAudio.Play();
+
+//        // Reset attack animator to original state
+//        if (attackAnimator != null)
+//        {
+//            attackAnimator.ResetToOriginal();
+//        }
+//    }
+
+//    public void StopSpinning()
+//    {
+//        isSpinning = false;
+
+//        if (spinParticles != null)
+//            spinParticles.Stop();
+
+//        if (spinAudio != null)
+//            spinAudio.Stop();
+
+//        // Log for debugging
+//        Debug.Log("Player " + playerIndex + " torompo stopped spinning.");
+//    }
+
+//    public void BoostSpin()
+//    {
+//        // Increase spin speed on successful matches
+//        currentSpinSpeed += spinBoostPerMatch;
+
+//        if (currentSpinSpeed > maxSpinSpeed)
+//        {
+//            currentSpinSpeed = maxSpinSpeed;
+//        }
+
+//        // Trigger attack animation
+//        if (attackAnimator != null)
+//        {
+//            attackAnimator.TriggerAttack();
+//        }
+
+//        if (spinAudio != null && successSound != null)
+//            spinAudio.PlayOneShot(successSound);
+//    }
+
+//    /// <summary>
+//    /// Boost spin with collision point for directional attack animation
+//    /// </summary>
+//    public void BoostSpinWithCollision(Vector3 collisionPoint)
+//    {
+//        // Increase spin speed on successful matches
+//        currentSpinSpeed += spinBoostPerMatch;
+
+//        if (currentSpinSpeed > maxSpinSpeed)
+//        {
+//            currentSpinSpeed = maxSpinSpeed;
+//        }
+
+//        // Trigger attack animation with collision effects
+//        if (attackAnimator != null)
+//        {
+//            attackAnimator.TriggerAttackWithCollision(collisionPoint);
+//        }
+
+//        if (spinAudio != null && successSound != null)
+//            spinAudio.PlayOneShot(successSound);
+//    }
+
+//    public void MissedMatch()
+//    {
+//        // Play the fail sound but don't modify the spin speed on misses
+//        // This ensures rotation speed only increases on successful matches
+//        if (spinAudio != null && failSound != null)
+//            spinAudio.PlayOneShot(failSound);
+//    }
+//}
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -152,6 +324,14 @@ public class TurompoController : MonoBehaviour
     public AudioClip successSound;
     public AudioClip failSound;
 
+    // Speed Bar UI
+    [Header("Speed Bar UI")]
+    public Image speedBarFill; // The fill image of the speed bar
+    public Color highSpeedColor = Color.green;
+    public Color mediumSpeedColor = Color.yellow;
+    public Color lowSpeedColor = Color.red;
+    public Color criticalSpeedColor = Color.red;
+
     // Attack Animation System
     private TurompoAttackAnimator attackAnimator;
 
@@ -163,6 +343,9 @@ public class TurompoController : MonoBehaviour
     {
         // Get the attack animator component
         attackAnimator = GetComponent<TurompoAttackAnimator>();
+
+        // Initialize speed bar
+        InitializeSpeedBar();
 
         ResetTorompo();
     }
@@ -199,6 +382,9 @@ public class TurompoController : MonoBehaviour
                 spinAudio.pitch = 0.5f + (currentSpinSpeed / maxSpinSpeed);
             }
 
+            // Update speed bar
+            UpdateSpeedBar();
+
             // Check for game over condition (when speed drops below minimum)
             if (currentSpinSpeed <= minSpinSpeed)
             {
@@ -212,6 +398,53 @@ public class TurompoController : MonoBehaviour
 
                     // Log for debugging
                     Debug.Log("Player " + playerIndex + " stopped spinning. Game over triggered.");
+                }
+            }
+        }
+    }
+
+    private void InitializeSpeedBar()
+    {
+        if (speedBarFill != null)
+        {
+            speedBarFill.fillAmount = 1f; // Start at full speed
+        }
+    }
+
+    private void UpdateSpeedBar()
+    {
+        if (speedBarFill != null)
+        {
+            // Calculate speed percentage
+            float speedPercentage = currentSpinSpeed / maxSpinSpeed;
+
+            // Update the fill amount (0 to 1)
+            speedBarFill.fillAmount = speedPercentage;
+
+            // Update the color based on speed percentage
+            if (speedPercentage > 0.7f)
+            {
+                speedBarFill.color = highSpeedColor;
+            }
+            else if (speedPercentage > 0.4f)
+            {
+                speedBarFill.color = mediumSpeedColor;
+            }
+            else if (speedPercentage > 0.2f)
+            {
+                speedBarFill.color = lowSpeedColor;
+            }
+            else
+            {
+                speedBarFill.color = criticalSpeedColor;
+
+                // Optional: Add blinking effect when critical
+                if (speedPercentage <= (minSpinSpeed / maxSpinSpeed))
+                {
+                    float blinkAlpha = Mathf.Sin(Time.time * 8f) * 0.5f + 0.5f;
+                    Color blinkColor = criticalSpeedColor;
+                    blinkColor.a = blinkAlpha;
+                    speedBarFill.color = blinkColor;
                 }
             }
         }
@@ -233,6 +466,9 @@ public class TurompoController : MonoBehaviour
         {
             attackAnimator.ResetToOriginal();
         }
+
+        // Update speed bar on reset
+        UpdateSpeedBar();
     }
 
     public void StopSpinning()
@@ -244,6 +480,12 @@ public class TurompoController : MonoBehaviour
 
         if (spinAudio != null)
             spinAudio.Stop();
+
+        // Update speed bar to show empty
+        if (speedBarFill != null)
+        {
+            speedBarFill.fillAmount = 0f;
+        }
 
         // Log for debugging
         Debug.Log("Player " + playerIndex + " torompo stopped spinning.");
@@ -267,6 +509,9 @@ public class TurompoController : MonoBehaviour
 
         if (spinAudio != null && successSound != null)
             spinAudio.PlayOneShot(successSound);
+
+        // Update speed bar immediately after boost
+        UpdateSpeedBar();
     }
 
     /// <summary>
@@ -290,6 +535,9 @@ public class TurompoController : MonoBehaviour
 
         if (spinAudio != null && successSound != null)
             spinAudio.PlayOneShot(successSound);
+
+        // Update speed bar immediately after boost
+        UpdateSpeedBar();
     }
 
     public void MissedMatch()
@@ -298,5 +546,11 @@ public class TurompoController : MonoBehaviour
         // This ensures rotation speed only increases on successful matches
         if (spinAudio != null && failSound != null)
             spinAudio.PlayOneShot(failSound);
+    }
+
+    // Public getter for current speed percentage (useful for UI or other components)
+    public float GetSpeedPercentage()
+    {
+        return currentSpinSpeed / maxSpinSpeed;
     }
 }
