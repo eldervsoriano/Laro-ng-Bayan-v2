@@ -9,16 +9,16 @@ public class PauseButton : MonoBehaviour
     [SerializeField] private GameObject pausePanel;
     private bool isPaused = false;
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (isPaused)
-                ResumeGame();
-            else
-                PauseGame();
-        }
-    }
+    //void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Escape))
+    //    {
+    //        if (isPaused)
+    //            ResumeGame();
+    //        else
+    //            PauseGame();
+    //    }
+    //}
 
     void PauseGame()
     {

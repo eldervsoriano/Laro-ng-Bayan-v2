@@ -5,23 +5,59 @@ using UnityEngine.SceneManagement;
 
 public class NpcButton : MonoBehaviour
 {
-    [SerializeField] private GameObject interactionPrompt; // 3D Text near NPC shoulder
-    [SerializeField] private string sceneToLoad = "YourNextSceneName"; // Name of the scene to load
+    [Header("3D Prompt (Near NPC)")]
+    [SerializeField] private GameObject interactionPrompt;
+
+    [Header("Confirmation UI Panel")]
+    [SerializeField] private GameObject confirmationPanel;
+
+    [Header("Scene To Load")]
+    [SerializeField] private string sceneToLoad = "YourNextSceneName";
 
     private bool isPlayerNearby = false;
+    private GameObject playerObject; // To find and store reference to player
+    private SimpleCharacterController playerController;
 
     void Start()
     {
         if (interactionPrompt != null)
             interactionPrompt.SetActive(false);
+
+        if (confirmationPanel != null)
+            confirmationPanel.SetActive(false);
     }
 
     void Update()
     {
         if (isPlayerNearby && Input.GetKeyDown(KeyCode.E))
         {
-            SceneManager.LoadScene(sceneToLoad);
+            // Show UI and disable movement
+            if (interactionPrompt != null)
+                interactionPrompt.SetActive(false);
+
+            if (confirmationPanel != null)
+                confirmationPanel.SetActive(true);
+
+            if (playerController != null)
+                playerController.enabled = false;
         }
+    }
+
+    public void OnYesClicked()
+    {
+        SceneManager.LoadScene(sceneToLoad);
+    }
+
+    public void OnNoClicked()
+    {
+        if (confirmationPanel != null)
+            confirmationPanel.SetActive(false);
+
+        if (isPlayerNearby && interactionPrompt != null)
+            interactionPrompt.SetActive(true);
+
+        if (playerController != null)
+            playerController.enabled = true;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -29,7 +65,10 @@ public class NpcButton : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerNearby = true;
-            if (interactionPrompt != null)
+            playerObject = other.gameObject;
+            playerController = playerObject.GetComponent<SimpleCharacterController>();
+
+            if (interactionPrompt != null && confirmationPanel != null && !confirmationPanel.activeSelf)
                 interactionPrompt.SetActive(true);
         }
     }
@@ -39,8 +78,15 @@ public class NpcButton : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerNearby = false;
+
             if (interactionPrompt != null)
                 interactionPrompt.SetActive(false);
+
+            if (confirmationPanel != null)
+                confirmationPanel.SetActive(false);
+
+            if (playerController != null)
+                playerController.enabled = true; // Ensure control is restored when walking away
         }
     }
 }

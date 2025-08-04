@@ -6,6 +6,7 @@ using TMPro;
 
 public class LocationPopup : MonoBehaviour
 {
+
     [SerializeField] private string locationName;
     [SerializeField] private TextMeshProUGUI locationText;
 
