@@ -550,6 +550,7 @@ MonoBehaviour:
   panel: {fileID: 453113139}
   openButton: {fileID: 71520170}
   closeButton: {fileID: 0}
+  pauseButton: {fileID: 0}
   startClosed: 1
 --- !u!1 &91236932
 GameObject:
@@ -1121,6 +1122,7 @@ MonoBehaviour:
   panel: {fileID: 1052287658}
   openButton: {fileID: 179910810}
   closeButton: {fileID: 0}
+  pauseButton: {fileID: 0}
   startClosed: 1
 --- !u!1 &234220447
 GameObject:
@@ -1728,6 +1730,7 @@ MonoBehaviour:
   panel: {fileID: 234220447}
   openButton: {fileID: 0}
   closeButton: {fileID: 315841197}
+  pauseButton: {fileID: 0}
   startClosed: 1
 --- !u!1 &337583532
 GameObject:
@@ -2697,7 +2700,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &495943484
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2782,11 +2785,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 4.93372, y: 2.6476, z: 3.08125}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1954073138}
-  - {fileID: 2072482416}
-  - {fileID: 832924214}
-  - {fileID: 1663107372}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &495943488
@@ -3250,6 +3249,7 @@ MonoBehaviour:
   panel: {fileID: 1052287658}
   openButton: {fileID: 0}
   closeButton: {fileID: 627811569}
+  pauseButton: {fileID: 0}
   startClosed: 1
 --- !u!114 &627811569
 MonoBehaviour:
@@ -4471,7 +4471,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &832924214
 Transform:
   m_ObjectHideFlags: 0
@@ -4480,12 +4480,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 832924213}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -4.0993, y: -0.064534, z: -0.07}
-  m_LocalScale: {x: 9.801975, y: 11.907, z: 0.35431528}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -20.224798, y: -0.17086022, z: -0.2156875}
+  m_LocalScale: {x: 30.202343, y: 31.524971, z: 1.7480928}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 495943487}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!65 &832924215
 BoxCollider:
@@ -4515,7 +4515,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 832924213}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -5573,6 +5573,7 @@ MonoBehaviour:
   panel: {fileID: 453113139}
   openButton: {fileID: 0}
   closeButton: {fileID: 967893844}
+  pauseButton: {fileID: 0}
   startClosed: 1
 --- !u!114 &967893844
 MonoBehaviour:
@@ -6023,6 +6024,7 @@ MonoBehaviour:
   panel: {fileID: 402508703}
   openButton: {fileID: 1114345605}
   closeButton: {fileID: 0}
+  pauseButton: {fileID: 0}
   startClosed: 1
 --- !u!1 &1116683932
 GameObject:
@@ -7761,7 +7763,6 @@ MonoBehaviour:
   LoadingScreen: {fileID: 1193883358}
   LoadingBarFill: {fileID: 1241562533}
   LoadingText: {fileID: 1910146872}
-  minimumLoadingTime: 1.5
 --- !u!1 &1663107371
 GameObject:
   m_ObjectHideFlags: 0
@@ -7781,7 +7782,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1663107372
 Transform:
   m_ObjectHideFlags: 0
@@ -7790,12 +7791,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1663107371}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 4.135, y: -0.064534, z: -0.07}
-  m_LocalScale: {x: 9.801975, y: 11.907, z: 0.35431528}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 20.400934, y: -0.17086022, z: -0.2156875}
+  m_LocalScale: {x: 30.202343, y: 31.524971, z: 1.7480928}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 495943487}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!65 &1663107373
 BoxCollider:
@@ -7825,7 +7826,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1663107371}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -9054,6 +9055,99 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &1923451592
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1923451595}
+  - component: {fileID: 1923451594}
+  - component: {fileID: 1923451593}
+  m_Layer: 0
+  m_Name: Terrain
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!154 &1923451593
+TerrainCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1923451592}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_TerrainData: {fileID: 15600000, guid: 76cb742549132d64a888f88258ad8516, type: 2}
+  m_EnableTreeColliders: 1
+--- !u!218 &1923451594
+Terrain:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1923451592}
+  m_Enabled: 1
+  serializedVersion: 6
+  m_TerrainData: {fileID: 15600000, guid: 76cb742549132d64a888f88258ad8516, type: 2}
+  m_TreeDistance: 5000
+  m_TreeBillboardDistance: 50
+  m_TreeCrossFadeLength: 5
+  m_TreeMaximumFullLODCount: 50
+  m_DetailObjectDistance: 80
+  m_DetailObjectDensity: 1
+  m_HeightmapPixelError: 5
+  m_SplatMapDistance: 1000
+  m_HeightmapMinimumLODSimplification: 0
+  m_HeightmapMaximumLOD: 0
+  m_ShadowCastingMode: 2
+  m_DrawHeightmap: 1
+  m_DrawInstanced: 0
+  m_DrawTreesAndFoliage: 1
+  m_StaticShadowCaster: 0
+  m_IgnoreQualitySettings: 0
+  m_ReflectionProbeUsage: 1
+  m_MaterialTemplate: {fileID: 10652, guid: 0000000000000000f000000000000000, type: 0}
+  m_BakeLightProbesForTrees: 1
+  m_PreserveTreePrototypeLayers: 0
+  m_DeringLightProbesForTrees: 1
+  m_ReceiveGI: 1
+  m_ScaleInLightmap: 0.0256
+  m_LightmapParameters: {fileID: 15203, guid: 0000000000000000f000000000000000, type: 0}
+  m_GroupingID: 0
+  m_RenderingLayerMask: 1
+  m_AllowAutoConnect: 1
+  m_EnableHeightmapRayTracing: 1
+  m_EnableTreesAndDetailsRayTracing: 0
+  m_TreeMotionVectorModeOverride: 3
+--- !u!4 &1923451595
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1923451592}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.5609857, y: -0.43045926, z: -0.43045923, w: 0.5609856}
+  m_LocalPosition: {x: -171, y: 0, z: -285}
+  m_LocalScale: {x: 205.6431, y: 150.85425, z: 168.64278}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1954073137
 GameObject:
   m_ObjectHideFlags: 0
@@ -9073,7 +9167,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1954073138
 Transform:
   m_ObjectHideFlags: 0
@@ -9082,12 +9176,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1954073137}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.054536, z: 3.9844}
-  m_LocalScale: {x: 9.113495, y: 11.907, z: 0.3810821}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.14438951, z: 12.276933}
+  m_LocalScale: {x: 44.963432, y: 31.524971, z: 1.1742091}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 495943487}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1954073139
 BoxCollider:
@@ -9117,7 +9211,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1954073137}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -9575,6 +9669,7 @@ MonoBehaviour:
   panel: {fileID: 234220447}
   openButton: {fileID: 2051986105}
   closeButton: {fileID: 0}
+  pauseButton: {fileID: 0}
   startClosed: 1
 --- !u!1 &2065588177
 GameObject:
@@ -9765,6 +9860,7 @@ MonoBehaviour:
   panel: {fileID: 402508703}
   openButton: {fileID: 0}
   closeButton: {fileID: 2069036836}
+  pauseButton: {fileID: 0}
   startClosed: 1
 --- !u!114 &2069036836
 MonoBehaviour:
@@ -9879,7 +9975,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2072482416
 Transform:
   m_ObjectHideFlags: 0
@@ -9888,12 +9984,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2072482415}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.054536, z: -4.0189}
-  m_LocalScale: {x: 9.113495, y: 11.907, z: 0.3810821}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.14438951, z: -12.383235}
+  m_LocalScale: {x: 44.963432, y: 31.524971, z: 1.1742091}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 495943487}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &2072482417
 BoxCollider:
@@ -9923,7 +10019,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2072482415}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -10699,6 +10795,10 @@ SceneRoots:
   m_Roots:
   - {fileID: 963194228}
   - {fileID: 705507995}
+  - {fileID: 1954073138}
+  - {fileID: 2072482416}
+  - {fileID: 832924214}
+  - {fileID: 1663107372}
   - {fileID: 495943487}
   - {fileID: 1649974012}
   - {fileID: 1522013275}
@@ -10724,3 +10824,4 @@ SceneRoots:
   - {fileID: 1805654615}
   - {fileID: 628323013}
   - {fileID: 832409114}
+  - {fileID: 1923451595}
