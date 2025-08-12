@@ -8,16 +8,20 @@ public class MouseToggle : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Z))
+        // Only allow Z toggle if not paused
+        if (!PauseButton.isPaused)
         {
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-        }
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+            }
 
-        if (Input.GetKeyUp(KeyCode.Z))
-        {
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
+            if (Input.GetKeyUp(KeyCode.Z))
+            {
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+            }
         }
     }
 

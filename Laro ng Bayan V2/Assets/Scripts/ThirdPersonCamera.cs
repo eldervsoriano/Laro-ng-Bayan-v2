@@ -207,13 +207,14 @@ public class ThirdPersonCamera : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (target == null)
+        if (target == null || PauseButton.isPaused)
             return;
 
         HandleInput();
         RotateCamera();
         PositionCamera();
     }
+
 
     private void HandleInput()
     {

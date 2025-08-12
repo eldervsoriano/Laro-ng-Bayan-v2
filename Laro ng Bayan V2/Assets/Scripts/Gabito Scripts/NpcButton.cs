@@ -1,21 +1,29 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro; // Only if you use TextMesh Pro
 
 public class NpcButton : MonoBehaviour
 {
     [Header("3D Prompt (Near NPC)")]
     [SerializeField] private GameObject interactionPrompt;
 
-    [Header("Confirmation UI Panel")]
+    [Header("UI Panels")]
     [SerializeField] private GameObject confirmationPanel;
+    [SerializeField] private GameObject dialoguePanel;
+
+    [Header("Dialogue Elements")]
+    [SerializeField] private TMP_Text dialogueText; // TMP recommended
+    [TextArea]
+    [SerializeField] private List<string> npcLines;
+
+    private int currentLineIndex = 0;
 
     [Header("Scene To Load")]
     [SerializeField] private string sceneToLoad = "YourNextSceneName";
 
     private bool isPlayerNearby = false;
-    private GameObject playerObject; // To find and store reference to player
+    private GameObject playerObject;
     private SimpleCharacterController playerController;
 
     void Start()
@@ -25,21 +33,52 @@ public class NpcButton : MonoBehaviour
 
         if (confirmationPanel != null)
             confirmationPanel.SetActive(false);
+
+        if (dialoguePanel != null)
+            dialoguePanel.SetActive(false);
     }
 
     void Update()
     {
         if (isPlayerNearby && Input.GetKeyDown(KeyCode.E))
         {
-            // Show UI and disable movement
             if (interactionPrompt != null)
                 interactionPrompt.SetActive(false);
 
-            if (confirmationPanel != null)
-                confirmationPanel.SetActive(true);
+            if (dialoguePanel != null)
+            {
+                dialoguePanel.SetActive(true);
+                currentLineIndex = 0;        // Reset dialogue index here before showing dialogue
+                ShowDialogueLine(currentLineIndex);
+            }
 
             if (playerController != null)
                 playerController.enabled = false;
+        }
+    }
+
+    // Called when "Next" button is pressed
+    public void OnNextClicked()
+    {
+        currentLineIndex++;
+
+        if (currentLineIndex < npcLines.Count)
+        {
+            ShowDialogueLine(currentLineIndex);
+        }
+        else
+        {
+            // End of dialogue — show Yes/No choices
+            if (dialoguePanel != null) dialoguePanel.SetActive(false);
+            if (confirmationPanel != null) confirmationPanel.SetActive(true);
+        }
+    }
+
+    void ShowDialogueLine(int index)
+    {
+        if (dialogueText != null && index >= 0 && index < npcLines.Count)
+        {
+            dialogueText.text = npcLines[index];
         }
     }
 
@@ -53,11 +92,16 @@ public class NpcButton : MonoBehaviour
         if (confirmationPanel != null)
             confirmationPanel.SetActive(false);
 
+        if (dialoguePanel != null)
+            dialoguePanel.SetActive(false);
+
         if (isPlayerNearby && interactionPrompt != null)
             interactionPrompt.SetActive(true);
 
         if (playerController != null)
             playerController.enabled = true;
+
+        currentLineIndex = 0; // Reset dialogue index here as well
     }
 
     private void OnTriggerEnter(Collider other)
@@ -68,7 +112,7 @@ public class NpcButton : MonoBehaviour
             playerObject = other.gameObject;
             playerController = playerObject.GetComponent<SimpleCharacterController>();
 
-            if (interactionPrompt != null && confirmationPanel != null && !confirmationPanel.activeSelf)
+            if (interactionPrompt != null && !confirmationPanel.activeSelf)
                 interactionPrompt.SetActive(true);
         }
     }
@@ -85,8 +129,11 @@ public class NpcButton : MonoBehaviour
             if (confirmationPanel != null)
                 confirmationPanel.SetActive(false);
 
+            if (dialoguePanel != null)
+                dialoguePanel.SetActive(false);
+
             if (playerController != null)
-                playerController.enabled = true; // Ensure control is restored when walking away
+                playerController.enabled = true;
         }
     }
 }
