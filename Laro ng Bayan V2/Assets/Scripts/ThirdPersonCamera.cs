@@ -145,7 +145,7 @@
 //        }
 //    }
 //}
-// =================================================================================
+
 using UnityEngine;
 
 public class ThirdPersonCamera : MonoBehaviour
@@ -207,14 +207,13 @@ public class ThirdPersonCamera : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (target == null || PauseButton.isPaused)
+        if (target == null)
             return;
 
         HandleInput();
         RotateCamera();
         PositionCamera();
     }
-
 
     private void HandleInput()
     {

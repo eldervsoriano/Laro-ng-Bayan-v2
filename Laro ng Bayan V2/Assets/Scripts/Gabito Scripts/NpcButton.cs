@@ -5,8 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class NpcButton : MonoBehaviour
 {
-    // GABITO SCRIPT :D
-
     [Header("3D Prompt (Near NPC)")]
     [SerializeField] private GameObject interactionPrompt;
 

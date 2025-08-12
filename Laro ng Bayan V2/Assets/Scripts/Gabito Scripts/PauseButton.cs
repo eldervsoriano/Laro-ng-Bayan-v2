@@ -4,53 +4,34 @@ using UnityEngine;
 
 public class PauseButton : MonoBehaviour
 {
-    // GABITO SCRIPT :D
+    // GABITO SCRIPT 
 
     [SerializeField] private GameObject pausePanel;
-    public static bool isPaused = false; // Make it static so other scripts can check it
+    private bool isPaused = false;
 
-    // If you want ESC back, uncomment this
-    // void Update()
-    // {
-    //     if (Input.GetKeyDown(KeyCode.Escape))
-    //     {
-    //         if (isPaused)
-    //             ResumeGame();
-    //         else
-    //             PauseGame();
-    //     }
-    // }
+    //void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Escape))
+    //    {
+    //        if (isPaused)
+    //            ResumeGame();
+    //        else
+    //            PauseGame();
+    //    }
+    //}
 
-    public void PauseGame()
+    void PauseGame()
     {
-        pausePanel.SetActive(true);
-        Time.timeScale = 0f;
+        pausePanel.SetActive(true); // Show UI first
+        Time.timeScale = 0f;        // THEN pause time
         isPaused = true;
-
-        // Show cursor
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
     }
 
+    // Now public so buttons can call it
     public void ResumeGame()
     {
-        Time.timeScale = 1f;
-        pausePanel.SetActive(false);
+        Time.timeScale = 1f;             // Unpause time first
+        pausePanel.SetActive(false);     // THEN hide UI
         isPaused = false;
-
-        // Hide cursor
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-    }
-
-    public void ResumeGameWithCursor()
-    {
-        Time.timeScale = 1f;
-        pausePanel.SetActive(false);
-        isPaused = false;
-
-        // Hide cursor
-        //Cursor.visible = false;
-        //Cursor.lockState = CursorLockMode.Locked;
     }
 }
