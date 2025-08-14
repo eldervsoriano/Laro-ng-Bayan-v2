@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using TMPro; // Only if you use TextMesh Pro
+using TMPro;
 
 public class NpcButton : MonoBehaviour
 {
@@ -13,7 +13,7 @@ public class NpcButton : MonoBehaviour
     [SerializeField] private GameObject dialoguePanel;
 
     [Header("Dialogue Elements")]
-    [SerializeField] private TMP_Text dialogueText; // TMP recommended
+    [SerializeField] private TMP_Text dialogueText;
     [TextArea]
     [SerializeField] private List<string> npcLines;
 
@@ -25,39 +25,54 @@ public class NpcButton : MonoBehaviour
     private bool isPlayerNearby = false;
     private GameObject playerObject;
     private SimpleCharacterController playerController;
+    private ThirdPersonCamera cameraController;
+    private Animator playerAnimator; // NEW — for animation control
+    private int speedParamID;
+    private int isRunningParamID;
 
     void Start()
     {
-        if (interactionPrompt != null)
-            interactionPrompt.SetActive(false);
+        if (interactionPrompt != null) interactionPrompt.SetActive(false);
+        if (confirmationPanel != null) confirmationPanel.SetActive(false);
+        if (dialoguePanel != null) dialoguePanel.SetActive(false);
 
-        if (confirmationPanel != null)
-            confirmationPanel.SetActive(false);
-
-        if (dialoguePanel != null)
-            dialoguePanel.SetActive(false);
+        // Cache animator parameter hashes
+        speedParamID = Animator.StringToHash("Speed");
+        isRunningParamID = Animator.StringToHash("IsRunning");
     }
 
     void Update()
     {
         if (isPlayerNearby && Input.GetKeyDown(KeyCode.E))
         {
-            if (interactionPrompt != null)
-                interactionPrompt.SetActive(false);
+            if (interactionPrompt != null) interactionPrompt.SetActive(false);
 
             if (dialoguePanel != null)
             {
                 dialoguePanel.SetActive(true);
-                currentLineIndex = 0;        // Reset dialogue index here before showing dialogue
+                currentLineIndex = 0;
                 ShowDialogueLine(currentLineIndex);
             }
 
             if (playerController != null)
-                playerController.enabled = false;
+                playerController.enabled = false; // stop movement script
+
+            if (cameraController != null)
+                cameraController.enabled = false; // stop camera movement
+
+            if (playerAnimator != null)
+            {
+                // Force idle animation
+                playerAnimator.SetFloat(speedParamID, 0f);
+                playerAnimator.SetBool(isRunningParamID, false);
+            }
+
+            // Show mouse
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
     }
 
-    // Called when "Next" button is pressed
     public void OnNextClicked()
     {
         currentLineIndex++;
@@ -68,7 +83,6 @@ public class NpcButton : MonoBehaviour
         }
         else
         {
-            // End of dialogue — show Yes/No choices
             if (dialoguePanel != null) dialoguePanel.SetActive(false);
             if (confirmationPanel != null) confirmationPanel.SetActive(true);
         }
@@ -84,24 +98,36 @@ public class NpcButton : MonoBehaviour
 
     public void OnYesClicked()
     {
+        // Optional: reset before scene change
+        if (playerController != null) playerController.enabled = true;
+        if (cameraController != null) cameraController.enabled = true;
+        if (playerAnimator != null) playerAnimator.SetFloat(speedParamID, 0f);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
         SceneManager.LoadScene(sceneToLoad);
     }
 
     public void OnNoClicked()
     {
-        if (confirmationPanel != null)
-            confirmationPanel.SetActive(false);
-
-        if (dialoguePanel != null)
-            dialoguePanel.SetActive(false);
-
-        if (isPlayerNearby && interactionPrompt != null)
-            interactionPrompt.SetActive(true);
+        if (confirmationPanel != null) confirmationPanel.SetActive(false);
+        if (dialoguePanel != null) dialoguePanel.SetActive(false);
+        if (isPlayerNearby && interactionPrompt != null) interactionPrompt.SetActive(true);
 
         if (playerController != null)
             playerController.enabled = true;
 
-        currentLineIndex = 0; // Reset dialogue index here as well
+        if (cameraController != null)
+            cameraController.enabled = true;
+
+        if (playerAnimator != null)
+        {
+            // Let movement script control animations again (no extra changes needed here)
+        }
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        currentLineIndex = 0;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -111,6 +137,8 @@ public class NpcButton : MonoBehaviour
             isPlayerNearby = true;
             playerObject = other.gameObject;
             playerController = playerObject.GetComponent<SimpleCharacterController>();
+            playerAnimator = playerObject.GetComponentInChildren<Animator>();
+            cameraController = FindObjectOfType<ThirdPersonCamera>();
 
             if (interactionPrompt != null && !confirmationPanel.activeSelf)
                 interactionPrompt.SetActive(true);
@@ -123,17 +151,15 @@ public class NpcButton : MonoBehaviour
         {
             isPlayerNearby = false;
 
-            if (interactionPrompt != null)
-                interactionPrompt.SetActive(false);
+            if (interactionPrompt != null) interactionPrompt.SetActive(false);
+            if (confirmationPanel != null) confirmationPanel.SetActive(false);
+            if (dialoguePanel != null) dialoguePanel.SetActive(false);
 
-            if (confirmationPanel != null)
-                confirmationPanel.SetActive(false);
+            if (playerController != null) playerController.enabled = true;
+            if (cameraController != null) cameraController.enabled = true;
 
-            if (dialoguePanel != null)
-                dialoguePanel.SetActive(false);
-
-            if (playerController != null)
-                playerController.enabled = true;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
     }
 }
