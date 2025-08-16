@@ -4,45 +4,27 @@ using UnityEngine;
 
 public class NPCRotateName : MonoBehaviour
 {
-    [Tooltip("Leave empty to auto-find the main camera")]
-    public Transform targetCamera;
+    private Transform cam;
 
-    [Tooltip("If true, it will rotate only on the Y axis (useful for 3D world labels)")]
-    public bool rotateOnlyY = true;
-
-    private void Start()
+    void Start()
     {
-        if (targetCamera == null)
+        // Find the main camera once at start
+        if (Camera.main != null)
         {
-            if (Camera.main != null)
-                targetCamera = Camera.main.transform;
-            else
-                Debug.LogWarning("BillboardName: No camera found. Please assign one manually.");
-        }
-    }
-
-    private void LateUpdate()
-    {
-        if (targetCamera == null)
-            return;
-
-        Vector3 lookDirection;
-
-        if (rotateOnlyY)
-        {
-            // Keep the object's Y the same, so it only rotates horizontally
-            Vector3 targetPosition = targetCamera.position;
-            targetPosition.y = transform.position.y;
-            lookDirection = transform.position - targetPosition;
+            cam = Camera.main.transform;
         }
         else
         {
-            // Full rotation to face the camera
-            lookDirection = transform.position - targetCamera.position;
+            Debug.LogWarning("No MainCamera found. Make sure your camera has the 'MainCamera' tag.");
         }
+    }
 
-        // Face toward the camera
-        Quaternion rotation = Quaternion.LookRotation(lookDirection);
-        transform.rotation = rotation;
+    void LateUpdate()
+    {
+        if (cam == null) return;
+
+        // Make the text face the camera (full 360 rotation)
+        transform.LookAt(transform.position + cam.rotation * Vector3.forward,
+                         cam.rotation * Vector3.up);
     }
 }

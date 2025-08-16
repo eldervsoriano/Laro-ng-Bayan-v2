@@ -71,7 +71,14 @@ public class NpcButton : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
+
+        // Allow pressing Space to advance dialogue
+        if (dialoguePanel != null && dialoguePanel.activeSelf && Input.GetKeyDown(KeyCode.Space))
+        {
+            OnNextClicked();
+        }
     }
+
 
     public void OnNextClicked()
     {
@@ -102,8 +109,10 @@ public class NpcButton : MonoBehaviour
         if (playerController != null) playerController.enabled = true;
         if (cameraController != null) cameraController.enabled = true;
         if (playerAnimator != null) playerAnimator.SetFloat(speedParamID, 0f);
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+
+        // Force cursor to be visible and unlocked for the next scene
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
 
         SceneManager.LoadScene(sceneToLoad);
     }
