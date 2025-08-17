@@ -3058,6 +3058,7 @@ MonoBehaviour:
   damagePerAttack: 20
   winnerDelay: 4
   animationDelay: 0.5
+  damageAnimationDelay: 0.3
   deathAnimationDelay: 1
   drawDelay: 2
 --- !u!1 &493224560
@@ -4906,7 +4907,6 @@ MonoBehaviour:
   LoadingScreen: {fileID: 1469512154}
   LoadingBarFill: {fileID: 558863578}
   LoadingText: {fileID: 1206480637}
-  minimumLoadingTime: 1.5
 --- !u!1 &809617868
 GameObject:
   m_ObjectHideFlags: 0
@@ -7317,6 +7317,7 @@ GameObject:
   - component: {fileID: 1260826521}
   - component: {fileID: 1260826520}
   - component: {fileID: 1260826519}
+  - component: {fileID: 1260826522}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -7398,6 +7399,44 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 13.73, y: 0, z: 0}
+--- !u!114 &1260826522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260826518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0188c6fab7896c64eb819ead4534dd27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeReductionSpeed: 1
+  maxShakeDistance: 0.1
+  shakeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!4 &1269559517 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7ef8b756695f4044b8d53cc334af4ecc, type: 3}
@@ -13395,6 +13434,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffed0c7590b50b74ab2ada4b87df1cf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackParticles: {fileID: 0}
+  hitImpactParticles: {fileID: 0}
+  deathParticles: {fileID: 0}
+  damageParticles: {fileID: 0}
+  audioSource: {fileID: 0}
+  attackSound: {fileID: 0}
+  hitImpactSound: {fileID: 0}
+  damageSound: {fileID: 0}
+  deathSound: {fileID: 0}
+  cameraShake: {fileID: 1260826522}
+  attackShakeDuration: 0.3
+  attackShakeIntensity: 1
+  hitImpactShakeDuration: 0.5
+  hitImpactShakeIntensity: 1.5
+  deathShakeDuration: 0.8
+  deathShakeIntensity: 2
+  hitFlashDuration: 0.2
+  hitFlashColor: {r: 1, g: 0, b: 0, a: 1}
+  hitKnockbackForce: 0.5
+  knockbackDirection: {x: -1, y: 0, z: 0}
 --- !u!95 &902513455328516008
 Animator:
   serializedVersion: 5
@@ -13473,6 +13532,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffed0c7590b50b74ab2ada4b87df1cf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackParticles: {fileID: 0}
+  hitImpactParticles: {fileID: 0}
+  deathParticles: {fileID: 0}
+  damageParticles: {fileID: 0}
+  audioSource: {fileID: 0}
+  attackSound: {fileID: 0}
+  hitImpactSound: {fileID: 0}
+  damageSound: {fileID: 0}
+  deathSound: {fileID: 0}
+  cameraShake: {fileID: 0}
+  attackShakeDuration: 0.3
+  attackShakeIntensity: 1
+  hitImpactShakeDuration: 0.5
+  hitImpactShakeIntensity: 1.5
+  deathShakeDuration: 0.8
+  deathShakeIntensity: 2
+  hitFlashDuration: 0.2
+  hitFlashColor: {r: 1, g: 0, b: 0, a: 1}
+  hitKnockbackForce: 5
+  knockbackDirection: {x: -1, y: 0, z: 0}
 --- !u!137 &938170828222284329
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
@@ -17228,6 +17307,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffed0c7590b50b74ab2ada4b87df1cf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackParticles: {fileID: 0}
+  hitImpactParticles: {fileID: 0}
+  deathParticles: {fileID: 0}
+  damageParticles: {fileID: 0}
+  audioSource: {fileID: 0}
+  attackSound: {fileID: 0}
+  hitImpactSound: {fileID: 0}
+  damageSound: {fileID: 0}
+  deathSound: {fileID: 0}
+  cameraShake: {fileID: 0}
+  attackShakeDuration: 0.3
+  attackShakeIntensity: 1
+  hitImpactShakeDuration: 0.5
+  hitImpactShakeIntensity: 1.5
+  deathShakeDuration: 0.8
+  deathShakeIntensity: 2
+  hitFlashDuration: 0.2
+  hitFlashColor: {r: 1, g: 0, b: 0, a: 1}
+  hitKnockbackForce: 5
+  knockbackDirection: {x: -1, y: 0, z: 0}
 --- !u!4 &5554336738852347854
 Transform:
   m_ObjectHideFlags: 0
