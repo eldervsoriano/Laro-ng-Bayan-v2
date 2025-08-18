@@ -6,7 +6,7 @@ public class ArrowIndicator : MonoBehaviour
 {
     public PamatoShooter shooter;   // reference to your friend's script
     public Transform arrowSprite;   // assign your arrow sprite GameObject here
-    public float maxLength = 3f;    // how long arrow can stretch
+    public float maxLength;    // how long arrow can stretch
 
     private void Update()
     {
@@ -21,12 +21,17 @@ public class ArrowIndicator : MonoBehaviour
 
             // Rotate arrow to match drag direction
             if (dir != Vector3.zero)
-                arrowSprite.rotation = Quaternion.LookRotation(Vector3.up, dir);
+
+            arrowSprite.rotation = Quaternion.LookRotation(Vector3.up, dir);
             // "Vector3.up" because arrow is flat on board (XZ plane)
 
             // Scale arrow length based on drag distance
-            Vector3 dragDir = dir.normalized;
-            float length = Mathf.Min(dir.magnitude, maxLength);
+            float length = Mathf.Min(dir.magnitude * 0.13f, maxLength);
+
+            // Scales the Y axis only
+            arrowSprite.localScale = new Vector3(0.4f, length, 0.5f);
+
+
 
 
             // Show arrow

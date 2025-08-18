@@ -261,22 +261,22 @@ public class ThirdPersonCamera : MonoBehaviour
 
     private Vector3 HandleCameraCollision(Vector3 targetPosition, Vector3 desiredPosition)
     {
-        RaycastHit hit;
-        Vector3 direction = (desiredPosition - targetPosition).normalized;
-        float distance = Vector3.Distance(targetPosition, desiredPosition);
+        Vector3 direction = desiredPosition - targetPosition;
+        float targetDistance = direction.magnitude;
+        direction.Normalize();
 
-        // Use a slightly larger radius for the SphereCast to better detect walls
-        if (Physics.SphereCast(targetPosition, collisionRadius, direction, out hit, distance, collisionLayers))
+        // Use SphereCast to detect collisions
+        if (Physics.SphereCast(targetPosition, collisionRadius, direction, out RaycastHit hit, targetDistance, collisionLayers))
         {
-            // Respect minimum distance to prevent extreme closeups
+            // Move camera in front of obstacle (keeping a small distance to avoid clipping)
             float adjustedDistance = Mathf.Max(hit.distance - collisionRadius, minDistanceFromTarget);
-
-            // If there's a collision, place the camera at the hit point offset by collision radius
-            return targetPosition + direction * adjustedDistance;
+            Vector3 newPosition = targetPosition + direction * adjustedDistance;
+            return newPosition;
         }
 
         return desiredPosition;
     }
+
 
     // Public method to set the target
     public void SetTarget(Transform newTarget)
