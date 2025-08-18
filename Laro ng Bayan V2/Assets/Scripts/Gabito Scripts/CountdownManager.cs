@@ -11,12 +11,19 @@ public class CountdownManager : MonoBehaviour
 
     public PamatoShooter[] shooters; // assign both Player 1 and Player 2 in Inspector
 
-    void Start()
+    // Remove Start() auto-start so tutorial can control it
+    // void Start()
+    // {
+    //     StartCoroutine(StartCountdown());
+    // }
+
+    // Public method so TutorialPanel can call this
+    public void BeginCountdown()
     {
         StartCoroutine(StartCountdown());
     }
 
-    IEnumerator StartCountdown()
+    private IEnumerator StartCountdown()
     {
         // disable all PamatoShooter scripts
         foreach (var shooter in shooters)
