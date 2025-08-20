@@ -11365,7 +11365,7 @@ Transform:
   m_GameObject: {fileID: 1954073137}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -19.560266, y: 0.34179455, z: 12.365068}
+  m_LocalPosition: {x: -19.560266, y: 0.34179455, z: 8.92}
   m_LocalScale: {x: 47.513657, y: 34.180515, z: 1.3887569}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12988,6 +12988,7 @@ GameObject:
   - component: {fileID: 1481479470804971471}
   - component: {fileID: 9118470351957501781}
   - component: {fileID: 9118470351957501782}
+  - component: {fileID: 9118470351957501783}
   m_Layer: 0
   m_Name: PamatoP2
   m_TagString: Pamato
@@ -13312,6 +13313,19 @@ MonoBehaviour:
   shooter: {fileID: 1481479470804971471}
   arrowSprite: {fileID: 1146408390}
   maxLength: 1
+--- !u!114 &9118470351957501783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8711986537163981837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a0e957dd21b8f74e9dbae170e328eec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slowMultiplier: 0.5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
