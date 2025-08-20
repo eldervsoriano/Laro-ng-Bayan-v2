@@ -84,6 +84,309 @@
 //    }
 //}
 
+//using UnityEngine;
+//using System.Collections;
+
+//public class SpiderAnimationController : MonoBehaviour
+//{
+//    [Header("Animation References")]
+//    // Reference to the Animator component
+//    private Animator animator;
+
+//    [Header("Effect References")]
+//    // Particle Systems for different effects
+//    [SerializeField] private ParticleSystem attackParticles;
+//    [SerializeField] private ParticleSystem hitImpactParticles;
+//    [SerializeField] private ParticleSystem deathParticles;
+//    [SerializeField] private ParticleSystem damageParticles;
+
+//    // Audio Sources for sound effects
+//    [SerializeField] private AudioSource audioSource;
+//    [SerializeField] private AudioClip attackSound;
+//    [SerializeField] private AudioClip hitImpactSound;
+//    [SerializeField] private AudioClip damageSound;
+//    [SerializeField] private AudioClip deathSound;
+
+//    // Camera shake reference
+//    [SerializeField] private CameraShake cameraShake;
+
+//    [Header("Effect Settings")]
+//    // Camera shake parameters
+//    [SerializeField] private float attackShakeDuration = 0.3f;
+//    [SerializeField] private float attackShakeIntensity = 1.0f;
+//    [SerializeField] private float hitImpactShakeDuration = 0.5f;
+//    [SerializeField] private float hitImpactShakeIntensity = 1.5f;
+//    [SerializeField] private float deathShakeDuration = 0.8f;
+//    [SerializeField] private float deathShakeIntensity = 2.0f;
+
+//    // Hit impact settings
+//    [SerializeField] private float hitFlashDuration = 0.2f;
+//    [SerializeField] private Color hitFlashColor = Color.red;
+
+//    [Header("Hit Knockback Settings")]
+//    [SerializeField] private float hitKnockbackForce = 5.0f;
+//    [SerializeField] private Vector3 knockbackDirection = Vector3.back; // Editable in Inspector
+
+//    // Material references for hit flash effect
+//    private Renderer spiderRenderer;
+//    private Material originalMaterial;
+//    private Material flashMaterial;
+
+//    // Animation parameter names (constants)
+//    private const string TRIGGER_ATTACK = "Attack";
+//    private const string TRIGGER_DAMAGE = "TakeDamage";
+//    private const string TRIGGER_DEATH = "Death";
+//    private const string BOOL_IS_DEAD = "IsDead";
+
+//    // Flag to track if spider is dead
+//    private bool isDead = false;
+
+//    void Start()
+//    {
+//        // Get the Animator component
+//        animator = GetComponent<Animator>();
+
+//        // Get the renderer for hit flash effects
+//        spiderRenderer = GetComponent<Renderer>();
+//        if (spiderRenderer != null)
+//        {
+//            originalMaterial = spiderRenderer.material;
+//            // Create a flash material with the hit flash color
+//            flashMaterial = new Material(originalMaterial);
+//            flashMaterial.color = hitFlashColor;
+//        }
+
+//        // Get audio source if not assigned
+//        if (audioSource == null)
+//            audioSource = GetComponent<AudioSource>();
+
+//        // Find camera shake component if not assigned
+//        if (cameraShake == null)
+//            cameraShake = FindObjectOfType<CameraShake>();
+
+//        // Ensure we have an animator
+//        if (animator == null)
+//        {
+//            Debug.LogError("Animator component not found on spider model!");
+//        }
+
+//        // Auto-find particle systems if not assigned
+//        SetupParticleSystems();
+
+//        // Start in idle state by default
+//        ResetToIdle();
+//    }
+
+//    // Method to automatically find and setup particle systems
+//    private void SetupParticleSystems()
+//    {
+//        if (attackParticles == null)
+//        {
+//            Transform attackParticleTransform = transform.Find("AttackParticles");
+//            if (attackParticleTransform != null)
+//                attackParticles = attackParticleTransform.GetComponent<ParticleSystem>();
+//        }
+
+//        if (hitImpactParticles == null)
+//        {
+//            Transform hitParticleTransform = transform.Find("HitImpactParticles");
+//            if (hitParticleTransform != null)
+//                hitImpactParticles = hitParticleTransform.GetComponent<ParticleSystem>();
+//        }
+
+//        if (deathParticles == null)
+//        {
+//            Transform deathParticleTransform = transform.Find("DeathParticles");
+//            if (deathParticleTransform != null)
+//                deathParticles = deathParticleTransform.GetComponent<ParticleSystem>();
+//        }
+
+//        if (damageParticles == null)
+//        {
+//            Transform damageParticleTransform = transform.Find("DamageParticles");
+//            if (damageParticleTransform != null)
+//                damageParticles = damageParticleTransform.GetComponent<ParticleSystem>();
+//        }
+//    }
+
+//    // Method to trigger the Attack animation with effects
+//    public void PlayAttackAnimation()
+//    {
+//        if (animator != null && !isDead)
+//        {
+//            animator.SetTrigger(TRIGGER_ATTACK);
+//            PlayAttackEffects();
+//        }
+//    }
+
+//    private void PlayAttackEffects()
+//    {
+//        if (attackParticles != null) attackParticles.Play();
+//        if (audioSource != null && attackSound != null) audioSource.PlayOneShot(attackSound);
+//        if (cameraShake != null) cameraShake.Shake(attackShakeDuration, attackShakeIntensity);
+//    }
+
+//    public void PlayDamageTakenAnimation()
+//    {
+//        if (animator != null && !isDead)
+//        {
+//            animator.SetTrigger(TRIGGER_DAMAGE);
+//            PlayHitImpactEffects();
+//        }
+//    }
+
+//    private void PlayHitImpactEffects()
+//    {
+//        if (hitImpactParticles != null) hitImpactParticles.Play();
+//        if (damageParticles != null) damageParticles.Play();
+
+//        if (audioSource != null && hitImpactSound != null) audioSource.PlayOneShot(hitImpactSound);
+//        if (audioSource != null && damageSound != null) audioSource.PlayOneShot(damageSound, 0.7f);
+
+//        if (cameraShake != null) cameraShake.Shake(hitImpactShakeDuration, hitImpactShakeIntensity);
+
+//        StartCoroutine(HitFlashEffect());
+//        StartCoroutine(HitKnockback());
+//    }
+
+//    private IEnumerator HitFlashEffect()
+//    {
+//        if (spiderRenderer != null && flashMaterial != null)
+//        {
+//            spiderRenderer.material = flashMaterial;
+//            yield return new WaitForSeconds(hitFlashDuration);
+//            spiderRenderer.material = originalMaterial;
+//        }
+//    }
+
+//    private IEnumerator HitKnockback()
+//    {
+//        Vector3 originalPosition = transform.position;
+
+//        // Use inspector direction, normalized
+//        Vector3 direction = knockbackDirection.normalized;
+//        Vector3 targetPosition = originalPosition + direction * hitKnockbackForce;
+
+//        float elapsedTime = 0f;
+//        float knockbackDuration = 0.2f;
+
+//        while (elapsedTime < knockbackDuration)
+//        {
+//            transform.position = Vector3.Lerp(originalPosition, targetPosition,
+//                elapsedTime / knockbackDuration);
+//            elapsedTime += Time.deltaTime;
+//            yield return null;
+//        }
+
+//        elapsedTime = 0f;
+//        while (elapsedTime < knockbackDuration)
+//        {
+//            transform.position = Vector3.Lerp(targetPosition, originalPosition,
+//                elapsedTime / knockbackDuration);
+//            elapsedTime += Time.deltaTime;
+//            yield return null;
+//        }
+
+//        transform.position = originalPosition;
+//    }
+
+//    public void PlayDeathAnimation()
+//    {
+//        if (animator != null && !isDead)
+//        {
+//            isDead = true;
+//            animator.SetBool(BOOL_IS_DEAD, true);
+//            animator.SetTrigger(TRIGGER_DEATH);
+//            PlayDeathEffects();
+//        }
+//    }
+
+//    private void PlayDeathEffects()
+//    {
+//        if (deathParticles != null) deathParticles.Play();
+//        if (audioSource != null && deathSound != null) audioSource.PlayOneShot(deathSound);
+//        if (cameraShake != null) cameraShake.Shake(deathShakeDuration, deathShakeIntensity);
+//        StartCoroutine(DeathEffectSequence());
+//    }
+
+//    private IEnumerator DeathEffectSequence()
+//    {
+//        if (spiderRenderer != null)
+//        {
+//            Color originalColor = spiderRenderer.material.color;
+//            for (int i = 0; i < 3; i++)
+//            {
+//                spiderRenderer.material.color = Color.red;
+//                yield return new WaitForSeconds(0.1f);
+//                spiderRenderer.material.color = originalColor;
+//                yield return new WaitForSeconds(0.1f);
+//            }
+
+//            float fadeTime = 1.0f;
+//            float elapsedTime = 0f;
+//            while (elapsedTime < fadeTime)
+//            {
+//                float alpha = Mathf.Lerp(1f, 0.3f, elapsedTime / fadeTime);
+//                Color fadeColor = originalColor;
+//                fadeColor.a = alpha;
+//                spiderRenderer.material.color = fadeColor;
+//                elapsedTime += Time.deltaTime;
+//                yield return null;
+//            }
+//        }
+//    }
+
+//    public void ResetToIdle()
+//    {
+//        if (animator != null)
+//        {
+//            animator.ResetTrigger(TRIGGER_ATTACK);
+//            animator.ResetTrigger(TRIGGER_DAMAGE);
+//            animator.ResetTrigger(TRIGGER_DEATH);
+
+//            if (isDead)
+//            {
+//                isDead = false;
+//                animator.SetBool(BOOL_IS_DEAD, false);
+//                if (spiderRenderer != null && originalMaterial != null)
+//                {
+//                    Color resetColor = originalMaterial.color;
+//                    resetColor.a = 1f;
+//                    spiderRenderer.material.color = resetColor;
+//                }
+//            }
+//        }
+//    }
+
+//    public bool IsDead()
+//    {
+//        return isDead;
+//    }
+
+//    public void TriggerHitImpact()
+//    {
+//        PlayHitImpactEffects();
+//    }
+
+//    public void SetParticleSystems(ParticleSystem attack, ParticleSystem hitImpact,
+//                                  ParticleSystem death, ParticleSystem damage)
+//    {
+//        attackParticles = attack;
+//        hitImpactParticles = hitImpact;
+//        deathParticles = death;
+//        damageParticles = damage;
+//    }
+
+//    public void SetAudioClips(AudioClip attack, AudioClip hitImpact,
+//                             AudioClip damage, AudioClip death)
+//    {
+//        attackSound = attack;
+//        hitImpactSound = hitImpact;
+//        damageSound = damage;
+//        deathSound = death;
+//    }
+//}
+
 using UnityEngine;
 using System.Collections;
 
@@ -94,11 +397,11 @@ public class SpiderAnimationController : MonoBehaviour
     private Animator animator;
 
     [Header("Effect References")]
-    // Particle Systems for different effects
-    [SerializeField] private ParticleSystem attackParticles;
-    [SerializeField] private ParticleSystem hitImpactParticles;
+    // 2D Sprite Reference for kapow effect (one per player)
+    [SerializeField] private GameObject kapowSprite;
+
+    // Particle Systems for death effects (keeping these)
     [SerializeField] private ParticleSystem deathParticles;
-    [SerializeField] private ParticleSystem damageParticles;
 
     // Audio Sources for sound effects
     [SerializeField] private AudioSource audioSource;
@@ -118,6 +421,11 @@ public class SpiderAnimationController : MonoBehaviour
     [SerializeField] private float hitImpactShakeIntensity = 1.5f;
     [SerializeField] private float deathShakeDuration = 0.8f;
     [SerializeField] private float deathShakeIntensity = 2.0f;
+
+    // Kapow sprite settings
+    [SerializeField] private float kapowDisplayDuration = 0.5f;
+    [SerializeField] private Vector3 kapowOffset = new Vector3(1f, 1f, 0f);
+    [SerializeField] private float kapowScaleAnimation = 1.2f;
 
     // Hit impact settings
     [SerializeField] private float hitFlashDuration = 0.2f;
@@ -170,42 +478,39 @@ public class SpiderAnimationController : MonoBehaviour
             Debug.LogError("Animator component not found on spider model!");
         }
 
-        // Auto-find particle systems if not assigned
+        // Auto-find kapow sprites if not assigned
+        SetupKapowSprites();
+
+        // Auto-find particle systems if not assigned (for death effects)
         SetupParticleSystems();
 
         // Start in idle state by default
         ResetToIdle();
     }
 
-    // Method to automatically find and setup particle systems
+    // Method to automatically find and setup kapow sprite
+    private void SetupKapowSprites()
+    {
+        if (kapowSprite == null)
+        {
+            Transform kapowTransform = transform.Find("Kapow");
+            if (kapowTransform != null)
+                kapowSprite = kapowTransform.gameObject;
+        }
+
+        // Hide kapow sprite at start
+        if (kapowSprite != null)
+            kapowSprite.SetActive(false);
+    }
+
+    // Method to automatically find and setup particle systems (keeping for death effects)
     private void SetupParticleSystems()
     {
-        if (attackParticles == null)
-        {
-            Transform attackParticleTransform = transform.Find("AttackParticles");
-            if (attackParticleTransform != null)
-                attackParticles = attackParticleTransform.GetComponent<ParticleSystem>();
-        }
-
-        if (hitImpactParticles == null)
-        {
-            Transform hitParticleTransform = transform.Find("HitImpactParticles");
-            if (hitParticleTransform != null)
-                hitImpactParticles = hitParticleTransform.GetComponent<ParticleSystem>();
-        }
-
         if (deathParticles == null)
         {
             Transform deathParticleTransform = transform.Find("DeathParticles");
             if (deathParticleTransform != null)
                 deathParticles = deathParticleTransform.GetComponent<ParticleSystem>();
-        }
-
-        if (damageParticles == null)
-        {
-            Transform damageParticleTransform = transform.Find("DamageParticles");
-            if (damageParticleTransform != null)
-                damageParticles = damageParticleTransform.GetComponent<ParticleSystem>();
         }
     }
 
@@ -221,9 +526,14 @@ public class SpiderAnimationController : MonoBehaviour
 
     private void PlayAttackEffects()
     {
-        if (attackParticles != null) attackParticles.Play();
-        if (audioSource != null && attackSound != null) audioSource.PlayOneShot(attackSound);
-        if (cameraShake != null) cameraShake.Shake(attackShakeDuration, attackShakeIntensity);
+        // Show kapow sprite for attack
+        StartCoroutine(ShowKapowSprite(kapowSprite, kapowOffset));
+
+        if (audioSource != null && attackSound != null)
+            audioSource.PlayOneShot(attackSound);
+
+        if (cameraShake != null)
+            cameraShake.Shake(attackShakeDuration, attackShakeIntensity);
     }
 
     public void PlayDamageTakenAnimation()
@@ -237,16 +547,60 @@ public class SpiderAnimationController : MonoBehaviour
 
     private void PlayHitImpactEffects()
     {
-        if (hitImpactParticles != null) hitImpactParticles.Play();
-        if (damageParticles != null) damageParticles.Play();
+        // No kapow sprite for damage taken - removed as requested
 
-        if (audioSource != null && hitImpactSound != null) audioSource.PlayOneShot(hitImpactSound);
-        if (audioSource != null && damageSound != null) audioSource.PlayOneShot(damageSound, 0.7f);
+        if (audioSource != null && hitImpactSound != null)
+            audioSource.PlayOneShot(hitImpactSound);
 
-        if (cameraShake != null) cameraShake.Shake(hitImpactShakeDuration, hitImpactShakeIntensity);
+        if (audioSource != null && damageSound != null)
+            audioSource.PlayOneShot(damageSound, 0.7f);
+
+        if (cameraShake != null)
+            cameraShake.Shake(hitImpactShakeDuration, hitImpactShakeIntensity);
 
         StartCoroutine(HitFlashEffect());
         StartCoroutine(HitKnockback());
+    }
+
+    private IEnumerator ShowKapowSprite(GameObject kapowSprite, Vector3 offset)
+    {
+        if (kapowSprite != null)
+        {
+            // Position the kapow sprite
+            kapowSprite.transform.position = transform.position + offset;
+            kapowSprite.transform.localScale = Vector3.zero;
+            kapowSprite.SetActive(true);
+
+            // Scale up animation
+            float elapsedTime = 0f;
+            float scaleUpDuration = 0.1f;
+
+            while (elapsedTime < scaleUpDuration)
+            {
+                float scale = Mathf.Lerp(0f, kapowScaleAnimation, elapsedTime / scaleUpDuration);
+                kapowSprite.transform.localScale = Vector3.one * scale;
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+
+            // Hold at full scale
+            kapowSprite.transform.localScale = Vector3.one * kapowScaleAnimation;
+            yield return new WaitForSeconds(kapowDisplayDuration - 0.2f);
+
+            // Scale down animation
+            elapsedTime = 0f;
+            float scaleDownDuration = 0.1f;
+
+            while (elapsedTime < scaleDownDuration)
+            {
+                float scale = Mathf.Lerp(kapowScaleAnimation, 0f, elapsedTime / scaleDownDuration);
+                kapowSprite.transform.localScale = Vector3.one * scale;
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+
+            kapowSprite.SetActive(false);
+        }
     }
 
     private IEnumerator HitFlashEffect()
@@ -262,7 +616,6 @@ public class SpiderAnimationController : MonoBehaviour
     private IEnumerator HitKnockback()
     {
         Vector3 originalPosition = transform.position;
-
         // Use inspector direction, normalized
         Vector3 direction = knockbackDirection.normalized;
         Vector3 targetPosition = originalPosition + direction * hitKnockbackForce;
@@ -272,8 +625,7 @@ public class SpiderAnimationController : MonoBehaviour
 
         while (elapsedTime < knockbackDuration)
         {
-            transform.position = Vector3.Lerp(originalPosition, targetPosition,
-                elapsedTime / knockbackDuration);
+            transform.position = Vector3.Lerp(originalPosition, targetPosition, elapsedTime / knockbackDuration);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
@@ -281,8 +633,7 @@ public class SpiderAnimationController : MonoBehaviour
         elapsedTime = 0f;
         while (elapsedTime < knockbackDuration)
         {
-            transform.position = Vector3.Lerp(targetPosition, originalPosition,
-                elapsedTime / knockbackDuration);
+            transform.position = Vector3.Lerp(targetPosition, originalPosition, elapsedTime / knockbackDuration);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
@@ -303,9 +654,15 @@ public class SpiderAnimationController : MonoBehaviour
 
     private void PlayDeathEffects()
     {
-        if (deathParticles != null) deathParticles.Play();
-        if (audioSource != null && deathSound != null) audioSource.PlayOneShot(deathSound);
-        if (cameraShake != null) cameraShake.Shake(deathShakeDuration, deathShakeIntensity);
+        if (deathParticles != null)
+            deathParticles.Play();
+
+        if (audioSource != null && deathSound != null)
+            audioSource.PlayOneShot(deathSound);
+
+        if (cameraShake != null)
+            cameraShake.Shake(deathShakeDuration, deathShakeIntensity);
+
         StartCoroutine(DeathEffectSequence());
     }
 
@@ -314,6 +671,7 @@ public class SpiderAnimationController : MonoBehaviour
         if (spiderRenderer != null)
         {
             Color originalColor = spiderRenderer.material.color;
+
             for (int i = 0; i < 3; i++)
             {
                 spiderRenderer.material.color = Color.red;
@@ -324,6 +682,7 @@ public class SpiderAnimationController : MonoBehaviour
 
             float fadeTime = 1.0f;
             float elapsedTime = 0f;
+
             while (elapsedTime < fadeTime)
             {
                 float alpha = Mathf.Lerp(1f, 0.3f, elapsedTime / fadeTime);
@@ -348,6 +707,7 @@ public class SpiderAnimationController : MonoBehaviour
             {
                 isDead = false;
                 animator.SetBool(BOOL_IS_DEAD, false);
+
                 if (spiderRenderer != null && originalMaterial != null)
                 {
                     Color resetColor = originalMaterial.color;
@@ -356,6 +716,10 @@ public class SpiderAnimationController : MonoBehaviour
                 }
             }
         }
+
+        // Hide kapow sprite
+        if (kapowSprite != null)
+            kapowSprite.SetActive(false);
     }
 
     public bool IsDead()
@@ -368,21 +732,27 @@ public class SpiderAnimationController : MonoBehaviour
         PlayHitImpactEffects();
     }
 
-    public void SetParticleSystems(ParticleSystem attack, ParticleSystem hitImpact,
-                                  ParticleSystem death, ParticleSystem damage)
+    // Updated setter method for the single kapow sprite
+    public void SetKapowSprite(GameObject kapow)
     {
-        attackParticles = attack;
-        hitImpactParticles = hitImpact;
-        deathParticles = death;
-        damageParticles = damage;
+        kapowSprite = kapow;
+
+        // Hide it initially
+        if (kapowSprite != null)
+            kapowSprite.SetActive(false);
     }
 
-    public void SetAudioClips(AudioClip attack, AudioClip hitImpact,
-                             AudioClip damage, AudioClip death)
+    public void SetAudioClips(AudioClip attack, AudioClip hitImpact, AudioClip damage, AudioClip death)
     {
         attackSound = attack;
         hitImpactSound = hitImpact;
         damageSound = damage;
         deathSound = death;
+    }
+
+    // Legacy method to maintain compatibility (now does nothing for particles, only death particles remain)
+    public void SetParticleSystems(ParticleSystem attack, ParticleSystem hitImpact, ParticleSystem death, ParticleSystem damage)
+    {
+        deathParticles = death;
     }
 }
