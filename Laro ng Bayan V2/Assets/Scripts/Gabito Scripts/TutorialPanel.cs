@@ -28,6 +28,9 @@ public class TutorialPanel : MonoBehaviour
 
     void Start()
     {
+        // Disable pause during tutorial
+        PauseButton.canPause = false;
+
         countdownManager = FindObjectOfType<CountdownManager>();
 
         if (tutorialPanel != null)
@@ -44,6 +47,8 @@ public class TutorialPanel : MonoBehaviour
 
         currentIndex = 0;
         ShowPage(currentIndex);
+
+
     }
 
     void ShowPage(int index)

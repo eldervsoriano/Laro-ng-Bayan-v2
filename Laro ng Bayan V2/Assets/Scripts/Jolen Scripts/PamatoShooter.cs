@@ -71,7 +71,7 @@ public class PamatoShooter : MonoBehaviour
             Vector3 force = dragStartWorld - dragEnd;
             rb.AddForce(force * forceMultiplier, ForceMode.Impulse);
 
-            GameManager.Instance.NotifyShot(rb); // ✅ Let GameManager watch it
+            JolenGameManager.Instance.NotifyShot(rb); // Let GameManager watch it
             hasShot = true;
 
             if (aimLine != null)
