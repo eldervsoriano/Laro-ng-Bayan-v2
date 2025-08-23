@@ -10,6 +10,7 @@ public class UIJolen : MonoBehaviour
 
     public static UIJolen Instance;
 
+
     // Separate text components for each player's score
     public TextMeshProUGUI player1ScoreText;
     public TextMeshProUGUI player2ScoreText;

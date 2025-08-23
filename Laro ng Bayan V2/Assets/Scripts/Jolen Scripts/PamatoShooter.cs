@@ -12,6 +12,11 @@ public class PamatoShooter : MonoBehaviour
     private bool hasShot = false;
     private Camera cam;
 
+    //[Header("Player Model")]
+    //public GameObject playerModel;       // Assign prefab or model in inspector
+    //public float playerDistance = 1.5f;  // How far behind the marble
+    //public Vector3 playerOffset = new Vector3(0, 0, -1); // Direction behind the marble
+
 
 
     void Start()
@@ -84,7 +89,11 @@ public class PamatoShooter : MonoBehaviour
 
     void Update()
     {
-        // Remove turn-ending logic here
+        //// Always keep player behind the marble
+        //if (playerModel != null)
+        //{
+        //    PositionPlayerModel();
+        //}
     }
 
     public void ResetTurn()
@@ -94,6 +103,17 @@ public class PamatoShooter : MonoBehaviour
         if (aimLine != null)
             aimLine.enabled = false;
     }
+
+    //private void PositionPlayerModel()
+    //{
+    //    // Place player behind marble (relative to camera forward for now)
+    //    Vector3 behindDir = -cam.transform.forward; // "behind" from camera's POV
+    //    behindDir.y = 0; // keep flat
+    //    behindDir.Normalize();
+
+    //    playerModel.transform.position = transform.position + behindDir * playerDistance;
+    //    playerModel.transform.LookAt(transform.position); // make it face marble
+    //}
 
 
 }
