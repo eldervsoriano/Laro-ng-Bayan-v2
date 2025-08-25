@@ -1,49 +1,30 @@
-using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 using System.Collections;
+using UnityEngine;
+using TMPro;
 
 public class CountdownManager : MonoBehaviour
 {
-    public GameObject countdownPanel;   // Parent panel of the text
-    public TextMeshProUGUI countdownText;          // The countdown text
-    public float countdownTime = 3f;    // Seconds before game starts
+    [Header("Countdown UI")]
+    public GameObject countdownPanel;
+    public TextMeshProUGUI countdownText;
+    public float countdownTime = 3f;
 
-    public PamatoShooter[] shooters; // assign both Player 1 and Player 2 in Inspector
-    public UIJolen uiJolen;
+    [Header("Gameplay References")]
+    public PamatoShooter[] shooters; // assign both Player 1 and 2 in inspector
 
-    // Remove Start() auto-start so tutorial can control it
-    // void Start()
-    // {
-    //     StartCoroutine(StartCountdown());
-    // }
-
-    // Public method so TutorialPanel can call this
+    /// <summary>
+    /// Starts countdown coroutine (called by TutorialPanel when finished)
+    /// </summary>
     public void BeginCountdown()
     {
         StartCoroutine(StartCountdown());
     }
 
-
     private IEnumerator StartCountdown()
     {
-        PauseButton.canPause = false; // disable pause during countdown
-
-        // disable all PamatoShooter scripts
+        // Disable gameplay while counting down
         foreach (var shooter in shooters)
-        {
             shooter.enabled = false;
-        }
-
-        // Hide profiles and turn panels
-        // Make sure profiles + turn panels are hidden at start of countdown
-        UIJolen.Instance.SetProfilesVisible(false);
-        if (UIJolen.Instance.player1TurnPanel != null)
-            UIJolen.Instance.player1TurnPanel.SetActive(false);
-
-        if (UIJolen.Instance.player2TurnPanel != null)
-            UIJolen.Instance.player2TurnPanel.SetActive(false);
-
 
         countdownPanel.SetActive(true);
 
@@ -60,20 +41,15 @@ public class CountdownManager : MonoBehaviour
 
         countdownPanel.SetActive(false);
 
-        // enable all PamatoShooter scripts
+        // Enable gameplay
         foreach (var shooter in shooters)
-        {
             shooter.enabled = true;
+
+        // Initialize UI after countdown
+        if (UIJolen.Instance != null)
+        {
+            UIJolen.Instance.SetProfilesVisible(true);
+            UIJolen.Instance.UpdateTurn(1); // Player 1 starts
         }
-
-        // Show Player profiles now
-        UIJolen.Instance.SetProfilesVisible(true);
-
-        // Show Player 1’s turn (this will auto-enable Player1TurnPanel)
-        UIJolen.Instance.UpdateTurn(1);
-        UIJolen.Instance.turnText.gameObject.SetActive(true);
-
-        PauseButton.canPause = true; // re-enable pause once countdown is done
-
     }
 }

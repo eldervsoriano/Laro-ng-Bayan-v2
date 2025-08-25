@@ -1,69 +1,82 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-
 public class UIJolen : MonoBehaviour
 {
-    // EDITED BY GABITO
-
     public static UIJolen Instance;
+    private bool canShowTurn = false; // NEW: only allow turn panel when game starts
 
 
-    // Separate text components for each player's score
+    [Header("Score UI")]
     public TextMeshProUGUI player1ScoreText;
     public TextMeshProUGUI player2ScoreText;
 
-    // Player profile icons (drag your UI Image/Panel here in Inspector)
+    [Header("Profiles")]
     public RectTransform player1Profile;
     public RectTransform player2Profile;
 
+    [Header("Turn UI")]
     public TextMeshProUGUI turnText;
-    public GameObject winnerPanel;
-    public TextMeshProUGUI winnerText;
-
-    // Panels for turn indicators
     public GameObject player1TurnPanel;
     public GameObject player2TurnPanel;
 
-    // Scale settings
-    public Vector3 normalScale = Vector3.one;
-    public Vector3 highlightScale = new Vector3(1.2f, 1.2f, 1f); // make 20% bigger
+    [Header("Winner UI")]
+    public GameObject winnerPanel;
+    public TextMeshProUGUI winnerText;
 
-    void Awake()
+    [Header("Scale Settings")]
+    public Vector3 normalScale = Vector3.one;
+    public Vector3 highlightScale = new Vector3(1.2f, 1.2f, 1f);
+
+    void Start()
     {
         Instance = this;
-        if (turnText != null)
-            turnText.gameObject.SetActive(false); // hide at start
 
-        SetProfilesVisible(false); // hide profiles at start
-
-        // Hide turn panels at start
-        if (player1TurnPanel != null) 
-            player1TurnPanel.SetActive(false);
-
-        if (player2TurnPanel != null) 
-            player2TurnPanel.SetActive(false);
+        // Force hide everything at start
+        if (turnText != null) turnText.gameObject.SetActive(false);
+        SetProfilesVisible(false);
+        if (player1TurnPanel != null) player1TurnPanel.SetActive(false);
+        if (player2TurnPanel != null) player2TurnPanel.SetActive(false);
+        if (winnerPanel != null) winnerPanel.SetActive(false);
     }
 
+    /// <summary>
+    /// Updates both player scores on screen
+    /// </summary>
+    /// 
+
+
+    public void EnableUI(bool value)
+    {
+        this.enabled = value; // now you can enable/disable at runtime
+    }
 
     public void UpdateScore(int p1, int p2)
     {
-        // Update each player's score separately
         player1ScoreText.text = $"Player 1: {p1}";
         player2ScoreText.text = $"Player 2: {p2}";
     }
 
+    /// <summary>
+    /// Updates turn UI to highlight active player
+    /// </summary>
+    /// 
+    public void AllowTurnUI() => canShowTurn = true; // call this AFTER countdown
+
     public void UpdateTurn(int currentPlayer)
     {
-        turnText.text = $"Player {currentPlayer}'s Turn";
+        if (turnText != null)
+        {
+            turnText.gameObject.SetActive(true);
+            turnText.text = $"Player {currentPlayer}'s Turn";
+        }
 
-        // Highlight active player's score text
+        // Highlight active player’s score
         player1ScoreText.fontStyle = (currentPlayer == 1) ? FontStyles.Bold : FontStyles.Normal;
         player2ScoreText.fontStyle = (currentPlayer == 2) ? FontStyles.Bold : FontStyles.Normal;
 
-        // Scale profiles (make active one bigger)
+        // Scale active profile
         if (player1Profile != null && player2Profile != null)
         {
             player1Profile.localScale = (currentPlayer == 1) ? highlightScale : normalScale;
@@ -71,36 +84,31 @@ public class UIJolen : MonoBehaviour
         }
 
         // Toggle turn panels
-        if (player1TurnPanel != null)
-            player1TurnPanel.SetActive(currentPlayer == 1);
-        if (player2TurnPanel != null)
-            player2TurnPanel.SetActive(currentPlayer == 2);
+        if (player1TurnPanel != null) player1TurnPanel.SetActive(currentPlayer == 1);
+        if (player2TurnPanel != null) player2TurnPanel.SetActive(currentPlayer == 2);
     }
 
+    /// <summary>
+    /// Shows the winner after a short delay
+    /// </summary>
     public void ShowWinner(int player)
     {
         StartCoroutine(ShowWinnerWithDelay(player));
     }
 
-    private System.Collections.IEnumerator ShowWinnerWithDelay(int player)
+    private IEnumerator ShowWinnerWithDelay(int player)
     {
-        yield return new WaitForSeconds(2f); // delay duration
-        winnerPanel.SetActive(true);
-        winnerText.text = $"Player {player} Wins!";
+        yield return new WaitForSeconds(2f);
+        if (winnerPanel != null) winnerPanel.SetActive(true);
+        if (winnerText != null) winnerText.text = $"Player {player} Wins!";
     }
 
-    public void SetTurnTextVisible(bool visible)
-    {
-        if (turnText != null)
-            turnText.gameObject.SetActive(visible);
-    }
-
+    /// <summary>
+    /// Toggle profile visibility
+    /// </summary>
     public void SetProfilesVisible(bool visible)
     {
-        if (player1Profile != null)
-            player1Profile.gameObject.SetActive(visible);
-        if (player2Profile != null)
-            player2Profile.gameObject.SetActive(visible);
+        if (player1Profile != null) player1Profile.gameObject.SetActive(visible);
+        if (player2Profile != null) player2Profile.gameObject.SetActive(visible);
     }
-
 }

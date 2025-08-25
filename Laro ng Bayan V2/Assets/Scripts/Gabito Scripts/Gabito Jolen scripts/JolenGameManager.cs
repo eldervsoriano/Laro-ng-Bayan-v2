@@ -31,7 +31,7 @@ public class JolenGameManager : MonoBehaviour
 
     void Start()
     {
-        SetActivePlayer(1);
+        //SetActivePlayer(1);
     }
 
     void Update()
