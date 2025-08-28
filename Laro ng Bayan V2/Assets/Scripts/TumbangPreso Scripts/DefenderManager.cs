@@ -611,6 +611,7 @@ public class DefenderManager : MonoBehaviour
     ? TumbangGameManager.Instance.GetPlayer1Score()
     : TumbangGameManager.Instance.GetPlayer2Score();
 
+
         float t = Mathf.Clamp01((float)playerScore / maxScore);
         sliderCycleTime = Mathf.Lerp(maxCycleTime, minCycleTime, t);
 
