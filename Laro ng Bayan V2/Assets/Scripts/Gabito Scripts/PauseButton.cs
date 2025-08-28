@@ -6,11 +6,13 @@ public class PauseButton : MonoBehaviour
 {
     [SerializeField] private GameObject pausePanel;
     public static bool isPaused = false;
+    public static bool canPause = true; // NEW: Block pause during tutorial/countdown
+
 
     void Update()
     {
-        // Only allow ESC to pause if game is NOT already paused
-        if (!isPaused && Input.GetKeyDown(KeyCode.Escape))
+        // Only allow ESC if pausing is allowed AND game is not already paused
+        if (canPause && !isPaused && Input.GetKeyDown(KeyCode.Escape))
         {
             PauseGame();
         }

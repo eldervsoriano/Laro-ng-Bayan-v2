@@ -35,7 +35,7 @@ public class Marble : MonoBehaviour
 
     private System.Collections.IEnumerator DestroyAfterDelay()
     {
-        GameManager.Instance.MarbleKnockedOut(this.gameObject); // Score immediately
+        JolenGameManager.Instance.MarbleKnockedOut(this.gameObject); // Score immediately
         yield return new WaitForSeconds(destroyDelay);
         Destroy(gameObject);
     }
