@@ -22,6 +22,11 @@ public class NpcButton : MonoBehaviour
     [Header("Scene To Load")]
     [SerializeField] private string sceneToLoad = "YourNextSceneName";
 
+    [Header("Optional: Pause UI Button GameObject")]
+    [Tooltip("Assign the pause button GameObject (the whole UI button). We'll SetActive(false/true) while dialogue is open.")]
+
+    [SerializeField] private GameObject pauseUIButton; // << just a GameObject
+
     private bool isPlayerNearby = false;
     private GameObject playerObject;
     private SimpleCharacterController playerController;
@@ -39,6 +44,9 @@ public class NpcButton : MonoBehaviour
         // Cache animator parameter hashes
         speedParamID = Animator.StringToHash("Speed");
         isRunningParamID = Animator.StringToHash("IsRunning");
+
+        // Make sure pause is allowed at start (safe default)
+        PauseButton.canPause = true;
     }
 
     void Update()
@@ -53,6 +61,10 @@ public class NpcButton : MonoBehaviour
                 currentLineIndex = 0;
                 ShowDialogueLine(currentLineIndex);
             }
+
+            // Block pausing & hide pause button while in dialogue
+            PauseButton.canPause = false;
+            if (pauseUIButton != null) pauseUIButton.SetActive(false);
 
             if (playerController != null)
                 playerController.enabled = false; // stop movement script
@@ -90,6 +102,7 @@ public class NpcButton : MonoBehaviour
         }
         else
         {
+            // keep Pause blocked until player chooses Yes/No
             if (dialoguePanel != null) dialoguePanel.SetActive(false);
             if (confirmationPanel != null) confirmationPanel.SetActive(true);
         }
@@ -105,6 +118,10 @@ public class NpcButton : MonoBehaviour
 
     public void OnYesClicked()
     {
+        // Re-enable before leaving scene (optional)
+        PauseButton.canPause = true;
+        if (pauseUIButton != null) pauseUIButton.SetActive(true);
+
         // Optional: reset before scene change
         if (playerController != null) playerController.enabled = true;
         if (cameraController != null) cameraController.enabled = true;
@@ -123,6 +140,10 @@ public class NpcButton : MonoBehaviour
         if (dialoguePanel != null) dialoguePanel.SetActive(false);
         if (isPlayerNearby && interactionPrompt != null) interactionPrompt.SetActive(true);
 
+        // Re-enable pause after dialogue is fully closed
+        PauseButton.canPause = true;
+        if (pauseUIButton != null) pauseUIButton.SetActive(true);
+
         if (playerController != null)
             playerController.enabled = true;
 
@@ -137,6 +158,9 @@ public class NpcButton : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         currentLineIndex = 0;
+
+        // Re-enable pause once dialogue fully ends
+        PauseButton.canPause = true;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -164,11 +188,18 @@ public class NpcButton : MonoBehaviour
             if (confirmationPanel != null) confirmationPanel.SetActive(false);
             if (dialoguePanel != null) dialoguePanel.SetActive(false);
 
+            // Safety: restore pause ability if player walks away
+            PauseButton.canPause = true;
+            if (pauseUIButton != null) pauseUIButton.SetActive(true);
+
             if (playerController != null) playerController.enabled = true;
             if (cameraController != null) cameraController.enabled = true;
 
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+
+            // Just in case: allow pause again when leaving NPC
+            PauseButton.canPause = true;
         }
     }
 }

@@ -12,9 +12,20 @@ public class CountdownManager : MonoBehaviour
     [Header("Gameplay References")]
     public PamatoShooter[] shooters; // assign both Player 1 and 2 in inspector
 
-    /// <summary>
-    /// Starts countdown coroutine (called by TutorialPanel when finished)
-    /// </summary>
+    [Header("Options")]
+    [Tooltip("Check if this level has a tutorial panel.")]
+    public bool hasTutorial = true;
+
+    void Start()
+    {
+        if (!hasTutorial)
+        {
+            // If no tutorial, start countdown immediately
+            BeginCountdown();
+        }
+        // If hasTutorial = true then TutorialPanel handles it and calls BeginCountdown() later
+    }
+
     public void BeginCountdown()
     {
         StartCoroutine(StartCountdown());
