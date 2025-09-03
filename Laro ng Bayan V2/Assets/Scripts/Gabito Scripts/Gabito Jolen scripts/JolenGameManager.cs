@@ -104,8 +104,6 @@ public class JolenGameManager : MonoBehaviour
         isWaitingForStop = false;
     }
 
-
-
     public int GetCurrentPlayer() => currentPlayer;
 
     private void EndGame(int winningPlayer)
@@ -116,4 +114,15 @@ public class JolenGameManager : MonoBehaviour
         player1Pamato.SetActive(false);
         player2Pamato.SetActive(false);
     }
+
+    public void NotifyPamatoFell()
+    {
+        // End turn immediately when a player falls
+        isWaitingForStop = false;
+        hasStartedMoving = false;
+        EndTurn();
+    }
+
+
+
 }
