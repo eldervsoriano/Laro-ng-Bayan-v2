@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PanelsSwitchButton : MonoBehaviour
 {
@@ -15,4 +16,18 @@ public class PanelsSwitchButton : MonoBehaviour
         if (targetPanel != null)
             targetPanel.SetActive(true);
     }
+
+    public void QuitGame()
+    {
+        Debug.Log("Quit button pressed. Exiting game...");
+
+        Application.Quit();
+
+    }
+    public void LoadScene(string sceneName)
+    {
+        Debug.Log("Loading scene: " + sceneName);
+        SceneManager.LoadScene(sceneName);
+    }
+
 }
