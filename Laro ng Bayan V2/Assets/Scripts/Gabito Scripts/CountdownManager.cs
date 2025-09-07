@@ -33,6 +33,9 @@ public class CountdownManager : MonoBehaviour
 
     private IEnumerator StartCountdown()
     {
+        // Disable pause during countdown
+        PauseButton.canPause = false;
+
         // Disable gameplay while counting down
         foreach (var shooter in shooters)
             shooter.enabled = false;
@@ -55,6 +58,9 @@ public class CountdownManager : MonoBehaviour
         // Enable gameplay
         foreach (var shooter in shooters)
             shooter.enabled = true;
+
+        // Re-enable pause after countdown finishes
+        PauseButton.canPause = true;
 
         // Initialize UI after countdown
         if (UIJolen.Instance != null)

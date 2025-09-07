@@ -25,9 +25,17 @@ public class JolenGameManager : MonoBehaviour
 
     void Awake()
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
+        if (Instance == null)
+        {
+            Instance = this;
+            // DontDestroyOnLoad(gameObject); // usually UI is scene-specific
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
+
 
     void Start()
     {

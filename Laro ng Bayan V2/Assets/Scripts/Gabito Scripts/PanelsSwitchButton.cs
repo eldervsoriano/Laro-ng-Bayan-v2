@@ -27,6 +27,12 @@ public class PanelsSwitchButton : MonoBehaviour
     public void LoadScene(string sceneName)
     {
         Debug.Log("Loading scene: " + sceneName);
+
+        // Reset time and pause states
+        Time.timeScale = 1f;
+        PauseButton.isPaused = false;
+        PauseButton.canPause = true;
+
         SceneManager.LoadScene(sceneName);
     }
 

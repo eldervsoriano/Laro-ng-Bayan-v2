@@ -29,6 +29,20 @@ public class UIJolen : MonoBehaviour
     public Vector3 normalScale = Vector3.one;
     public Vector3 highlightScale = new Vector3(1.2f, 1.2f, 1f);
 
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            // Optional: only keep alive across scenes if really needed
+            // DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject); // remove duplicate if one already exists
+        }
+    }
+
     void Start()
     {
         Instance = this;

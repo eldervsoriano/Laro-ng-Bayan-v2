@@ -85,6 +85,9 @@ public class TutorialPanel : MonoBehaviour
 
         Time.timeScale = 1f; // Resume game
 
+        // Allow pausing AFTER tutorial is done
+        PauseButton.canPause = true;
+
         // Begin countdown after tutorial
         if (countdownManager != null)
             countdownManager.BeginCountdown();

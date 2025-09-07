@@ -604,7 +604,7 @@ public class DefenderManager : MonoBehaviour
         if (defenseSlider != null) defenseSlider.value = 0f;
 
         if (promptText != null)
-            promptText.text = "PRESS SPACE when the slider hits the target line!";
+            promptText.text = "PRESS <color=yellow>SPACE</color> when the slider hits the target line!";
 
         // 🔥 Adjust difficulty based on the defending player's score
         int playerScore = (defendingPlayer == 1)
