@@ -17,6 +17,10 @@ public class NpcButton : MonoBehaviour
     [TextArea]
     [SerializeField] private List<string> npcLines;
 
+    [Header("Unlock Requirements")]
+    [SerializeField] private bool requiresTurumpoUnlocked = false;
+
+
     private int currentLineIndex = 0;
 
     [Header("Scene To Load")]
@@ -24,6 +28,8 @@ public class NpcButton : MonoBehaviour
 
     [Header("Optional: Pause UI Button GameObject")]
     [Tooltip("Assign the pause button GameObject (the whole UI button). We'll SetActive(false/true) while dialogue is open.")]
+
+
 
     [SerializeField] private GameObject pauseUIButton; // << just a GameObject
 
@@ -167,6 +173,13 @@ public class NpcButton : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            // Check if this NPC requires Turumpo unlocked
+            if (requiresTurumpoUnlocked && !ObjectiveManager.Instance.turumpoUnlocked)
+            {
+                // Do NOT show prompt if locked
+                return;
+            }
+
             isPlayerNearby = true;
             playerObject = other.gameObject;
             playerController = playerObject.GetComponent<SimpleCharacterController>();
@@ -177,6 +190,7 @@ public class NpcButton : MonoBehaviour
                 interactionPrompt.SetActive(true);
         }
     }
+
 
     private void OnTriggerExit(Collider other)
     {

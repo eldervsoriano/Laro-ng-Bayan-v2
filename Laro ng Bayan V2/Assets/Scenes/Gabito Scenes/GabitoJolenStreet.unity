@@ -154,6 +154,8 @@ MonoBehaviour:
   player1Pamato: {fileID: 1863885890}
   player2Pamato: {fileID: 1021576654}
   winningScore: 5
+  lowSpeedThreshold: 3
+  stallTimeLimit: 1.5
 --- !u!4 &19027104
 Transform:
   m_ObjectHideFlags: 0
@@ -7385,7 +7387,7 @@ RectTransform:
   m_GameObject: {fileID: 674145016}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.95758, y: 0.95758, z: 0.95758}
+  m_LocalScale: {x: 0.86277956, y: 0.86277956, z: 0.86277956}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2133663938}
@@ -7415,7 +7417,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: MAIN MENU
+  m_text: Back to Daang Bakal
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ca311ce9773728b4683de93397cadeaa, type: 2}
   m_sharedMaterial: {fileID: 1193811825937682822, guid: ca311ce9773728b4683de93397cadeaa, type: 2}
@@ -11982,7 +11984,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 1021576660}
-  forceMultiplier: 15
+  forceMultiplier: 8.5
   aimLine: {fileID: 1021576658}
 --- !u!54 &1021576660
 Rigidbody:
@@ -11993,7 +11995,7 @@ Rigidbody:
   m_GameObject: {fileID: 1021576654}
   serializedVersion: 4
   m_Mass: 2
-  m_Drag: 0.5
+  m_Drag: 1
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -12010,7 +12012,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 2
 --- !u!135 &1021576661
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -19273,7 +19275,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 1863885895}
-  forceMultiplier: 15
+  forceMultiplier: 8.5
   aimLine: {fileID: 1863885893}
 --- !u!54 &1863885895
 Rigidbody:
@@ -19284,7 +19286,7 @@ Rigidbody:
   m_GameObject: {fileID: 1863885890}
   serializedVersion: 4
   m_Mass: 2
-  m_Drag: 0.5
+  m_Drag: 1
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -19301,7 +19303,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 2
 --- !u!135 &1863885896
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -21473,8 +21475,9 @@ GameObject:
   - component: {fileID: 2133663941}
   - component: {fileID: 2133663940}
   - component: {fileID: 2133663939}
+  - component: {fileID: 2133663942}
   m_Layer: 5
-  m_Name: 'Main Menu Button '
+  m_Name: 'Go Back Button '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21544,16 +21547,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 622115924}
-        m_TargetAssemblyTypeName: GameUIActions, Assembly-CSharp
-        m_MethodName: GoToMainMenu
-        m_Mode: 1
+      - m_Target: {fileID: 2133663942}
+        m_TargetAssemblyTypeName: PanelsSwitchButton, Assembly-CSharp
+        m_MethodName: LoadScene
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: GabitoOpenWorld
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &2133663940
@@ -21594,6 +21597,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2133663937}
   m_CullTransparentMesh: 1
+--- !u!114 &2133663942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2133663937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 943f34f144c1d094ba97b2b636ccb84a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentPanel: {fileID: 0}
+  targetPanel: {fileID: 0}
 --- !u!4 &2134964714 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8cdd1e777f4db6c498f02e3d6ecc527e, type: 3}

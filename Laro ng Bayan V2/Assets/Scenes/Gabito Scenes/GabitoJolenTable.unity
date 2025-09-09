@@ -1385,7 +1385,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 124471930}
-  forceMultiplier: 15
+  forceMultiplier: 8
   aimLine: {fileID: 124471928}
 --- !u!54 &124471930
 Rigidbody:
@@ -7255,7 +7255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 767854023}
-  forceMultiplier: 15
+  forceMultiplier: 8
   aimLine: {fileID: 767854021}
 --- !u!54 &767854023
 Rigidbody:
@@ -7413,7 +7413,7 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 0.7433963, g: 0.71163076, b: 0.4193877, a: 1}
-  m_Intensity: 2.59
+  m_Intensity: 3.1
   m_Range: 34.8
   m_SpotAngle: 144.3
   m_InnerSpotAngle: 20.6
@@ -19047,6 +19047,8 @@ MonoBehaviour:
   player1Pamato: {fileID: 124471925}
   player2Pamato: {fileID: 767854018}
   winningScore: 5
+  lowSpeedThreshold: 0.1
+  stallTimeLimit: 2
 --- !u!4 &2140097069
 Transform:
   m_ObjectHideFlags: 0

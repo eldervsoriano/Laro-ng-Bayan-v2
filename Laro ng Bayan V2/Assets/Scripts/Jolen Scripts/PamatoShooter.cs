@@ -12,18 +12,20 @@ public class PamatoShooter : MonoBehaviour
     private bool hasShot = false;
     private Camera cam;
 
-    //[Header("Player Model")]
-    //public GameObject playerModel;       // Assign prefab or model in inspector
-    //public float playerDistance = 1.5f;  // How far behind the marble
-    //public Vector3 playerOffset = new Vector3(0, 0, -1); // Direction behind the marble
-
+    private Plane dragPlane; // NEW: imaginary flat ground
+    private RigidbodyConstraints originalConstraints; // save original settings
 
 
     void Start()
     {
         cam = Camera.main;
+        dragPlane = new Plane(Vector3.up, Vector3.zero); // flat plane at Y = 0
+
         if (aimLine != null)
             aimLine.enabled = false;
+
+        // store the default constraints (important if you set some in Inspector)
+        originalConstraints = rb.constraints;
     }
 
     void OnMouseDown()
@@ -31,13 +33,20 @@ public class PamatoShooter : MonoBehaviour
         if (hasShot) return;
 
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hit))
+        if (dragPlane.Raycast(ray, out float enter))
         {
-            dragStartWorld = new Vector3(hit.point.x, 0f, hit.point.z);
+            Vector3 hitPoint = ray.GetPoint(enter);
+            dragStartWorld = new Vector3(hitPoint.x, 0f, hitPoint.z);
             isDragging = true;
 
             if (aimLine != null)
                 aimLine.enabled = true;
+
+            // Freeze position so it won’t roll while aiming
+            rb.constraints = RigidbodyConstraints.FreezePositionX |
+                             RigidbodyConstraints.FreezePositionY |
+                             RigidbodyConstraints.FreezePositionZ |
+                             RigidbodyConstraints.FreezeRotation;
         }
     }
 
@@ -46,9 +55,10 @@ public class PamatoShooter : MonoBehaviour
         if (!isDragging || hasShot) return;
 
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hit))
+        if (dragPlane.Raycast(ray, out float enter))
         {
-            Vector3 dragCurrent = new Vector3(hit.point.x, 0f, hit.point.z);
+            Vector3 hitPoint = ray.GetPoint(enter);
+            Vector3 dragCurrent = new Vector3(hitPoint.x, 0f, hitPoint.z);
             Vector3 direction = dragStartWorld - dragCurrent;
 
             Vector3 lineEnd = transform.position + direction;
@@ -58,7 +68,6 @@ public class PamatoShooter : MonoBehaviour
                 aimLine.SetPosition(0, transform.position);
                 aimLine.SetPosition(1, lineEnd);
 
-                // Optional: Color based on power
                 float power = Mathf.Clamp(direction.magnitude, 0, 2f);
                 aimLine.startColor = aimLine.endColor = Color.Lerp(Color.green, Color.red, power / 2f);
             }
@@ -70,13 +79,16 @@ public class PamatoShooter : MonoBehaviour
         if (!isDragging || hasShot) return;
 
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hit))
+        if (dragPlane.Raycast(ray, out float enter))
         {
-            Vector3 dragEnd = new Vector3(hit.point.x, 0f, hit.point.z);
+            Vector3 hitPoint = ray.GetPoint(enter);
+            Vector3 dragEnd = new Vector3(hitPoint.x, 0f, hitPoint.z);
             Vector3 force = dragStartWorld - dragEnd;
+
+            rb.constraints = originalConstraints; // Unfreeze before shooting
             rb.AddForce(force * forceMultiplier, ForceMode.Impulse);
 
-            JolenGameManager.Instance.NotifyShot(rb); // Let GameManager watch it
+            JolenGameManager.Instance.NotifyShot(rb);
             hasShot = true;
 
             if (aimLine != null)
@@ -86,34 +98,13 @@ public class PamatoShooter : MonoBehaviour
         isDragging = false;
     }
 
-
-    void Update()
-    {
-        //// Always keep player behind the marble
-        //if (playerModel != null)
-        //{
-        //    PositionPlayerModel();
-        //}
-    }
-
     public void ResetTurn()
     {
         hasShot = false;
         isDragging = false;
         if (aimLine != null)
             aimLine.enabled = false;
+
+        rb.constraints = originalConstraints; // ensure unfrozen at turn reset
     }
-
-    //private void PositionPlayerModel()
-    //{
-    //    // Place player behind marble (relative to camera forward for now)
-    //    Vector3 behindDir = -cam.transform.forward; // "behind" from camera's POV
-    //    behindDir.y = 0; // keep flat
-    //    behindDir.Normalize();
-
-    //    playerModel.transform.position = transform.position + behindDir * playerDistance;
-    //    playerModel.transform.LookAt(transform.position); // make it face marble
-    //}
-
-
 }
