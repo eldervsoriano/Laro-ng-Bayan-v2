@@ -15,7 +15,7 @@ public class UnlockUIManager : MonoBehaviour
 
         if (ObjectiveManager.Instance != null && ObjectiveManager.Instance.turumpoJustUnlocked)
         {
-            ShowUnlockMessage("You can now play Turumpo! Talk to Charles.");
+            ShowUnlockMessage("You can now play Turumpo! Talk to Andrea.");
             ObjectiveManager.Instance.turumpoJustUnlocked = false; // reset so it won’t show again
         }
     }
