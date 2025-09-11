@@ -400,6 +400,81 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &48791575
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 48791576}
+  - component: {fileID: 48791578}
+  - component: {fileID: 48791577}
+  m_Layer: 5
+  m_Name: Player 2 Indicator Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &48791576
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 48791575}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 811738359}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 563, y: -304}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &48791577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 48791575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &48791578
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 48791575}
+  m_CullTransparentMesh: 1
 --- !u!1 &53029365
 GameObject:
   m_ObjectHideFlags: 0
@@ -668,14 +743,14 @@ RectTransform:
   m_GameObject: {fileID: 71987330}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1786037, y: 0.1786037, z: 0.1786037}
+  m_LocalScale: {x: 0.3192541, y: 0.1786037, z: 0.1786037}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1931808453}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 160.9, y: 0}
+  m_AnchoredPosition: {x: 160, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &71987332
@@ -691,14 +766,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.17600934, b: 0.082352936, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 3e0aae55f4771bb4dbd4f57c88f8bdb6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2632,7 +2707,7 @@ GameObject:
   - component: {fileID: 366500968}
   - component: {fileID: 366500967}
   m_Layer: 5
-  m_Name: Player 1 Symbol Guide
+  m_Name: mbol Indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5376,13 +5451,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47a0ac40591693b4c90da07ad658032c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  challengeDuration: 30
-  scoreAdvantage: 100
-  centerDrift: 3
+  challengeDuration: 20
+  scoreAdvantage: 500
+  centerDrift: 5
   sliderSmoothSpeed: 1
-  momentumPerTap: 10
-  momentumDecay: 6
-  momentumMultiplier: 1.6
+  momentumPerTap: 8
+  momentumDecay: 5
+  momentumMultiplier: 1.5
   preChallengePanel: {fileID: 811738358}
   challengeTimerText: {fileID: 1192980140}
   player1TapsText: {fileID: 1455422835}
@@ -5390,14 +5465,18 @@ MonoBehaviour:
   instructionText: {fileID: 888383292}
   countdownText: {fileID: 487490977}
   player1KeyIndicator: {fileID: 366500967}
-  player2KeyIndicator: {fileID: 2142382065}
+  player2KeyIndicator: {fileID: 48791577}
   tugOfWarSlider: {fileID: 1931808454}
   player1DangerLine: {fileID: 1248526836}
   player2DangerLine: {fileID: 71987331}
   resultText: {fileID: 479400148}
   player1TapEffect: {fileID: 0}
   player2TapEffect: {fileID: 0}
-  keySwitchInterval: 5
+  upArrowSprite: {fileID: -961770579, guid: 8b6cacef4efd7604ebab9e98a24ed7be, type: 3}
+  downArrowSprite: {fileID: -1593800771, guid: 488cf957014bac640a05279afb550443, type: 3}
+  leftArrowSprite: {fileID: -179968277, guid: e475bf99e3c67174eabaeaf8d870bbf3, type: 3}
+  rightArrowSprite: {fileID: 1023775190, guid: 0859fb5de4848264b97de50309a4750b, type: 3}
+  keySwitchInterval: 4
 --- !u!1 &741608346
 GameObject:
   m_ObjectHideFlags: 0
@@ -6124,6 +6203,7 @@ RectTransform:
   - {fileID: 2142382064}
   - {fileID: 1931808453}
   - {fileID: 1139244289}
+  - {fileID: 48791576}
   m_Father: {fileID: 2052423941}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -9786,14 +9866,14 @@ RectTransform:
   m_GameObject: {fileID: 1248526835}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1786037, y: 0.1786037, z: 0.1786037}
+  m_LocalScale: {x: 0.3192541, y: 0.1786037, z: 0.1786037}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1931808453}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -157.3, y: 0}
+  m_AnchoredPosition: {x: -160, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1248526837
@@ -9809,14 +9889,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.081131995, g: 0.4204326, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 0d2d6952665d5484d8c70c601f22fbd0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -10173,8 +10253,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pausePanel: {fileID: 956845411}
-  scriptsToDisable: []
-  objectsToDisable: []
 --- !u!1 &1363319080
 GameObject:
   m_ObjectHideFlags: 0
@@ -13572,7 +13650,7 @@ GameObject:
   - component: {fileID: 2142382066}
   - component: {fileID: 2142382065}
   m_Layer: 5
-  m_Name: Player 2 Symbol Guide
+  m_Name: Player 2 Indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
