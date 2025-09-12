@@ -277,6 +277,15 @@ public class SpiderGameManager : MonoBehaviour
             // Proceed to the next round after animations finish
             Invoke("StartNewRound", 2.5f);  // Reduced delay since animations start sooner
         }
+
+        // At the end of CheckGameOver(), when the game is truly over:
+        if (gameOver && ObjectiveManager.Instance != null)
+        {
+            ObjectiveManager.Instance.CompleteSpiderDerby();
+        }
+        // GABITO ADDED THIS 
+
+
     }
 
     // Method to start a new round

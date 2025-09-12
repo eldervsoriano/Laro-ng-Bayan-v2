@@ -174,10 +174,25 @@ public class TumbangGameManager : MonoBehaviour
 
                 UIManager.Instance.UpdateScore(player1Score, player2Score);
 
+                // MODIFIED BY GABITO
                 if (player1Score >= winningScore)
+                {
                     UIManager.Instance.ShowWinner(1);
+
+                    // ✅egardless of who wins, complete the quest
+                    if (ObjectiveManager.Instance != null)
+                        ObjectiveManager.Instance.CompleteTumbangPreso();
+                }
                 else if (player2Score >= winningScore)
+                {
                     UIManager.Instance.ShowWinner(2);
+
+                    // Regardless of who wins, complete the quest
+                    if (ObjectiveManager.Instance != null)
+                        ObjectiveManager.Instance.CompleteTumbangPreso();
+                }
+                // MODIFIED BY GABITO
+
             }
         });
     }

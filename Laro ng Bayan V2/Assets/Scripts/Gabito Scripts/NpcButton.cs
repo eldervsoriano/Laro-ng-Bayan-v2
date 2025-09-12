@@ -22,6 +22,9 @@ public class NpcButton : MonoBehaviour
     [SerializeField] private bool requiresTurumpoUnlocked = false;
     [SerializeField] private bool requiresTurumpoCompleted = false;
     [SerializeField] private bool requiresTumbangPresoUnlocked = false;
+    [SerializeField] private bool requiresTumbangPresoCompleted = false; // << NEW
+
+
 
 
 
@@ -185,6 +188,7 @@ public class NpcButton : MonoBehaviour
             if (requiresTurumpoUnlocked && !ObjectiveManager.Instance.turumpoUnlocked) return;
             if (requiresTurumpoCompleted && !ObjectiveManager.Instance.turumpoCompleted) return;
             if (requiresTumbangPresoUnlocked && !ObjectiveManager.Instance.tumbangPresoUnlocked) return;
+            if (requiresTumbangPresoCompleted && !ObjectiveManager.Instance.tumbangPresoCompleted) return; // << NEW
 
             // Passed all requirements -> allow interaction
             isPlayerNearby = true;
@@ -197,10 +201,6 @@ public class NpcButton : MonoBehaviour
                 interactionPrompt.SetActive(true);
         }
     }
-
-
-
-
 
     private void OnTriggerExit(Collider other)
     {

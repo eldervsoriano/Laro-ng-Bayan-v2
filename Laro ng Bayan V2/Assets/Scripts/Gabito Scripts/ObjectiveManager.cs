@@ -15,6 +15,15 @@ public class ObjectiveManager : MonoBehaviour
     public bool tumbangPresoUnlocked = false;
     public bool tumbangPresoJustUnlocked = false;
 
+    // For Tumbang Preso
+    public bool tumbangPresoCompleted = false;
+    public bool spiderDerbyUnlocked = false;
+    public bool spiderDerbyJustUnlocked = false;
+
+    // For Spider Derby
+    public bool spiderDerbyCompleted = false;
+
+
     // Event for quest updates
     public event Action<string> OnQuestUpdated;
 
@@ -31,6 +40,7 @@ public class ObjectiveManager : MonoBehaviour
         }
     }
 
+    // === Jolen ===
     public void StartJolenQuest()
     {
         OnQuestUpdated?.Invoke("Find <color=green>Nina</color>. She can be found beside a fishball cart in Gen street.");
@@ -50,6 +60,7 @@ public class ObjectiveManager : MonoBehaviour
         }
     }
 
+    // === Turumpo ===
     public void StartTurumpoQuest()
     {
         if (turumpoUnlocked && !turumpoCompleted)
@@ -72,11 +83,45 @@ public class ObjectiveManager : MonoBehaviour
         }
     }
 
+    // === Tumbang Preso ===
     public void StartTumbangPresoQuest()
     {
-        if (tumbangPresoUnlocked && !turumpoCompleted)
+        if (tumbangPresoUnlocked && !tumbangPresoCompleted)
         {
             OnQuestUpdated?.Invoke("Find <color=orange>Charles</color>. He can be found near the basketball court.");
         }
+    }
+
+    public void CompleteTumbangPreso()
+    {
+        tumbangPresoCompleted = true;
+
+        if (!spiderDerbyUnlocked) // unlock finale
+        {
+            spiderDerbyUnlocked = true;
+            spiderDerbyJustUnlocked = true;
+
+            Debug.Log("Tumbang Preso complete! Spider Derby is now unlocked.");
+            OnQuestUpdated?.Invoke("Find <color=red>Michael</color>. He is waiting for you at the street for the Spider Derby finale!");
+        }
+
+    }
+
+    // === Spider Derby ===
+    public void StartSpiderDerbyQuest()
+    {
+        if (spiderDerbyUnlocked && !spiderDerbyCompleted)
+        {
+            OnQuestUpdated?.Invoke("Find <color=red>Michael</color>. He is waiting for you at the street for the Spider Derby finale!");
+        }
+    }
+
+    public void CompleteSpiderDerby()
+    {
+        spiderDerbyCompleted = true;
+        Debug.Log("Spider Derby complete! You’ve finished all quests!");
+
+        // Final quest text — can be victory or credits trigger
+        OnQuestUpdated?.Invoke("<color=yellow>Congratulations!</color> You’ve completed all Larong Pinoy challenges!");
     }
 }

@@ -26,6 +26,13 @@ public class UnlockUIManager : MonoBehaviour
                 ShowUnlockMessage("You can now play Tumbang Preso! Talk to Charles.");
                 ObjectiveManager.Instance.tumbangPresoJustUnlocked = false; // reset so it won’t show again
             }
+
+            // Spider Derby unlock
+            if (ObjectiveManager.Instance.spiderDerbyJustUnlocked)
+            {
+                ShowUnlockMessage("You can now play Spider Derby! Talk to Michael.");
+                ObjectiveManager.Instance.spiderDerbyJustUnlocked = false; // reset so it won’t show again
+            }
         }
     }
 
