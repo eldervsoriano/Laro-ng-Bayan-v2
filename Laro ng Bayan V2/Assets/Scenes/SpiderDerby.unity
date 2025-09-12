@@ -5227,7 +5227,7 @@ GameObject:
   - component: {fileID: 689650698}
   - component: {fileID: 689650697}
   m_Layer: 0
-  m_Name: DamageKapow
+  m_Name: KapowDamageTaken 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13827,7 +13827,7 @@ GameObject:
   - component: {fileID: 1746661553}
   - component: {fileID: 1746661552}
   m_Layer: 0
-  m_Name: DamageKapow
+  m_Name: KapowDamageTaken 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18391,7 +18391,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffed0c7590b50b74ab2ada4b87df1cf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kapowSprite: {fileID: 1746661551}
+  kapowSprites:
+  - {fileID: 1746661551}
   deathParticles: {fileID: 0}
   audioSource: {fileID: 0}
   attackSound: {fileID: 0}
@@ -18522,7 +18523,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffed0c7590b50b74ab2ada4b87df1cf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kapowSprite: {fileID: 0}
+  kapowSprites: []
   deathParticles: {fileID: 0}
   audioSource: {fileID: 0}
   attackSound: {fileID: 0}
@@ -23831,7 +23832,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffed0c7590b50b74ab2ada4b87df1cf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kapowSprite: {fileID: 0}
+  kapowSprites: []
   deathParticles: {fileID: 0}
   audioSource: {fileID: 0}
   attackSound: {fileID: 0}
@@ -24691,7 +24692,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffed0c7590b50b74ab2ada4b87df1cf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kapowSprite: {fileID: 689650696}
+  kapowSprites:
+  - {fileID: 689650696}
   deathParticles: {fileID: 0}
   audioSource: {fileID: 0}
   attackSound: {fileID: 0}
