@@ -18,7 +18,11 @@ public class NpcButton : MonoBehaviour
     [SerializeField] private List<string> npcLines;
 
     [Header("Unlock Requirements")]
+    [SerializeField] private bool requiresJolenCompleted = false;
     [SerializeField] private bool requiresTurumpoUnlocked = false;
+    [SerializeField] private bool requiresTurumpoCompleted = false;
+    [SerializeField] private bool requiresTumbangPresoUnlocked = false;
+
 
 
     private int currentLineIndex = 0;
@@ -173,13 +177,16 @@ public class NpcButton : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            // Check if this NPC requires Turumpo unlocked
-            if (requiresTurumpoUnlocked && !ObjectiveManager.Instance.turumpoUnlocked)
-            {
-                // Do NOT show prompt if locked
-                return;
-            }
+            // Safety: make sure ObjectiveManager exists
+            if (ObjectiveManager.Instance == null) return;
 
+            // Check requirements before showing prompt
+            if (requiresJolenCompleted && !ObjectiveManager.Instance.jolenCompleted) return;
+            if (requiresTurumpoUnlocked && !ObjectiveManager.Instance.turumpoUnlocked) return;
+            if (requiresTurumpoCompleted && !ObjectiveManager.Instance.turumpoCompleted) return;
+            if (requiresTumbangPresoUnlocked && !ObjectiveManager.Instance.tumbangPresoUnlocked) return;
+
+            // Passed all requirements -> allow interaction
             isPlayerNearby = true;
             playerObject = other.gameObject;
             playerController = playerObject.GetComponent<SimpleCharacterController>();
@@ -190,6 +197,9 @@ public class NpcButton : MonoBehaviour
                 interactionPrompt.SetActive(true);
         }
     }
+
+
+
 
 
     private void OnTriggerExit(Collider other)

@@ -559,6 +559,13 @@ public class TurompoGameManager : MonoBehaviour
 
         Debug.Log("Game Over: " + winner + " Wins!");
 
+        // Call ObjectiveManager when Turumpo finishes (GABITO ITO LANG YUNG SCRIPT KO DITO
+        if (ObjectiveManager.Instance != null)
+        {
+            ObjectiveManager.Instance.CompleteTurumpo();
+        }
+        /// GABITO, ITO LANG DINAGDAG KO
+
         // Stop all coroutines to prevent further difficulty increases
         StopAllCoroutines();
     }
@@ -618,6 +625,13 @@ public class TurompoGameManager : MonoBehaviour
             player1Rhythm.ClearAllNotes();
         if (player2Rhythm != null)
             player2Rhythm.ClearAllNotes();
+
+        // Call ObjectiveManager when Turumpo finishes (GABITO ITO LANG YUNG SCRIPT KO DITO
+        if (ObjectiveManager.Instance != null)
+        {
+            ObjectiveManager.Instance.CompleteTurumpo();
+        }
+        /// GABITO, ITO LANG DINAGDAG KO
 
         // Stop progression
         StopAllCoroutines();

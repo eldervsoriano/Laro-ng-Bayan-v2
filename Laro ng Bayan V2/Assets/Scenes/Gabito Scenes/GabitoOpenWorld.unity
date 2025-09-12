@@ -14589,7 +14589,10 @@ MonoBehaviour:
   - Hi!!
   - These games here are so fun!
   - But, I want to play jolen with someone!
+  requiresJolenCompleted: 0
   requiresTurumpoUnlocked: 0
+  requiresTurumpoCompleted: 0
+  requiresTumbangPresoUnlocked: 0
   sceneToLoad: GabitoJolenStreet
   pauseUIButton: {fileID: 0}
 --- !u!65 &443569424
@@ -25244,7 +25247,10 @@ MonoBehaviour:
   npcLines:
   - Oh, hey...
   - Didn't expect you to be here.
+  requiresJolenCompleted: 0
   requiresTurumpoUnlocked: 1
+  requiresTurumpoCompleted: 0
+  requiresTumbangPresoUnlocked: 0
   sceneToLoad: Turompo
   pauseUIButton: {fileID: 0}
 --- !u!65 &779084851
@@ -27714,6 +27720,10 @@ PrefabInstance:
     - target: {fileID: 3908831312286429213, guid: 35de8d10b06578c498af2171a1e32ad6, type: 3}
       propertyPath: m_Name
       value: Charles_Prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 3908831312286429213, guid: 35de8d10b06578c498af2171a1e32ad6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4428487533213641383, guid: 35de8d10b06578c498af2171a1e32ad6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -39390,7 +39400,10 @@ MonoBehaviour:
   - Yo Aiden!
   - 'What''s up? Are you having fun here? '
   - Because I'm having a blast here!
+  requiresJolenCompleted: 0
   requiresTurumpoUnlocked: 0
+  requiresTurumpoCompleted: 1
+  requiresTumbangPresoUnlocked: 0
   sceneToLoad: TumbangPreso
   pauseUIButton: {fileID: 0}
 --- !u!65 &1200505529
