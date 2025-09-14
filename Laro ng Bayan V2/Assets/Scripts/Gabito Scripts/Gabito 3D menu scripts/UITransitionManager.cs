@@ -17,28 +17,30 @@ public class UITransitionManager : MonoBehaviour
     public GameObject uiGameModes;
     public GameObject uiGameSelect;
 
+    [Header("For Select Modes")]
+    public GameObject uiStoryNotComplete; // Warning panel
+    public GameObject uiPlayPanel;        // The "regular play panel"
+
     private void SetActiveCamera(CinemachineVirtualCamera target)
     {
-        // Reset all cameras to priority 0
         vcamPlay.Priority = 0;
         vcamOptions.Priority = 0;
         vcamCredits.Priority = 0;
         vcamModes.Priority = 0;
         vcamSelect.Priority = 0;
 
-        // Activate target
-        target.Priority = 10;
+        if (target != null)
+            target.Priority = 10;
     }
 
     private void ShowOnly(GameObject targetUI)
     {
-        // Disable all UIs first
         uiMainMenu.SetActive(false);
         uiOptions.SetActive(false);
         uiCredits.SetActive(false);
         uiGameModes.SetActive(false);
+        uiGameSelect.SetActive(false);
 
-        // Then enable the one we want
         if (targetUI != null)
             targetUI.SetActive(true);
     }
@@ -69,7 +71,35 @@ public class UITransitionManager : MonoBehaviour
 
     public void GoToSelectModes()
     {
-        SetActiveCamera(vcamSelect);
-        ShowOnly(uiGameSelect);
+        if (ObjectiveManager.Instance != null && ObjectiveManager.Instance.spiderDerbyCompleted)
+        {
+            // Story completed -> move to game modes
+            SetActiveCamera(vcamSelect);
+        if (uiGameSelect != null) uiGameSelect.SetActive(true);
+        if (uiPlayPanel != null) uiPlayPanel.SetActive(false);
+        }
+        else
+        {
+            // Not completed -> show warning, stay on Play camera
+            if (uiStoryNotComplete != null) uiStoryNotComplete.SetActive(true);
+            if (uiPlayPanel != null) uiPlayPanel.SetActive(false);
+
+            Debug.Log("Finish the story first!");
+        }
+    }
+
+    // Hook this to the Close button in your warning panel
+    public void CloseWarning()
+    {
+        if (uiStoryNotComplete != null) uiStoryNotComplete.SetActive(false);
+        if (uiPlayPanel != null) uiPlayPanel.SetActive(true);
+    }
+
+    // Hook this to the Close button in your game modes panel
+    public void CloseGameModes()
+    {
+        if (uiGameModes != null) uiGameModes.SetActive(false);
+        if (uiPlayPanel != null) uiPlayPanel.SetActive(true);
+        SetActiveCamera(vcamPlay);
     }
 }

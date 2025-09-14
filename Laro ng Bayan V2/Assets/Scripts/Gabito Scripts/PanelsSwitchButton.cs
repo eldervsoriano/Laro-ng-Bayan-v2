@@ -19,11 +19,14 @@ public class PanelsSwitchButton : MonoBehaviour
 
     public void QuitGame()
     {
-        Debug.Log("Quit button pressed. Exiting game...");
+        Debug.Log("Quit button pressed. Saving progress and exiting...");
+
+        if (ObjectiveManager.Instance != null)
+            ObjectiveManager.Instance.SaveProgress();
 
         Application.Quit();
-
     }
+
     public void LoadScene(string sceneName)
     {
         Debug.Log("Loading scene: " + sceneName);
