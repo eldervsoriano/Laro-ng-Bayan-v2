@@ -9489,7 +9489,7 @@ GameObject:
   - component: {fileID: 830173451}
   m_Layer: 0
   m_Name: Jolen Arrow P2
-  m_TagString: Untagged
+  m_TagString: NoOutline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11255,7 +11255,7 @@ GameObject:
   - component: {fileID: 980612278}
   m_Layer: 0
   m_Name: Jolen Arrow P1
-  m_TagString: Untagged
+  m_TagString: NoOutline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11964,6 +11964,7 @@ GameObject:
   - component: {fileID: 1021576656}
   - component: {fileID: 1021576665}
   - component: {fileID: 1021576664}
+  - component: {fileID: 1021576666}
   m_Layer: 0
   m_Name: PamatoP2
   m_TagString: Pamato
@@ -12343,6 +12344,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1021576666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1021576654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 3
+  outlineColor: {r: 1, g: 0.8451455, b: 0.49411762, a: 1}
+  outlineWidth: 1.89
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &1027020715
 GameObject:
   m_ObjectHideFlags: 0
@@ -19667,6 +19686,7 @@ GameObject:
   - component: {fileID: 1863885891}
   - component: {fileID: 1863885900}
   - component: {fileID: 1863885901}
+  - component: {fileID: 1863885902}
   m_Layer: 0
   m_Name: 'PamatoP1 '
   m_TagString: Pamato
@@ -19712,7 +19732,7 @@ LineRenderer:
   m_GameObject: {fileID: 1863885890}
   m_Enabled: 0
   m_CastShadows: 0
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 0
@@ -20047,6 +20067,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1863885902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1863885890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 3
+  outlineColor: {r: 0.6273585, g: 0.7530337, b: 1, a: 1}
+  outlineWidth: 1.89
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &1864708694
 GameObject:
   m_ObjectHideFlags: 0
@@ -21255,7 +21293,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -683171210, guid: 77d0569c5e4e1e64299a4ebe48fe1094, type: 3}
+  m_Sprite: {fileID: -155993819, guid: 77d0569c5e4e1e64299a4ebe48fe1094, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
