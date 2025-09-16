@@ -39,4 +39,16 @@ public class PanelsSwitchButton : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
+    public void GoTo3DMenu()
+    {
+        Debug.Log("Loading 3DMenu");
+
+        // Reset time and pause states
+        Time.timeScale = 1f;
+        PauseButton.isPaused = false;
+        PauseButton.canPause = true;
+
+        SceneManager.LoadScene("Gabito3DMenu");
+    }
+
 }

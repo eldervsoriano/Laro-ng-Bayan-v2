@@ -1600,7 +1600,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f0d56a49234e94eb5b23f7241d10a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetSceneName: YourSceneName
+  targetSceneName: Gabito3DMenu
 --- !u!114 &126729370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1654,7 +1654,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 1
           m_FloatArgument: 0
-          m_StringArgument: GabitoMainMenu
+          m_StringArgument: Gabito3DMenu
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &126729371
@@ -17274,7 +17274,7 @@ GameObject:
   - component: {fileID: 1648166314}
   - component: {fileID: 1648166313}
   - component: {fileID: 1648166312}
-  - component: {fileID: 1648166311}
+  - component: {fileID: 1648166315}
   m_Layer: 5
   m_Name: Yes Button
   m_TagString: Untagged
@@ -17302,19 +17302,6 @@ RectTransform:
   m_AnchoredPosition: {x: -20.081802, y: -21.6}
   m_SizeDelta: {x: 145.58566, y: 40.29491}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1648166311
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1648166309}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54f0d56a49234e94eb5b23f7241d10a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetSceneName: YourSceneName
 --- !u!114 &1648166312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17359,16 +17346,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1648166311}
-        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
-        m_MethodName: ChangeToScene
-        m_Mode: 5
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PanelsSwitchButton, Assembly-CSharp
+        m_MethodName: GoTo3DMenu
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: MainMenu
+          m_StringArgument: Gabito3DMenu
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1648166313
@@ -17409,6 +17396,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1648166309}
   m_CullTransparentMesh: 1
+--- !u!114 &1648166315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1648166309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54f0d56a49234e94eb5b23f7241d10a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetSceneName: YourSceneName
 --- !u!1 &1663107371
 GameObject:
   m_ObjectHideFlags: 0
