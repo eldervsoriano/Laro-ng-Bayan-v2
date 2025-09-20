@@ -10,7 +10,8 @@ public class CountdownManager : MonoBehaviour
     public float countdownTime = 3f;
 
     [Header("Gameplay References")]
-    public PamatoShooter[] shooters; // assign both Player 1 and 2 in inspector
+    [Tooltip("Drop any scripts that should be disabled during countdown.")]
+    public MonoBehaviour[] scriptsToDisable; // works for any component
 
     [Header("Options")]
     [Tooltip("Check if this level has a tutorial panel.")]
@@ -20,10 +21,9 @@ public class CountdownManager : MonoBehaviour
     {
         if (!hasTutorial)
         {
-            // If no tutorial, start countdown immediately
             BeginCountdown();
         }
-        // If hasTutorial = true then TutorialPanel handles it and calls BeginCountdown() later
+        // If hasTutorial = true, TutorialPanel will call BeginCountdown() later
     }
 
     public void BeginCountdown()
@@ -36,9 +36,9 @@ public class CountdownManager : MonoBehaviour
         // Disable pause during countdown
         PauseButton.canPause = false;
 
-        // Disable gameplay while counting down
-        foreach (var shooter in shooters)
-            shooter.enabled = false;
+        // Disable gameplay scripts
+        foreach (var script in scriptsToDisable)
+            if (script != null) script.enabled = false;
 
         countdownPanel.SetActive(true);
 
@@ -55,18 +55,18 @@ public class CountdownManager : MonoBehaviour
 
         countdownPanel.SetActive(false);
 
-        // Enable gameplay
-        foreach (var shooter in shooters)
-            shooter.enabled = true;
+        // Re-enable gameplay scripts
+        foreach (var script in scriptsToDisable)
+            if (script != null) script.enabled = true;
 
         // Re-enable pause after countdown finishes
         PauseButton.canPause = true;
 
-        // Initialize UI after countdown
+        // Optional: only Jolen cares about UIJolen, so wrap it in null check
         if (UIJolen.Instance != null)
         {
             UIJolen.Instance.SetProfilesVisible(true);
-            UIJolen.Instance.UpdateTurn(1); // Player 1 starts
+            UIJolen.Instance.UpdateTurn(1);
         }
     }
 }

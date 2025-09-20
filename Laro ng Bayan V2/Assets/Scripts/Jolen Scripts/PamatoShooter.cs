@@ -3,7 +3,7 @@
 public class PamatoShooter : MonoBehaviour
 {
     public Rigidbody rb;
-    public float forceMultiplier = 5f; // was 1.5, boost it for better response
+    public float forceMultiplier = 2f; // was 1.5, boost it for better response
 
     public LineRenderer aimLine;
 

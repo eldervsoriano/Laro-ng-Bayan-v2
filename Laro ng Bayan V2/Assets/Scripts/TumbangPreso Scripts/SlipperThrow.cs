@@ -19,7 +19,7 @@ public class SlipperThrow : MonoBehaviour
     void Awake()
     {
         startPosition = transform.position;
-        startRotation = transform.rotation; // ✅ Save rotation from scene
+        startRotation = transform.rotation; // Save rotation from scene
     }
 
 
@@ -45,6 +45,14 @@ public class SlipperThrow : MonoBehaviour
         if (!isDragging || hasThrown || TumbangGameManager.Instance.GetCurrentPlayer() != playerNumber)
             return;
 
+        // Check drag distance
+        float dragDistance = (Input.mousePosition - dragStart).magnitude;
+        if (dragDistance < 30f) // threshold in pixels (tweak this value)
+        {
+            isDragging = false;
+            return; // Do nothing if just a click
+        }
+
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
@@ -68,14 +76,16 @@ public class SlipperThrow : MonoBehaviour
         hasThrown = false;
         isDragging = false;
 
+        rb.isKinematic = false; // temporarily make it non-kinematic
         rb.velocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero; // ✅ clear spin before disabling physics
+        rb.angularVelocity = Vector3.zero;
 
-        rb.isKinematic = true; // ✅ move this after velocities
+        rb.isKinematic = true; // now safe to freeze it again
 
         transform.position = startPosition;
         transform.rotation = startRotation;
     }
+
 
 
 
