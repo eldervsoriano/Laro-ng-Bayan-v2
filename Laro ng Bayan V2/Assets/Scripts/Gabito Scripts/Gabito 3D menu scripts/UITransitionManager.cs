@@ -1,5 +1,7 @@
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.UI; // needed for Button
+
 
 public class UITransitionManager : MonoBehaviour
 {
@@ -17,9 +19,20 @@ public class UITransitionManager : MonoBehaviour
     public GameObject uiGameModes;
     public GameObject uiGameSelect;
 
+    [Header("Buttons")]
+    public Button selectModesButton; // Drag your Select Modes button here in Inspector
+
+    /*  Optional: keep reference to "story not complete" panel in case you want to restore later
     [Header("For Select Modes")]
     public GameObject uiStoryNotComplete; // Warning panel
-    public GameObject uiPlayPanel;        // The "regular play panel"
+    public GameObject uiPlayPanel;        // The "regular play panel" */
+
+    private void Update()
+    {
+        // Continuously check if progress changed (simple but safe)
+        UpdateSelectModesButton();
+    }
+
 
     private void SetActiveCamera(CinemachineVirtualCamera target)
     {
@@ -71,35 +84,58 @@ public class UITransitionManager : MonoBehaviour
 
     public void GoToSelectModes()
     {
+        // Only works if story completed
         if (ObjectiveManager.Instance != null && ObjectiveManager.Instance.spiderDerbyCompleted)
         {
-            // Story completed -> move to game modes
             SetActiveCamera(vcamSelect);
-        if (uiGameSelect != null) uiGameSelect.SetActive(true);
-        if (uiPlayPanel != null) uiPlayPanel.SetActive(false);
+            ShowOnly(uiGameSelect);
         }
         else
         {
-            // Not completed -> show warning, stay on Play camera
-            if (uiStoryNotComplete != null) uiStoryNotComplete.SetActive(true);
-            if (uiPlayPanel != null) uiPlayPanel.SetActive(false);
-
-            Debug.Log("Finish the story first!");
+            Debug.Log("Select Modes button should be greyed out. Story not complete.");
         }
+
+        //if (ObjectiveManager.Instance != null && ObjectiveManager.Instance.spiderDerbyCompleted)
+        //{
+        //    // Story completed -> move to game modes
+        //    SetActiveCamera(vcamSelect);
+        //if (uiGameSelect != null) uiGameSelect.SetActive(true);
+        //if (uiPlayPanel != null) uiPlayPanel.SetActive(false);
+        //}
+        //else
+        //{
+        //    // Not completed -> show warning, stay on Play camera
+        //    if (uiStoryNotComplete != null) uiStoryNotComplete.SetActive(true);
+        //    if (uiPlayPanel != null) uiPlayPanel.SetActive(false);
+
+        //    Debug.Log("Finish the story first!");
+        //}
     }
 
-    // Hook this to the Close button in your warning panel
-    public void CloseWarning()
-    {
-        if (uiStoryNotComplete != null) uiStoryNotComplete.SetActive(false);
-        if (uiPlayPanel != null) uiPlayPanel.SetActive(true);
-    }
+    //// Hook this to the Close button in your warning panel
+    //public void CloseWarning()
+    //{
+    //    if (uiStoryNotComplete != null) uiStoryNotComplete.SetActive(false);
+    //    if (uiPlayPanel != null) uiPlayPanel.SetActive(true);
+    //}
 
-    // Hook this to the Close button in your game modes panel
-    public void CloseGameModes()
+    //// Hook this to the Close button in your game modes panel
+    //public void CloseGameModes()
+    //{
+    //    if (uiGameModes != null) uiGameModes.SetActive(false);
+    //    if (uiPlayPanel != null) uiPlayPanel.SetActive(true);
+    //    SetActiveCamera(vcamPlay);
+    //}
+
+    // === Enable/disable the Select Modes button ===
+    private void UpdateSelectModesButton()
     {
-        if (uiGameModes != null) uiGameModes.SetActive(false);
-        if (uiPlayPanel != null) uiPlayPanel.SetActive(true);
-        SetActiveCamera(vcamPlay);
+        if (selectModesButton != null)
+        {
+            if (ObjectiveManager.Instance != null && ObjectiveManager.Instance.spiderDerbyCompleted)
+                selectModesButton.interactable = true;
+            else
+                selectModesButton.interactable = false;
+        }
     }
 }
