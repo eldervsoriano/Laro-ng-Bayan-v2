@@ -33,6 +33,9 @@ public class CountdownManager : MonoBehaviour
 
     private IEnumerator StartCountdown()
     {
+        // Freeze time
+        Time.timeScale = 0f;
+
         // Disable pause during countdown
         PauseButton.canPause = false;
 
@@ -46,18 +49,21 @@ public class CountdownManager : MonoBehaviour
         while (timer > 0)
         {
             countdownText.text = Mathf.Ceil(timer).ToString();
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSecondsRealtime(1f); // works even when timeScale = 0
             timer--;
         }
 
         countdownText.text = "Go!";
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSecondsRealtime(1f);
 
         countdownPanel.SetActive(false);
 
         // Re-enable gameplay scripts
         foreach (var script in scriptsToDisable)
             if (script != null) script.enabled = true;
+
+        // Unfreeze time
+        Time.timeScale = 1f;
 
         // Re-enable pause after countdown finishes
         PauseButton.canPause = true;
