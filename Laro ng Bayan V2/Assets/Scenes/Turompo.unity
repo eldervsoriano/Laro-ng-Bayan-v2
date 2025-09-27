@@ -1432,6 +1432,12 @@ MonoBehaviour:
   targetLine: {fileID: 957106264}
   playerTorompo: {fileID: 127715137}
   keyPressDelay: 0.3
+  enableAI: 1
+  aiAccuracy: 0.8
+  aiReactionSpeed: 0.7
+  aiConsistency: 0.85
+  aiPerfectHitRange: 0.3
+  aiGoodHitRange: 0.6
 --- !u!23 &127715140
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5302,6 +5308,62 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &711179555
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 711179557}
+  - component: {fileID: 711179556}
+  m_Layer: 0
+  m_Name: AI Game Object
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &711179556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711179555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6beade555974fed418b05ca9fa850efd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableAI: 1
+  aiPlayerIndex: 2
+  aiAccuracy: 0.8
+  aiReactionSpeed: 0.7
+  aiConsistency: 0.85
+  adaptiveDifficulty: 1
+  difficultyAdjustmentRate: 0.1
+  maxAccuracy: 0.95
+  minAccuracy: 0.3
+  burstChance: 0.3
+  burstDuration: 2
+  burstAccuracyMultiplier: 1.5
+--- !u!4 &711179557
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711179555}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 786.8975, y: 614.15405, z: 3.3022938}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &715861534
 GameObject:
   m_ObjectHideFlags: 0
@@ -5602,6 +5664,10 @@ MonoBehaviour:
   downArrowSprite: {fileID: 1461035633, guid: 28118ec74205f4a409c09bf5cd7a9ff8, type: 3}
   leftArrowSprite: {fileID: -1886885205, guid: 28118ec74205f4a409c09bf5cd7a9ff8, type: 3}
   rightArrowSprite: {fileID: 1558177756, guid: 28118ec74205f4a409c09bf5cd7a9ff8, type: 3}
+  enablePlayer2AI: 1
+  aiTapFrequency: 2
+  aiAccuracy: 1
+  aiReactionDelay: 0
   keySwitchInterval: 4
 --- !u!1 &790467634
 GameObject:
@@ -9758,6 +9824,10 @@ MonoBehaviour:
   winnerText: {fileID: 1905414174}
   preChallenge: {fileID: 739275376}
   usePreChallenge: 1
+  enableSinglePlayerMode: 1
+  aiController: {fileID: 711179556}
+  aiDifficultyLevel: 0.7
+  adaptiveAIDifficulty: 1
   gameDuration: 60
   progressionInterval: 15
   spinDecayIncrease: 100
@@ -13418,6 +13488,12 @@ MonoBehaviour:
   targetLine: {fileID: 1320913771}
   playerTorompo: {fileID: 1954651786}
   keyPressDelay: 0.3
+  enableAI: 0
+  aiAccuracy: 0.8
+  aiReactionSpeed: 0.7
+  aiConsistency: 0.85
+  aiPerfectHitRange: 0.3
+  aiGoodHitRange: 0.6
 --- !u!23 &1954651789
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -15103,3 +15179,4 @@ SceneRoots:
   - {fileID: 441444197}
   - {fileID: 473456758}
   - {fileID: 1154501435}
+  - {fileID: 711179557}

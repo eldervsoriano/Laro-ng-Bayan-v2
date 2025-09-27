@@ -4085,6 +4085,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player1Input: {fileID: 902513455328516009}
   player2Input: {fileID: 6418045802075228143}
+  aiController: {fileID: 6418045802075228144}
   player1Spider: {fileID: 902513455328516007}
   player2Spider: {fileID: 6418045802075228141}
   resultText: {fileID: 1158448854}
@@ -4096,6 +4097,10 @@ MonoBehaviour:
   winnerPanel: {fileID: 1619964719}
   winnerText: {fileID: 351914951}
   roundWinnerText: {fileID: 726380076}
+  isSinglePlayerMode: 1
+  singlePlayerToggle: {fileID: 0}
+  difficultyDropdown: {fileID: 0}
+  gameModeText: {fileID: 0}
   player1Health: 100
   player2Health: 100
   damagePerAttack: 20
@@ -21436,6 +21441,7 @@ GameObject:
   - component: {fileID: 6418045802075228143}
   - component: {fileID: 6418045802075228142}
   - component: {fileID: 6418045802075228141}
+  - component: {fileID: 6418045802075228144}
   m_Layer: 0
   m_Name: Hanging Spider 2
   m_TagString: Untagged
@@ -21697,6 +21703,26 @@ MonoBehaviour:
   keyToSelectRockPlayer2: 257
   keyToSelectPaperPlayer2: 258
   keyToSelectScissorsPlayer2: 259
+--- !u!114 &6418045802075228144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5934242425421815126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffc5b75cb358de94e918b90c3206d849, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAIEnabled: 1
+  difficulty: 3
+  minDecisionTime: 1
+  maxDecisionTime: 2
+  lastSecondChance: 0.3
+  randomChoiceWeight: 0.4
+  counterStrategyWeight: 0.4
+  patternFollowWeight: 0.2
 --- !u!4 &6425288269153584569
 Transform:
   m_ObjectHideFlags: 0
