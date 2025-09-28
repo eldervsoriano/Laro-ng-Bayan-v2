@@ -2089,6 +2089,9 @@ public class TurompoPreChallenge : MonoBehaviour
 
 
 
+
+
+
     public bool IsChallengeActive()
     {
         return isChallengeActive || isCountingDown;
