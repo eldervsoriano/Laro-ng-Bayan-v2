@@ -9297,6 +9297,30 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &777315058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 777315051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76db03bf1cac80046920e2014ffaa496, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAI: 1
+  playerNumber: 2
+  aimThinkTime: 1.5
+  throwAccuracy: 0.8
+  aimRandomness: 2
+  defenseReactionTime: 0.3
+  defenseAccuracy: 0.75
+  perfectTimingWindow: 0.05
+  scaleDifficulty: 1
+  minAccuracy: 0.5
+  maxAccuracy: 0.95
+  scoreThresholdForMax: 5
 --- !u!1 &780666311
 GameObject:
   m_ObjectHideFlags: 0
@@ -19442,6 +19466,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e0b6cc9e527554b438a3bb7b964d5827, type: 3}
       insertIndex: -1
       addedObject: {fileID: 777315056}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e0b6cc9e527554b438a3bb7b964d5827, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 777315058}
   m_SourcePrefab: {fileID: 100100000, guid: e0b6cc9e527554b438a3bb7b964d5827, type: 3}
 --- !u!1 &1773780266
 GameObject:
@@ -20131,6 +20158,8 @@ MonoBehaviour:
   player2BlockSuccessImage: {fileID: 150694126}
   successClip: {fileID: 8300000, guid: b2d0b07e30ead984ba667e056c66e76f, type: 3}
   failClip: {fileID: 0}
+  player1AI: {fileID: 0}
+  player2AI: {fileID: 777315058}
 --- !u!114 &1909095967
 MonoBehaviour:
   m_ObjectHideFlags: 0
