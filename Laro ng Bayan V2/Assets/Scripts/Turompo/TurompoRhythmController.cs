@@ -420,21 +420,44 @@ public class TurompoRhythmController : MonoBehaviour
     {
         // Set up key configurations based on player index
         if (playerIndex == 1)
-        {
             playerKeys = new KeyCode[] { KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D };
-        }
         else
-        {
             playerKeys = new KeyCode[] { KeyCode.UpArrow, KeyCode.LeftArrow, KeyCode.DownArrow, KeyCode.RightArrow };
-        }
 
-        // Initialize the key press timers
+        // Initialize timers
         for (int i = 0; i < playerKeys.Length; i++)
         {
-            keyLastPressTime[i] = -keyPressDelay; // Allow immediate first press
-            aiKeyLastAttempt[i] = -aiMinTimeBetweenAttempts; // Allow immediate AI attempts
+            keyLastPressTime[i] = -keyPressDelay;
+            aiKeyLastAttempt[i] = -aiMinTimeBetweenAttempts;
+        }
+
+        // Start spawning notes after a delay
+        StartCoroutine(SpawnNotesWithInitialDelay(3f)); // 3-second first note delay
+    }
+
+    private IEnumerator SpawnNotesWithInitialDelay(float initialDelay)
+    {
+        // Wait before first note
+        yield return new WaitForSeconds(initialDelay);
+
+        // Spawn first note immediately
+        SpawnRandomNote();
+        nextSpawnTime = Time.time + spawnRate;
+
+        // Continue spawning notes at regular intervals
+        while (TurompoGameManager.Instance != null && TurompoGameManager.Instance.IsGameActive())
+        {
+            if (Time.time >= nextSpawnTime)
+            {
+                SpawnRandomNote();
+                nextSpawnTime = Time.time + spawnRate;
+            }
+            yield return null; // wait until next frame
         }
     }
+
+
+
 
     void Update()
     {
