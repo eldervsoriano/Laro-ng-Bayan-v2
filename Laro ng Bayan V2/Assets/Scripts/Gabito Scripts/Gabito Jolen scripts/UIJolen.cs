@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement; // NEW: for scene loading
 
 public class UIJolen : MonoBehaviour
 {
@@ -25,9 +26,13 @@ public class UIJolen : MonoBehaviour
     public GameObject winnerPanel;
     public TextMeshProUGUI winnerText;
 
+    [Header("Scenes")]
+    public string defeatSceneName = "DefeatScene"; // drag your defeat scene name here or edit in Inspector
+
     [Header("Scale Settings")]
     public Vector3 normalScale = Vector3.one;
     public Vector3 highlightScale = new Vector3(1.2f, 1.2f, 1f);
+
 
     void Awake()
     {
@@ -113,8 +118,17 @@ public class UIJolen : MonoBehaviour
     private IEnumerator ShowWinnerWithDelay(int player)
     {
         yield return new WaitForSeconds(2f);
-        if (winnerPanel != null) winnerPanel.SetActive(true);
-        if (winnerText != null) winnerText.text = $"Player {player} Wins!";
+
+        if (player == 2) // meaning Player 1 lost
+        {
+            // Load defeat scene for Player 1
+            SceneManager.LoadScene(defeatSceneName);
+        }
+        else
+        {
+            if (winnerPanel != null) winnerPanel.SetActive(true);
+            if (winnerText != null) winnerText.text = $"Player {player} Wins!";
+        }
     }
 
     /// <summary>
