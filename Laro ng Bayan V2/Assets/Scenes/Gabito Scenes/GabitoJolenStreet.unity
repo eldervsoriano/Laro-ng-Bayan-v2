@@ -153,6 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player1Pamato: {fileID: 1863885890}
   player2Pamato: {fileID: 1021576654}
+  isAIEnabled: 1
   winningScore: 5
   lowSpeedThreshold: 1.5
   stallTimeLimit: 1.5
@@ -6696,6 +6697,7 @@ MonoBehaviour:
   player2TurnPanel: {fileID: 1567451354}
   winnerPanel: {fileID: 1150462819}
   winnerText: {fileID: 2073341317}
+  defeatSceneName: DefeatScreen
   normalScale: {x: 1, y: 1, z: 1}
   highlightScale: {x: 1.65, y: 1.65, z: 1}
 --- !u!4 &622115926
@@ -11965,6 +11967,7 @@ GameObject:
   - component: {fileID: 1021576665}
   - component: {fileID: 1021576664}
   - component: {fileID: 1021576666}
+  - component: {fileID: 1021576667}
   m_Layer: 0
   m_Name: PamatoP2
   m_TagString: Pamato
@@ -12362,6 +12365,33 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &1021576667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1021576654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c8aea9599a899d4194a9576ddd5bf85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 1021576660}
+  forceMultiplier: 5
+  aimLine: {fileID: 1021576658}
+  thinkingTime: 1.5
+  aimDisplayTime: 0.8
+  minShotPower: 10
+  maxShotPower: 20
+  aimInaccuracy: 5
+  targetingHeight: 0.5
+  preferCloserTargets: 1
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  raycastDistance: 10
+  maxAlternativeAttempts: 5
 --- !u!1 &1027020715
 GameObject:
   m_ObjectHideFlags: 0
