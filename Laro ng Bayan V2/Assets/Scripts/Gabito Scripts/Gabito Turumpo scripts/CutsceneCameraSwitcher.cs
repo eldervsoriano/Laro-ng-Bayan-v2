@@ -34,6 +34,9 @@ public class CutsceneCameraSwitcher : MonoBehaviour
             // Restore main cam when cutscene finishes
             SetActiveVCam(mainCam);
 
+            // Start spawning notes AFTER cutscene
+            StartCoroutine(StartGameplayAfterDelay(0.5f)); // adjust delay if you want extra pan time
+
             onCutsceneFinished?.Invoke();
             return;
         }
@@ -73,5 +76,17 @@ public class CutsceneCameraSwitcher : MonoBehaviour
         // Activate the one we want
         if (target != null)
             target.Priority = 10;
+    }
+
+    // This coroutine ensures gameplay doesn’t start instantly
+    private IEnumerator StartGameplayAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        TurompoRhythmController[] controllers = FindObjectsOfType<TurompoRhythmController>();
+        foreach (var c in controllers)
+        {
+            c.BeginSpawning(); // call the method we made in RhythmController
+        }
     }
 }

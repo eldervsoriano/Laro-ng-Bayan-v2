@@ -416,72 +416,56 @@ public class TurompoRhythmController : MonoBehaviour
     private Dictionary<int, float> aiKeyLastAttempt = new Dictionary<int, float>();
     private float aiMinTimeBetweenAttempts = 0.2f;
 
+
     void Start()
     {
-        // Set up key configurations based on player index
         if (playerIndex == 1)
             playerKeys = new KeyCode[] { KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D };
         else
             playerKeys = new KeyCode[] { KeyCode.UpArrow, KeyCode.LeftArrow, KeyCode.DownArrow, KeyCode.RightArrow };
 
-        // Initialize timers
         for (int i = 0; i < playerKeys.Length; i++)
         {
             keyLastPressTime[i] = -keyPressDelay;
             aiKeyLastAttempt[i] = -aiMinTimeBetweenAttempts;
         }
 
-        // Start spawning notes after a delay
-        StartCoroutine(SpawnNotesWithInitialDelay(3f)); // 3-second first note delay
+        // REMOVE THIS LINE
+        // StartCoroutine(SpawnNotesRoutine());
     }
 
-    private IEnumerator SpawnNotesWithInitialDelay(float initialDelay)
+
+    // Public method you call AFTER countdown ends
+    public void BeginSpawning()
     {
-        // Wait before first note
-        yield return new WaitForSeconds(initialDelay);
+        StartCoroutine(SpawnNotesRoutine());
+    }
 
-        // Spawn first note immediately
-        SpawnRandomNote();
-        nextSpawnTime = Time.time + spawnRate;
+    IEnumerator SpawnNotesRoutine()
+    {
+        // delay before the first note drops
+        yield return new WaitForSeconds(1f);
 
-        // Continue spawning notes at regular intervals
         while (TurompoGameManager.Instance != null && TurompoGameManager.Instance.IsGameActive())
         {
-            if (Time.time >= nextSpawnTime)
-            {
-                SpawnRandomNote();
-                nextSpawnTime = Time.time + spawnRate;
-            }
-            yield return null; // wait until next frame
+            SpawnRandomNote();
+            yield return new WaitForSeconds(spawnRate);
         }
     }
-
-
 
 
     void Update()
     {
-        // Only process game logic if the game is active
         if (TurompoGameManager.Instance != null && TurompoGameManager.Instance.IsGameActive())
         {
-            // Spawn new notes
-            if (Time.time >= nextSpawnTime)
-            {
-                SpawnRandomNote();
-                nextSpawnTime = Time.time + spawnRate;
-            }
-
-            // Handle input - either human or AI
+            // Only handle input (human or AI)
             if (enableAI)
-            {
                 HandleAIInput();
-            }
             else
-            {
                 HandleHumanInput();
-            }
         }
     }
+
 
     void HandleHumanInput()
     {
