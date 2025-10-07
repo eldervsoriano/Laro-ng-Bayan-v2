@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 2875151616974521722}
   - component: {fileID: 8719824823662110905}
   - component: {fileID: -5068834615132312908}
+  - component: {fileID: 7243954006677209311}
+  - component: {fileID: -4657535667428509632}
   m_Layer: 0
   m_Name: Arrow_Key_Down
   m_TagString: Untagged
@@ -102,3 +104,35 @@ MonoBehaviour:
   rhythmController: {fileID: 0}
   noteRotation: {x: 0, y: -90, z: -360}
   useCustomRotation: 1
+--- !u!114 &7243954006677209311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2080346756728148693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff2264e6293b64f45a94f57c5649874c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outline: {fileID: -4657535667428509632}
+  rhythmController: {fileID: 0}
+--- !u!114 &-4657535667428509632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2080346756728148693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
