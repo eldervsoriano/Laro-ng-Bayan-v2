@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Video; 
 
 [System.Serializable]
 public class TutorialPage
 {
     [TextArea] public string text;  // Tutorial text
-    public GameObject imagePanel;   // A panel from the scene
+    public GameObject imageOrVideoPanel;   // A panel from the scene
 }
 
 public class TutorialPanel : MonoBehaviour
@@ -15,6 +16,7 @@ public class TutorialPanel : MonoBehaviour
     [SerializeField] private GameObject tutorialPanel;
     [SerializeField] private TMP_Text tutorialText;
     [SerializeField] private GameObject nextButton;
+    [SerializeField] private GameObject backButton;
     [SerializeField] private GameObject doneButton;
     [SerializeField] private GameObject skipButton;
 
@@ -45,6 +47,8 @@ public class TutorialPanel : MonoBehaviour
         ShowPage(currentIndex);
     }
 
+
+
     private void ShowPage(int index)
     {
         if (index >= 0 && index < tutorialPages.Count)
@@ -54,19 +58,51 @@ public class TutorialPanel : MonoBehaviour
 
             // Only show the active page image
             for (int i = 0; i < tutorialPages.Count; i++)
-                if (tutorialPages[i].imagePanel != null)
-                    tutorialPages[i].imagePanel.SetActive(i == index);
+            {
+                var page = tutorialPages[i];
+                if (page.imageOrVideoPanel != null)
+                {
+                    bool isActive = (i == index);
+                    page.imageOrVideoPanel.SetActive(isActive);
+
+                    // Control video playback based on visibility
+                    var videoPlayer = page.imageOrVideoPanel.GetComponentInChildren<VideoPlayer>();
+                    if (videoPlayer != null)
+                    {
+                        if (isActive)
+                        {
+                            videoPlayer.frame = 0; // rewind to beginning each time
+                            videoPlayer.Play();
+                        }
+                        else
+                        {
+                            videoPlayer.Stop();
+                            videoPlayer.frame = 0; // reset preview to first frame
+                        }
+
+                    }
+                }
+            }
         }
 
         // Toggle navigation buttons
+        if (backButton != null) backButton.SetActive(index > 0);  // hide Back on first page
         if (nextButton != null) nextButton.SetActive(index < tutorialPages.Count - 1);
         if (doneButton != null) doneButton.SetActive(index == tutorialPages.Count - 1);
     }
+
 
     public void OnNextClicked()
     {
         currentIndex++;
         if (currentIndex < tutorialPages.Count)
+            ShowPage(currentIndex);
+    }
+
+    public void OnBackClicked()
+    {
+        currentIndex--;
+        if (currentIndex >= 0)
             ShowPage(currentIndex);
     }
 
@@ -80,8 +116,8 @@ public class TutorialPanel : MonoBehaviour
 
         // Hide all tutorial images
         foreach (var page in tutorialPages)
-            if (page.imagePanel != null)
-                page.imagePanel.SetActive(false);
+            if (page.imageOrVideoPanel != null)
+                page.imageOrVideoPanel.SetActive(false);
 
         Time.timeScale = 1f; // Resume game
 
@@ -92,4 +128,18 @@ public class TutorialPanel : MonoBehaviour
         if (countdownManager != null)
             countdownManager.BeginCountdown();
     }
+
+    public void ReopenTutorial()
+    {
+        Time.timeScale = 0f; // Pause again
+        PauseButton.canPause = false;
+
+
+        // Reset to first page or last viewed page (your choice)
+        currentIndex = 0;
+        ShowPage(currentIndex);
+    }
+
+
+
 }
