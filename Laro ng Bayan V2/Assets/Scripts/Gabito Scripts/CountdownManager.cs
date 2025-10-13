@@ -74,5 +74,12 @@ public class CountdownManager : MonoBehaviour
             UIJolen.Instance.SetProfilesVisible(true);
             UIJolen.Instance.UpdateTurn(1);
         }
+
+        // for delay spawning in turumpo
+        TurompoRhythmController[] controllers = FindObjectsOfType<TurompoRhythmController>();
+        foreach (var c in controllers)
+        {
+            c.BeginSpawning();
+        }
     }
 }

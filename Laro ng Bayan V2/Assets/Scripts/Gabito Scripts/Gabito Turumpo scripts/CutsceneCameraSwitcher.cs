@@ -83,10 +83,37 @@ public class CutsceneCameraSwitcher : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 
+        // Extra delay so the camera finishes blending before countdown starts
+        yield return new WaitForSeconds(0.5f); // or 3f if you want longer
+
+        // First try to find a tutorial panel
+        TutorialPanel tutorial = FindObjectOfType<TutorialPanel>();
+        if (tutorial != null)
+        {
+            // Show tutorial after cutscene
+            tutorial.OpenTutorial();
+        }
+        else
+        {
+            // If no tutorial exists, just run the normal countdown
+            CountdownManager countdown = FindObjectOfType<CountdownManager>();
+            if (countdown != null)
+                countdown.BeginCountdown();
+            else
+                StartGameplayDirectly();
+        }
+
+    }
+
+
+    private void StartGameplayDirectly()
+    {
         TurompoRhythmController[] controllers = FindObjectsOfType<TurompoRhythmController>();
         foreach (var c in controllers)
         {
-            c.BeginSpawning(); // call the method we made in RhythmController
+            c.BeginSpawning();
         }
     }
+
+
 }

@@ -786,6 +786,10 @@ public class TurompoGameManager : MonoBehaviour
     private float lastDifficultyAdjustment = 0f;
     private float difficultyAdjustmentInterval = 10f;
 
+    // ADDED BY GABITO, for locking or pausing every keys during tutorial panel
+    public static bool IsInputLocked = false;
+
+
     private void Awake()
     {
         // Singleton pattern

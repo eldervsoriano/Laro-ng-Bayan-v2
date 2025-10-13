@@ -821,6 +821,11 @@ public class TurompoRhythmController : MonoBehaviour
     private Renderer targetRenderer;
     private Color originalColor;
 
+    // Gabito added stuffs
+    private Coroutine spawnRoutine = null;
+    private bool isSpawning = false;
+
+
 
     void Start()
     {
@@ -843,15 +848,30 @@ public class TurompoRhythmController : MonoBehaviour
         }
     }
 
-    // Public method you call AFTER countdown ends
+    // Public method you call AFTER countdown ends. Also Gabito edits
     public void BeginSpawning()
     {
-        StartCoroutine(SpawnNotesRoutine());
+        if (isSpawning)
+            return; // Already spawning — prevent duplicates
+
+        isSpawning = true;
+        spawnRoutine = StartCoroutine(SpawnNotesRoutine());
     }
 
+    // Added by gabito
+    public void StopSpawning()
+    {
+        if (spawnRoutine != null)
+            StopCoroutine(spawnRoutine);
+
+        spawnRoutine = null;
+        isSpawning = false;
+    }
+
+
+    // Gabito edits
     IEnumerator SpawnNotesRoutine()
     {
-        // delay before the first note drops
         yield return new WaitForSeconds(1f);
 
         while (TurompoGameManager.Instance != null && TurompoGameManager.Instance.IsGameActive())
@@ -859,10 +879,18 @@ public class TurompoRhythmController : MonoBehaviour
             SpawnRandomNote();
             yield return new WaitForSeconds(spawnRate);
         }
+
+        isSpawning = false;
+        spawnRoutine = null;
     }
 
+
+    //Edited byG Gabito
     void Update()
     {
+        if (TurompoGameManager.IsInputLocked)
+            return;
+
         if (TurompoGameManager.Instance != null && TurompoGameManager.Instance.IsGameActive())
         {
             if (enableAI)
@@ -871,6 +899,7 @@ public class TurompoRhythmController : MonoBehaviour
                 HandleHumanInput();
         }
     }
+
 
     void HandleHumanInput()
     {

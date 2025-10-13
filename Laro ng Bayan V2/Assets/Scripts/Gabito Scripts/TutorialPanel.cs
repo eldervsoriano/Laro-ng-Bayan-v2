@@ -1,7 +1,9 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.Video; 
+using UnityEngine.Video;
+
 
 [System.Serializable]
 public class TutorialPage
@@ -28,24 +30,29 @@ public class TutorialPanel : MonoBehaviour
 
     public PamatoShooter[] shooters; // assign Player1 & Player2 in Inspector
 
+
+    [Header("Options")]
+    [SerializeField] private bool startAfterCutscene = false;
+
     void Start()
     {
         PauseButton.canPause = false;
         countdownManager = FindObjectOfType<CountdownManager>();
 
-        if (tutorialPanel != null)
+        // Only auto-open if NOT waiting for a cutscene
+        if (!startAfterCutscene && tutorialPanel != null)
         {
             tutorialPanel.SetActive(true);
             Time.timeScale = 0f; // Pause game during tutorial
+            currentIndex = 0;
+            ShowPage(currentIndex);
         }
 
         // Disable gameplay while tutorial is showing
         foreach (var shooter in shooters)
             shooter.enabled = false;
-
-        currentIndex = 0;
-        ShowPage(currentIndex);
     }
+
 
 
 
@@ -109,6 +116,27 @@ public class TutorialPanel : MonoBehaviour
     public void OnDoneClicked() => CloseTutorial();
     public void OnSkipClicked() => CloseTutorial();
 
+    public void OpenTutorial()
+    {
+        if (tutorialPanel != null)
+        {
+            tutorialPanel.SetActive(true);
+            Time.timeScale = 0f; // Pause during tutorial
+        }
+
+        TurompoGameManager.IsInputLocked = true; // locks input
+        PauseButton.canPause = false;
+
+        // Disable gameplay while tutorial is showing
+        foreach (var shooter in shooters)
+            if (shooter != null)
+                shooter.enabled = false;
+
+        currentIndex = 0;
+        ShowPage(currentIndex);
+    }
+
+
     private void CloseTutorial()
     {
         if (tutorialPanel != null)
@@ -124,10 +152,20 @@ public class TutorialPanel : MonoBehaviour
         // Allow pausing AFTER tutorial is done
         PauseButton.canPause = true;
 
-        // Begin countdown after tutorial
+        TurompoGameManager.IsInputLocked = false; // unlock input
+
+
+        // Start countdown with a slight delay (2 seconds for smoother transition)
         if (countdownManager != null)
-            countdownManager.BeginCountdown();
+            StartCoroutine(StartCountdownWithDelay(0f));
     }
+
+    private IEnumerator StartCountdownWithDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        countdownManager.BeginCountdown();
+    }
+
 
     public void ReopenTutorial()
     {
