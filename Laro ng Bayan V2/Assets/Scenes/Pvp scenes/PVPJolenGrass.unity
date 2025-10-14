@@ -2977,18 +2977,20 @@ MonoBehaviour:
   tutorialPanel: {fileID: 1272431967}
   tutorialText: {fileID: 739981635}
   nextButton: {fileID: 1039753318}
+  backButton: {fileID: 0}
   doneButton: {fileID: 745028835}
   skipButton: {fileID: 1868243079}
   tutorialPages:
   - text: Welcome to Jolen! Player 1 is BLUE and Player 2 is RED
-    imagePanel: {fileID: 721375477}
+    imageOrVideoPanel: {fileID: 0}
   - text: 'Next page of tutorial '
-    imagePanel: {fileID: 996331739}
+    imageOrVideoPanel: {fileID: 0}
   - text: 'Final page of tutorial '
-    imagePanel: {fileID: 1735359426}
+    imageOrVideoPanel: {fileID: 0}
   shooters:
   - {fileID: 1508201398}
   - {fileID: 1168785888}
+  startAfterCutscene: 0
 --- !u!114 &337583538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17385,6 +17387,60 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4480989708727878543, guid: 8beef00935407cc42a4b1f97fe29ab50, type: 3}
   m_PrefabInstance: {fileID: 1725959190}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1805095931
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1805095933}
+  - component: {fileID: 1805095932}
+  m_Layer: 0
+  m_Name: AudioSettings
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1805095932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1805095931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e77d81b1a6110e44687a814d5e91439a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicSource: {fileID: 0}
+  sfxSources:
+  - {fileID: 1508201406}
+  - {fileID: 1168785896}
+  musicSlider: {fileID: 1026315802}
+  sfxSlider: {fileID: 59287745}
+  musicVolume: 1
+  sfxVolume: 1
+  sfxClips:
+  - {fileID: 8300000, guid: e15b2af32352daa4c9fad51c8c54301b, type: 3}
+--- !u!4 &1805095933
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1805095931}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 781.06476, y: 510.3587, z: 1.0771853}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1810611413 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b03e8ca469eb33645b3ac3d541f69424, type: 3}
@@ -20444,3 +20500,4 @@ SceneRoots:
   - {fileID: 1974427353}
   - {fileID: 909935317}
   - {fileID: 1535780753}
+  - {fileID: 1805095933}

@@ -1745,6 +1745,60 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 126729367}
   m_CullTransparentMesh: 1
+--- !u!1 &140045598
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 140045600}
+  - component: {fileID: 140045599}
+  m_Layer: 0
+  m_Name: AudioSettings
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &140045599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 140045598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e77d81b1a6110e44687a814d5e91439a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicSource: {fileID: 0}
+  sfxSources:
+  - {fileID: 1863885901}
+  - {fileID: 1021576665}
+  musicSlider: {fileID: 193332536}
+  sfxSlider: {fileID: 2094971821}
+  musicVolume: 1
+  sfxVolume: 1
+  sfxClips:
+  - {fileID: 8300000, guid: e15b2af32352daa4c9fad51c8c54301b, type: 3}
+--- !u!4 &140045600
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 140045598}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 781.06476, y: 510.3587, z: 1.0771853}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &144862812
 GameObject:
   m_ObjectHideFlags: 0
@@ -6680,18 +6734,20 @@ MonoBehaviour:
   tutorialPanel: {fileID: 1925570963}
   tutorialText: {fileID: 1310981394}
   nextButton: {fileID: 902643424}
+  backButton: {fileID: 0}
   doneButton: {fileID: 1372612702}
   skipButton: {fileID: 1575168473}
   tutorialPages:
   - text: Welcome to Jolen! Player 1 is BLUE and Player 2 is RED
-    imagePanel: {fileID: 217671372}
+    imageOrVideoPanel: {fileID: 0}
   - text: 'Next page of tutorial '
-    imagePanel: {fileID: 1636871457}
+    imageOrVideoPanel: {fileID: 0}
   - text: 'Final page of tutorial '
-    imagePanel: {fileID: 1644036654}
+    imageOrVideoPanel: {fileID: 0}
   shooters:
   - {fileID: 1863885894}
   - {fileID: 1021576659}
+  startAfterCutscene: 0
 --- !u!114 &622115923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23076,3 +23132,4 @@ SceneRoots:
   - {fileID: 1044983536}
   - {fileID: 749921592}
   - {fileID: 1869835849}
+  - {fileID: 140045600}

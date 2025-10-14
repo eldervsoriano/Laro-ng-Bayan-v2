@@ -1981,6 +1981,16 @@ public class SpiderAnimationController : MonoBehaviour
 
 
 
+
+
+
+
+
+
+
+
+
+
 //using UnityEngine;
 //using System.Collections;
 
