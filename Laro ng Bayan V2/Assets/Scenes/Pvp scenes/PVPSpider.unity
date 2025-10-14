@@ -2951,6 +2951,58 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6418045802075228140}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &310739233
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 310739235}
+  - component: {fileID: 310739234}
+  m_Layer: 0
+  m_Name: AudioSettings
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &310739234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 310739233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e77d81b1a6110e44687a814d5e91439a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicSource: {fileID: 0}
+  sfxSource: {fileID: 1050656230}
+  musicSlider: {fileID: 1768860020}
+  sfxSlider: {fileID: 989375627}
+  musicVolume: 1
+  sfxVolume: 1
+  sfxClips:
+  - {fileID: 8300000, guid: 4f0085a29f010c74b9c6613efb8ad19c, type: 3}
+--- !u!4 &310739235
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 310739233}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 781.06476, y: 510.3587, z: 1.0771853}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &312404653
 GameObject:
   m_ObjectHideFlags: 0
@@ -9632,7 +9684,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: cf17c4960b0a81947a2cb58bf692a0ea, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 4f0085a29f010c74b9c6613efb8ad19c, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -13842,6 +13894,7 @@ MonoBehaviour:
       the final victory, a Player must score 5 points.'
     imageOrVideoPanel: {fileID: 1913363953}
   shooters: []
+  startAfterCutscene: 0
 --- !u!114 &1465932259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25901,3 +25954,4 @@ SceneRoots:
   - {fileID: 2066943105}
   - {fileID: 69999965}
   - {fileID: 1031618748}
+  - {fileID: 310739235}
