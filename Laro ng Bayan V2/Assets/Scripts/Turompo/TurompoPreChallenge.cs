@@ -2236,12 +2236,12 @@ public class TurompoPreChallenge : MonoBehaviour
 
             if (sliderPosition <= -dangerZone)
             {
-                EndChallenge(1, "Trophy reached Player 1's side!");
+                EndChallenge(1, "");
                 return;
             }
             else if (sliderPosition >= dangerZone)
             {
-                EndChallenge(2, "Trophy reached Player 2's side!");
+                EndChallenge(2, "");
                 return;
             }
 
@@ -2401,7 +2401,7 @@ public class TurompoPreChallenge : MonoBehaviour
         lastPlayer2Key = newKey2;
 
         if (player1KeyIndicator != null)
-            player1KeyIndicator.text = $"P1 Press: {currentPlayer1Key}";
+            player1KeyIndicator.text = $"Press: {currentPlayer1Key}";
 
         if (player2KeyIndicator != null)
         {
@@ -2475,10 +2475,10 @@ public class TurompoPreChallenge : MonoBehaviour
     private void UpdateTapUI()
     {
         if (player1TapsText != null)
-            player1TapsText.text = $"P1: {player1Taps}";
+            player1TapsText.text = $"Player 1: {player1Taps}";
         if (player2TapsText != null)
         {
-            string player2Label = enablePlayer2AI ? "AI" : "P2";
+            string player2Label = enablePlayer2AI ? "AI" : "Player 2";
             player2TapsText.text = $"{player2Label}: {player2Taps}";
         }
     }
