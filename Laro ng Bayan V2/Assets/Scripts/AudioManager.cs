@@ -172,6 +172,8 @@ public class AudioManager : MonoBehaviour
 
     private Dictionary<string, AudioClip> sfxLibrary = new Dictionary<string, AudioClip>();
 
+
+
     private void Awake()
     {
         // Singleton
@@ -196,8 +198,17 @@ public class AudioManager : MonoBehaviour
         ApplyVolumeSettings();
         BuildSFXLibrary();
 
-        SceneManager.sceneLoaded += (scene, mode) => ApplyVolumeSettings();
+        // Reconnect sliders and audio sources when a new scene loads
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        ReconnectSceneAudioObjects();
+        ApplyVolumeSettings();
+        HookButtonsToAudio();   // For buttons
+    }
+
 
     private void Start()
     {
@@ -256,26 +267,34 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning($"[AudioManager] SFX '{clipName}' not found!");
     }
 
+
+
     // 💥 Play SFX by clip
     public void PlaySFX(AudioClip clip)
     {
         if (clip == null) return;
 
-        // Find an available source or create a new one
         AudioSource source = GetAvailableSFXSource();
-        source.PlayOneShot(clip, sfxVolume);
+        if (source == null)
+        {
+            Debug.LogWarning("[AudioManager] No available SFX source found!");
+            return;
+        }
+
+        source.volume = sfxVolume;
+        source.PlayOneShot(clip);
     }
 
-    // 🎧 Finds a free SFX source (creates one if all are busy)
     private AudioSource GetAvailableSFXSource()
     {
+        // Find any valid AudioSource in the list
         foreach (AudioSource src in sfxSources)
         {
-            if (!src.isPlaying)
+            if (src != null && !src.isPlaying)
                 return src;
         }
 
-        // If all are playing, create a new one
+        // If none found, create a new one safely
         GameObject newSFXObj = new GameObject("SFX_AudioSource_Extra");
         newSFXObj.transform.SetParent(transform);
         AudioSource newSource = newSFXObj.AddComponent<AudioSource>();
@@ -310,4 +329,69 @@ public class AudioManager : MonoBehaviour
                 sfx.volume = sfxVolume;
         }
     }
+
+    private void ReconnectSceneAudioObjects()
+    {
+        // Reconnect music source
+        if (musicSource == null)
+        {
+            var foundMusic = GameObject.FindWithTag("MusicSource");
+            if (foundMusic != null)
+                musicSource = foundMusic.GetComponent<AudioSource>();
+        }
+
+        // Reconnect all tagged SFX sources
+        GameObject[] foundSFXObjects = GameObject.FindGameObjectsWithTag("SFXSource");
+        foreach (var obj in foundSFXObjects)
+        {
+            AudioSource src = obj.GetComponent<AudioSource>();
+            if (src != null && !sfxSources.Contains(src))
+            {
+                sfxSources.Add(src);
+                src.volume = sfxVolume;
+            }
+        }
+
+        // Reconnect sliders
+        var musicUI = GameObject.FindWithTag("MusicSlider");
+        if (musicUI != null)
+        {
+            var newSlider = musicUI.GetComponent<Slider>();
+            newSlider.onValueChanged.RemoveAllListeners();
+            newSlider.onValueChanged.AddListener(SetMusicVolume);
+            musicSlider = newSlider;
+            musicSlider.value = musicVolume;
+        }
+
+        var sfxUI = GameObject.FindWithTag("SFXSlider");
+        if (sfxUI != null)
+        {
+            var newSlider = sfxUI.GetComponent<Slider>();
+            newSlider.onValueChanged.RemoveAllListeners();
+            newSlider.onValueChanged.AddListener(SetSFXVolume);
+            sfxSlider = newSlider;
+            sfxSlider.value = sfxVolume;
+        }
+
+        ApplyVolumeSettings();
+    }
+
+    private void HookButtonsToAudio()
+    {
+        // Find all Buttons in the scene
+        Button[] buttons = FindObjectsOfType<Button>(true);
+        foreach (Button btn in buttons)
+        {
+            // Remove any old listeners to prevent stacking
+            btn.onClick.RemoveAllListeners();
+            // Add the click sound
+            btn.onClick.AddListener(() =>
+            {
+                if (sfxLibrary.ContainsKey("Click"))
+                    PlaySFX(sfxLibrary["Click"]);
+            });
+        }
+    }
+
+
 }
