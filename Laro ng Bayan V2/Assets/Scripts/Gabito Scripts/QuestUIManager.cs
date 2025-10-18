@@ -11,6 +11,17 @@ public class QuestUIManager : MonoBehaviour
         {
             ObjectiveManager.Instance.OnQuestUpdated += UpdateQuest;
 
+            // Check if all quests are completed
+            if (ObjectiveManager.Instance.jolenCompleted &&
+                ObjectiveManager.Instance.turumpoCompleted &&
+                ObjectiveManager.Instance.tumbangPresoCompleted &&
+                ObjectiveManager.Instance.spiderDerbyCompleted)
+            {
+                UpdateQuest("<color=yellow>You finished all the tasks!</color>");
+                return; // Stop here since it’s the final message
+            }
+
+
             // Initialize quest text depending on progress
             if (ObjectiveManager.Instance.tumbangPresoCompleted && ObjectiveManager.Instance.spiderDerbyUnlocked)
             {

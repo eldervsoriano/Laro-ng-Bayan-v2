@@ -3461,7 +3461,7 @@ MonoBehaviour:
   player2TurnPanel: {fileID: 1720673458}
   winnerPanel: {fileID: 1424718371}
   winnerText: {fileID: 1223690194}
-  defeatSceneName: DefeatScene
+  defeatSceneName: 
   normalScale: {x: 1, y: 1, z: 1}
   highlightScale: {x: 1.6, y: 1.6, z: 1}
 --- !u!114 &337583539
@@ -7293,7 +7293,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06cfd2221bae3cc4a8e46c55d7407920, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pausePanel: {fileID: 1472745053}
+  pausePanel: {fileID: 617181498}
+  mainPanel: {fileID: 1472745053}
+  settingsPanel: {fileID: 1399967484}
+  restartPanel: {fileID: 1670057077}
+  exitPanel: {fileID: 319996703}
 --- !u!1 &686469372
 GameObject:
   m_ObjectHideFlags: 0
@@ -9645,6 +9649,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pausePanel: {fileID: 1472745053}
+  mainPanel: {fileID: 0}
+  settingsPanel: {fileID: 0}
+  restartPanel: {fileID: 0}
+  exitPanel: {fileID: 0}
 --- !u!114 &890658376
 MonoBehaviour:
   m_ObjectHideFlags: 0

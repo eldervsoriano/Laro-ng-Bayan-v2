@@ -5,7 +5,13 @@ using UnityEngine.SceneManagement; // needed for scene reload
 
 public class PauseButton : MonoBehaviour
 {
-    [SerializeField] private GameObject pausePanel;
+    [SerializeField] private GameObject pausePanel;   // parent pause panel
+    [SerializeField] private GameObject mainPanel;    // the one with Resume, Options, Exit
+    [SerializeField] private GameObject settingsPanel;
+    [SerializeField] private GameObject restartPanel; // optional
+    [SerializeField] private GameObject exitPanel;     // optional
+
+
     public static bool isPaused = false;
     public static bool canPause = true; // NEW: Block pause during tutorial/countdown
 
@@ -15,15 +21,28 @@ public class PauseButton : MonoBehaviour
     //    Time.timeScale = 1f;
     //}
 
+
     void Update()
     {
-        // Only allow ESC if pausing is allowed AND game is not already paused
         if (canPause && Input.GetKeyDown(KeyCode.Escape))
         {
             if (isPaused)
-                ResumeGame();
+            {
+                // Only resume if currently in the main panel
+                if (mainPanel != null && mainPanel.activeSelf)
+                {
+                    ResumeGame();
+                }
+                else
+                {
+                    // Otherwise, return to main panel instead
+                    ShowMainPanel();
+                }
+            }
             else
+            {
                 PauseGame();
+            }
         }
     }
 
@@ -34,8 +53,10 @@ public class PauseButton : MonoBehaviour
         Time.timeScale = 0f;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        ShowMainPanel(); // always start with the main panel visible
 
-        pausePanel.SetActive(true);
+
+            pausePanel.SetActive(true);
         isPaused = true;
     }
 
@@ -77,5 +98,14 @@ public class PauseButton : MonoBehaviour
         Time.timeScale = 1f; // Ensure time is running again
         isPaused = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    private void ShowMainPanel()
+    {
+        // Main panel ON, others OFF
+        mainPanel.SetActive(true);
+        settingsPanel.SetActive(false);
+        //restartPanel.SetActive(false);
+        exitPanel.SetActive(false);
     }
 }

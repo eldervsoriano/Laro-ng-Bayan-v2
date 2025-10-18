@@ -4347,7 +4347,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06cfd2221bae3cc4a8e46c55d7407920, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pausePanel: {fileID: 1071130227}
+  pausePanel: {fileID: 584209935}
+  mainPanel: {fileID: 1071130227}
+  settingsPanel: {fileID: 851892154}
+  restartPanel: {fileID: 877689150}
+  exitPanel: {fileID: 1639572264}
 --- !u!114 &369536816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12832,6 +12836,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pausePanel: {fileID: 1071130227}
+  mainPanel: {fileID: 0}
+  settingsPanel: {fileID: 0}
+  restartPanel: {fileID: 0}
+  exitPanel: {fileID: 0}
 --- !u!114 &1097519660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16757,8 +16765,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: ca7be77b7a88eb54f8f433e837702772, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 1
+  m_PlayOnAwake: 0
+  m_Volume: 0.671
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -18379,12 +18387,12 @@ RectTransform:
   - {fileID: 151554283}
   - {fileID: 352703143}
   - {fileID: 40477529}
+  - {fileID: 369536814}
+  - {fileID: 236252259}
   - {fileID: 820483261}
   - {fileID: 1894065248}
   - {fileID: 2082032650}
   - {fileID: 584209936}
-  - {fileID: 369536814}
-  - {fileID: 236252259}
   - {fileID: 1682832607}
   - {fileID: 1066594210}
   - {fileID: 83120682}

@@ -27,7 +27,8 @@ public class UIJolen : MonoBehaviour
     public TextMeshProUGUI winnerText;
 
     [Header("Scenes")]
-    public string defeatSceneName = "DefeatScene"; // drag your defeat scene name here or edit in Inspector
+    [Tooltip("Optional: leave blank if you don’t want to load a defeat scene.")]
+    public string defeatSceneName = " "; // drag your defeat scene name here or edit in Inspector
 
     [Header("Scale Settings")]
     public Vector3 normalScale = Vector3.one;
@@ -39,12 +40,11 @@ public class UIJolen : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            // Optional: only keep alive across scenes if really needed
-            // DontDestroyOnLoad(gameObject);
+            // DontDestroyOnLoad(gameObject); // optional
         }
         else
         {
-            Destroy(gameObject); // remove duplicate if one already exists
+            Destroy(gameObject);
         }
     }
 
@@ -117,15 +117,16 @@ public class UIJolen : MonoBehaviour
 
     private IEnumerator ShowWinnerWithDelay(int player)
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
 
-        if (player == 2) // meaning Player 1 lost
+        // If Player 2 wins AND we actually have a defeat scene name, go there
+        if (player == 2 && !string.IsNullOrEmpty(defeatSceneName))
         {
-            // Load defeat scene for Player 1
             SceneManager.LoadScene(defeatSceneName);
         }
         else
         {
+            // Otherwise, just show the winner panel
             if (winnerPanel != null) winnerPanel.SetActive(true);
             if (winnerText != null) winnerText.text = $"Player {player} Wins!";
         }

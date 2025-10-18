@@ -28,8 +28,16 @@ public class PamatoShooter : MonoBehaviour
         originalConstraints = rb.constraints;
     }
 
+
+
     void OnMouseDown()
     {
+        if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out RaycastHit hit))
+        {
+            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Roof"))
+                return; // ignore clicks hitting the roof
+        }
+
         if (hasShot) return;
 
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -52,6 +60,12 @@ public class PamatoShooter : MonoBehaviour
 
     void OnMouseDrag()
     {
+        if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out RaycastHit hit))
+        {
+            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Roof"))
+                return; // ignore clicks hitting the roof
+        }
+
         if (!isDragging || hasShot) return;
 
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -76,6 +90,12 @@ public class PamatoShooter : MonoBehaviour
 
     void OnMouseUp()
     {
+        if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out RaycastHit hit))
+        {
+            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Roof"))
+                return; // ignore clicks hitting the roof
+        }
+
         if (!isDragging || hasShot) return;
 
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);

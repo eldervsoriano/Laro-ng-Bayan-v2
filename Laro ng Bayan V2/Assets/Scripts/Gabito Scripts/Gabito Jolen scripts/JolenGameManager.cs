@@ -267,6 +267,10 @@ public class JolenGameManager : MonoBehaviour
 
     private void SetActivePlayer(int player)
     {
+        // Stop both pamatos completely before switching
+        StopPamato(player1Pamato);
+        StopPamato(player2Pamato);
+
         player1Pamato.SetActive(player == 1);
         player2Pamato.SetActive(player == 2);
 
@@ -278,7 +282,6 @@ public class JolenGameManager : MonoBehaviour
             if (isAIEnabled && player2Pamato.TryGetComponent<PamatoAI>(out var aiShooter))
             {
                 aiShooter.ResetTurn();
-                // Trigger AI turn after a short delay
                 Invoke(nameof(TriggerAITurn), 0.5f);
             }
             else if (player2Pamato.TryGetComponent<PamatoShooter>(out var shooter2))
@@ -293,6 +296,22 @@ public class JolenGameManager : MonoBehaviour
         isWaitingForStop = false;
         lowSpeedTimer = 0f;
     }
+
+
+    private void StopPamato(GameObject pamato)
+    {
+        if (pamato != null && pamato.TryGetComponent<Rigidbody>(out var rb))
+        {
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+
+            // Optional: re-freeze rotation to prevent sliding on slopes
+            rb.constraints = RigidbodyConstraints.FreezeRotationX |
+                             RigidbodyConstraints.FreezeRotationZ;
+        }
+    }
+
+
 
     private void TriggerAITurn()
     {
