@@ -1,16 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class FinalPanelManager : MonoBehaviour
 {
+    [Header("References")]
     public GameObject finalPanel;
+    public MonoBehaviour cameraController; // Drag your camera controller script here
+
+    private bool isFinalPanelActive = false;
+
 
     void Start()
     {
-        if (finalPanel != null) finalPanel.SetActive(false);
+        if (finalPanel != null)
+            finalPanel.SetActive(false);
 
         if (ObjectiveManager.Instance != null && ObjectiveManager.Instance.showFinalPanel)
         {
@@ -19,11 +23,35 @@ public class FinalPanelManager : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        // This keeps the cursor visible if the final panel is active
+        if (isFinalPanelActive)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+    }
+
     public void ShowFinalPanel()
     {
         if (finalPanel != null)
         {
             finalPanel.SetActive(true);
+            isFinalPanelActive = true;
+
+            // Pause game
+            Time.timeScale = 0f;
+
+
+            // Disable camera movement
+            if (cameraController != null)
+                cameraController.enabled = false;
+
+            // Force cursor visible
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+
             Debug.Log("Final panel activated!");
         }
         else
@@ -32,10 +60,26 @@ public class FinalPanelManager : MonoBehaviour
         }
     }
 
-    // Hook this up to your Button's OnClick()
+
+    // Hook this up to your Okay Button's OnClick()
     public void HideFinalPanel()
     {
         if (finalPanel != null)
             finalPanel.SetActive(false);
+
+        isFinalPanelActive = false;
+
+        // Resume game
+        Time.timeScale = 1f;
+
+        // Re-enable camera movement
+        if (cameraController != null)
+            cameraController.enabled = true;
+
+        // Hide and lock the cursor
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        Debug.Log("Final panel hidden, game resumed.");
     }
 }
