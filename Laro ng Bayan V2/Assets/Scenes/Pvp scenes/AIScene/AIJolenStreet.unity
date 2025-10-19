@@ -153,7 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player1Pamato: {fileID: 1863885890}
   player2Pamato: {fileID: 1021576654}
-  isAIEnabled: 0
+  isAIEnabled: 1
   winningScore: 5
   lowSpeedThreshold: 1.5
   stallTimeLimit: 1.5
@@ -6659,7 +6659,7 @@ MonoBehaviour:
   doneButton: {fileID: 1161871220}
   skipButton: {fileID: 1965756738}
   tutorialPages:
-  - text: "Welcome to Jolen! \r\n\r\nPlayer 1 is Blue and Player 2 is Red."
+  - text: "Welcome to Jolen! \r\n\r\nPlayer 1 is Blue and the Enemy AI is Red."
     imageOrVideoPanel: {fileID: 448752311}
   - text: "Press and hold Left-Click Mouse Button. Then drag it away from your Jolen
       to draw power. \r\n\r\nYou can also Aim your Jolen's diirection by moving your
@@ -12213,7 +12213,7 @@ MonoBehaviour:
   aimDisplayTime: 0.8
   minShotPower: 10
   maxShotPower: 20
-  aimInaccuracy: 5
+  aimInaccuracy: 3
   targetingHeight: 0.5
   preferCloserTargets: 1
   obstacleLayer:
@@ -13678,7 +13678,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Player 2: 0'
+  m_text: 'ai: 0'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ca311ce9773728b4683de93397cadeaa, type: 2}
   m_sharedMaterial: {fileID: 1193811825937682822, guid: ca311ce9773728b4683de93397cadeaa, type: 2}

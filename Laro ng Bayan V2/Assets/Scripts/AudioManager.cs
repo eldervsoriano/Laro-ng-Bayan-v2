@@ -481,13 +481,12 @@ public class AudioManager : MonoBehaviour
 
     private System.Collections.IEnumerator ReconnectAfterDelay(string sceneName)
     {
-        yield return new WaitForSeconds(0.1f); // tiny delay for UI to spawn
-
+        yield return new WaitForSeconds(0.1f);
         ReconnectSceneAudioObjects();
         HookButtonsToAudio();
         ApplyVolumeSettings();
-        SwitchBGMForScene(sceneName);
     }
+
 
 
 

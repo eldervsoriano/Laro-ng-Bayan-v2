@@ -25,7 +25,7 @@ public class QuestUIManager : MonoBehaviour
             // Initialize quest text depending on progress
             if (ObjectiveManager.Instance.tumbangPresoCompleted && ObjectiveManager.Instance.spiderDerbyUnlocked)
             {
-                UpdateQuest("Find <color=grey>Michael</color>. He is waiting for you near a store in Gonzales Street");
+                UpdateQuest("Find <color=grey>Michael</color>. He is waiting for you besides a sorbetes cart in Gonzales Street");
             }
             else if (ObjectiveManager.Instance.turumpoCompleted && ObjectiveManager.Instance.tumbangPresoUnlocked)
             {

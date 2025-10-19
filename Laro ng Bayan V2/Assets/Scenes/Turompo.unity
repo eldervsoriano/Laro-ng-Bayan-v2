@@ -1438,11 +1438,13 @@ MonoBehaviour:
   playerTorompo: {fileID: 127715137}
   keyPressDelay: 0.3
   enableAI: 1
-  aiAccuracy: 0.8
-  aiReactionSpeed: 0.7
-  aiConsistency: 0.85
+  aiAccuracy: 0.41
+  aiReactionSpeed: 0.365
+  aiConsistency: 0.354
   aiPerfectHitRange: 0.3
   aiGoodHitRange: 0.6
+  highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  highlightDuration: 0.15
 --- !u!23 &127715140
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -12070,6 +12072,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pausePanel: {fileID: 956845411}
+  mainPanel: {fileID: 0}
+  settingsPanel: {fileID: 0}
+  restartPanel: {fileID: 0}
+  exitPanel: {fileID: 0}
 --- !u!114 &1358971310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16277,6 +16283,8 @@ MonoBehaviour:
   aiConsistency: 0.85
   aiPerfectHitRange: 0.3
   aiGoodHitRange: 0.6
+  highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  highlightDuration: 0.15
 --- !u!23 &1954651789
 MeshRenderer:
   m_ObjectHideFlags: 0
