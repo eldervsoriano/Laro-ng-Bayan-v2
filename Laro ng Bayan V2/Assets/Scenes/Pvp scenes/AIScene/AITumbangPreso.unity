@@ -11008,12 +11008,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76db03bf1cac80046920e2014ffaa496, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAI: 0
+  isAI: 1
   playerNumber: 2
-  aimThinkTime: 1.5
-  throwAccuracy: 0.8
-  aimRandomness: 2
-  defenseReactionTime: 0.3
+  aimThinkTime: 2.2
+  throwAccuracy: 0.3
+  aimRandomness: 5
+  defenseReactionTime: 0.4
   defenseAccuracy: 0.75
   perfectTimingWindow: 0.05
   scaleDifficulty: 1
@@ -14798,7 +14798,7 @@ MonoBehaviour:
   - text: 'Welcome to Tumbang Preso!
 
 
-      Player 1 is the Brown Slipper (You
+      Player 1 is the Brown Slipper (You)
 
       Enemy
       AI is the Colorful Slipper'
@@ -14813,12 +14813,9 @@ MonoBehaviour:
       \n\nIn the prompt, the AI will make Space when the yellow bar is inside the
       red bar zone. There's a chance that it may or may not hit the red bar. "
     imageOrVideoPanel: {fileID: 1930040953}
-  - text: 'If the AI missed the red bar, you''ll get a score. But if the AI hits
-      the red bar, you won''t get a score. This will also happen to you during the
-      AI''s turn to throw the slipper to the can.
-
-
-      The winning score is 5.'
+  - text: "If the AI missed the red bar, you'll get a score. But if the AI hits the
+      red bar, you won't get a score. \n\nThis will also happen to you during the
+      AI's turn to throw the slipper to the can.\n\nThe winning score is 5."
     imageOrVideoPanel: {fileID: 1876694718}
   shooters: []
   startAfterCutscene: 0
