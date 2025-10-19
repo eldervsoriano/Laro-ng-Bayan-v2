@@ -10941,7 +10941,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Find <color=grey>Michael</color>. He is waiting for you besides a sorbetes
+  m_text: Find <color=yellow>Michael</color>. He is waiting for you besides a sorbetes
     cart in Gonzales Street
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ca311ce9773728b4683de93397cadeaa, type: 2}
@@ -16965,10 +16965,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 463971086}
-        m_TargetAssemblyTypeName: PanelsSwitchButton, Assembly-CSharp
-        m_MethodName: LoadScene
-        m_Mode: 5
+      - m_Target: {fileID: 1560877446}
+        m_TargetAssemblyTypeName: NpcButton, Assembly-CSharp
+        m_MethodName: OnYesClicked
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -28191,7 +28191,7 @@ MonoBehaviour:
   requiresTurumpoCompleted: 0
   requiresTumbangPresoUnlocked: 0
   requiresTumbangPresoCompleted: 0
-  sceneToLoad: AITurompo
+  sceneToLoad: AITurumpo
   pauseUIButton: {fileID: 0}
 --- !u!65 &779084851
 BoxCollider:
@@ -29602,7 +29602,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1560877446}
         m_TargetAssemblyTypeName: NpcButton, Assembly-CSharp
         m_MethodName: OnNextClicked
         m_Mode: 1
@@ -55540,9 +55540,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaa8d3f107272c64b91a5a8527e4dcb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  openEyesMat: {fileID: 2100000, guid: 14f49f26ff4f5054293e0c5f70f256fb, type: 2}
-  closedEyesMat: {fileID: 2100000, guid: 1c6023d0176bc9445a604dfe7dd5f770, type: 2}
-  blinkInterval: 0.3
+  openEyesMat: {fileID: 2100000, guid: 1c6023d0176bc9445a604dfe7dd5f770, type: 2}
+  closedEyesMat: {fileID: 2100000, guid: 14f49f26ff4f5054293e0c5f70f256fb, type: 2}
+  blinkInterval: 3
   blinkDuration: 0.2
   faceMaterialIndex: 1
 --- !u!4 &1487960032 stripped

@@ -96,7 +96,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 3b1bf4c0b5d5ea94b808568c77a5b8a2, type: 2}
+  m_LightingDataAsset: {fileID: 112000000, guid: 410c3af9d85f4df42a44ff47925184a1, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -2648,9 +2648,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1358971312}
-        m_TargetAssemblyTypeName: TutorialPanel, Assembly-CSharp
-        m_MethodName: ReopenTutorial
+      - m_Target: {fileID: 1358971313}
+        m_TargetAssemblyTypeName: PanelOpener, Assembly-CSharp
+        m_MethodName: OpenPanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6622,8 +6622,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 701448014}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.015018474, y: -0.000060483806, z: -0.004022768, w: 0.9998791}
-  m_LocalPosition: {x: -0.36, y: 6.93, z: -7.84}
+  m_LocalRotation: {x: 0.092699975, y: 0.00037292976, z: -0.0040056207, w: 0.995686}
+  m_LocalPosition: {x: -0.36, y: 8.24, z: -9.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18224,14 +18224,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1854005800}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.015017906, y: -0.000060483806, z: -0.0040224837, w: 0.9998791}
-  m_LocalPosition: {x: -0.36, y: 6.93, z: -7.84}
+  m_LocalRotation: {x: 0.092699975, y: 0.00037292976, z: -0.0040056207, w: 0.995686}
+  m_LocalPosition: {x: -0.36, y: 8.24, z: -9.02}
   m_LocalScale: {x: 4.846699, y: 4.8466997, z: 4.8466997}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2074577194}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -1.721, y: 0, z: -0.461}
+  m_LocalEulerAnglesHint: {x: 10.638, y: 0, z: -0.461}
 --- !u!1 &1865864515
 GameObject:
   m_ObjectHideFlags: 0

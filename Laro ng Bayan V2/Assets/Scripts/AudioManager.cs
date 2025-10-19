@@ -425,7 +425,7 @@ public class AudioManager : MonoBehaviour
                 break;
 
 
-            // Turompo group
+            // Tumbang group
             case "PVPTumbangPreso":
             case "AITumbangPreso":
                 newBGM = transform.Find("BGM_Tumbang")?.GetComponent<AudioSource>();

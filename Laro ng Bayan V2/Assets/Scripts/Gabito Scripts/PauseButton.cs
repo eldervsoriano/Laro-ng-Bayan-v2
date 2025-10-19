@@ -11,9 +11,15 @@ public class PauseButton : MonoBehaviour
     [SerializeField] private GameObject restartPanel; // optional
     [SerializeField] private GameObject exitPanel;     // optional
 
+    // NEW: Remember previous cursor visibility and lock state
+    private bool prevCursorVisible;
+    private CursorLockMode prevCursorLockState;
+
 
     public static bool isPaused = false;
     public static bool canPause = true; // NEW: Block pause during tutorial/countdown
+
+
 
     //void Start()
     //{
@@ -50,6 +56,10 @@ public class PauseButton : MonoBehaviour
     {
         if (isPaused) return; // Prevent double-pausing
 
+        // Remember cursor state before pausing
+        prevCursorVisible = Cursor.visible;
+        prevCursorLockState = Cursor.lockState;
+
         Time.timeScale = 0f;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
@@ -72,7 +82,9 @@ public class PauseButton : MonoBehaviour
         pausePanel.SetActive(false);
         isPaused = false;
 
-
+        // Restore previous cursor state
+        Cursor.visible = prevCursorVisible;
+        Cursor.lockState = prevCursorLockState;
 
     }
 
@@ -87,7 +99,7 @@ public class PauseButton : MonoBehaviour
         pausePanel.SetActive(false);
         isPaused = false;
 
-
+        // Force cursor visible (used if your minigame uses mouse)
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }

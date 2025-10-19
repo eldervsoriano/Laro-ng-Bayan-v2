@@ -96,7 +96,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 5efabe131c386f44b92cae57dd2fd97e, type: 2}
+  m_LightingDataAsset: {fileID: 112000000, guid: d89f6d3cc208bdf40bb3b3787ab9e50e, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -16587,7 +16587,6 @@ GameObject:
   - component: {fileID: 1688185998}
   - component: {fileID: 1688185997}
   - component: {fileID: 1688185996}
-  - component: {fileID: 1688185995}
   - component: {fileID: 1688185999}
   m_Layer: 5
   m_Name: PauseButton
@@ -16616,23 +16615,6 @@ RectTransform:
   m_AnchoredPosition: {x: -75, y: -28}
   m_SizeDelta: {x: 132.8658, y: 106.539185}
   m_Pivot: {x: 0.5, y: 1}
---- !u!114 &1688185995
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1688185993}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2dd893aa7d963b4f9f97a7291133e76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  panel: {fileID: 1720521213}
-  openButton: {fileID: 1688185996}
-  closeButton: {fileID: 0}
-  pauseButton: {fileID: 0}
-  startClosed: 1
 --- !u!114 &1688185996
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -96,7 +96,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: b8f4e60b07a0f26448dec30f78e0c46d, type: 2}
+  m_LightingDataAsset: {fileID: 112000000, guid: ddc1ace53ea973d4c914f8d575ace93e, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -10670,9 +10670,9 @@ MonoBehaviour:
   aimThinkTime: 2.2
   throwAccuracy: 0.3
   aimRandomness: 5
-  defenseReactionTime: 0.4
-  defenseAccuracy: 0.75
-  perfectTimingWindow: 0.05
+  defenseReactionTime: 1
+  defenseAccuracy: 0.5
+  perfectTimingWindow: 0.04
   scaleDifficulty: 1
   minAccuracy: 0.5
   maxAccuracy: 0.95
@@ -25838,7 +25838,6 @@ GameObject:
   - component: {fileID: 2092706237}
   - component: {fileID: 2092706236}
   - component: {fileID: 2092706235}
-  - component: {fileID: 2092706234}
   m_Layer: 5
   m_Name: PauseButton
   m_TagString: Untagged
@@ -25866,23 +25865,6 @@ RectTransform:
   m_AnchoredPosition: {x: -66, y: -24}
   m_SizeDelta: {x: 132.8658, y: 106.539185}
   m_Pivot: {x: 0.5, y: 1}
---- !u!114 &2092706234
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2092706232}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2dd893aa7d963b4f9f97a7291133e76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  panel: {fileID: 1206077075}
-  openButton: {fileID: 2092706235}
-  closeButton: {fileID: 0}
-  pauseButton: {fileID: 0}
-  startClosed: 1
 --- !u!114 &2092706235
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using TMPro;
+using System.Collections;
+
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
@@ -38,10 +40,40 @@ public class UIManager : MonoBehaviour
         StartCoroutine(ShowWinnerWithDelay(player));
     }
 
-    private System.Collections.IEnumerator ShowWinnerWithDelay(int player)
+    private IEnumerator ShowWinnerWithDelay(int player)
     {
-        yield return new WaitForSeconds(2f); // ⏳ delay duration
+        yield return new WaitForSeconds(2f); // suspense before victory screen
+
         winnerPanel.SetActive(true);
         winnerText.text = $"Player {player} Wins!";
+
+        // Freeze time
+        Time.timeScale = 0f;
+
+        // Disable pause system so players can't pause the victory screen
+        PauseButton.canPause = false;
+        PauseButton.isPaused = true; // ensure pause logic doesn't try to resume
+
+        // Show the cursor for UI interaction
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
+
+    // This can be called by a "Restart" or "Back to Menu" button
+    public void ResumeAfterVictory()
+    {
+        // Resume normal gameplay or menu state
+        Time.timeScale = 1f;
+        PauseButton.canPause = true;
+        PauseButton.isPaused = false;
+
+        // Hide the winner panel
+        if (winnerPanel != null)
+            winnerPanel.SetActive(false);
+
+        // Optionally hide the cursor if you’re returning to gameplay
+        //Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
+    }
+
 }

@@ -96,7 +96,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 1c469780c725bdc49911565069fd1380, type: 2}
+  m_LightingDataAsset: {fileID: 112000000, guid: bbc898fbeb530cd4eb01e1584c57007b, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -6354,8 +6354,6 @@ GameObject:
   - component: {fileID: 579589478}
   - component: {fileID: 579589477}
   - component: {fileID: 579589476}
-  - component: {fileID: 579589475}
-  - component: {fileID: 579589474}
   m_Layer: 5
   m_Name: ResumeButton
   m_TagString: Untagged
@@ -6383,40 +6381,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0.1, y: 28.5007}
   m_SizeDelta: {x: 152.44684, y: 37.53407}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &579589474
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 579589472}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06cfd2221bae3cc4a8e46c55d7407920, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pausePanel: {fileID: 468851063}
-  mainPanel: {fileID: 0}
-  settingsPanel: {fileID: 0}
-  restartPanel: {fileID: 0}
-  exitPanel: {fileID: 0}
---- !u!114 &579589475
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 579589472}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2dd893aa7d963b4f9f97a7291133e76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  panel: {fileID: 468851063}
-  openButton: {fileID: 0}
-  closeButton: {fileID: 579589476}
-  pauseButton: {fileID: 0}
-  startClosed: 1
 --- !u!114 &579589476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6461,7 +6425,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 579589474}
+      - m_Target: {fileID: 1135453412}
         m_TargetAssemblyTypeName: PauseButton, Assembly-CSharp
         m_MethodName: ResumeGameWithCursor
         m_Mode: 1
@@ -12418,7 +12382,7 @@ MonoBehaviour:
   thinkingTime: 1.5
   aimDisplayTime: 0.8
   minShotPower: 10
-  maxShotPower: 20
+  maxShotPower: 16
   aimInaccuracy: 3
   targetingHeight: 0.5
   preferCloserTargets: 1
@@ -13143,7 +13107,6 @@ GameObject:
   - component: {fileID: 1135453416}
   - component: {fileID: 1135453415}
   - component: {fileID: 1135453414}
-  - component: {fileID: 1135453413}
   - component: {fileID: 1135453412}
   m_Layer: 5
   m_Name: PauseButton
@@ -13189,23 +13152,6 @@ MonoBehaviour:
   settingsPanel: {fileID: 1782276025}
   restartPanel: {fileID: 1100030566}
   exitPanel: {fileID: 887828361}
---- !u!114 &1135453413
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1135453410}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2dd893aa7d963b4f9f97a7291133e76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  panel: {fileID: 729301920}
-  openButton: {fileID: 1135453414}
-  closeButton: {fileID: 0}
-  pauseButton: {fileID: 0}
-  startClosed: 1
 --- !u!114 &1135453414
 MonoBehaviour:
   m_ObjectHideFlags: 0
