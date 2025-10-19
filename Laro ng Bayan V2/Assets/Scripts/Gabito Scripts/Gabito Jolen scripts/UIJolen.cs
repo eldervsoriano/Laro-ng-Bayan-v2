@@ -126,15 +126,45 @@ public class UIJolen : MonoBehaviour
         }
         else
         {
-            // Otherwise, just show the winner panel
+            // Show winner panel
             if (winnerPanel != null) winnerPanel.SetActive(true);
             if (winnerText != null) winnerText.text = $"Player {player} Wins!";
+
+            // Pause everything
+            Time.timeScale = 0f;
+
+            // Disable pause button completely
+            PauseButton.canPause = false;
+            PauseButton.isPaused = true;
+
+            // Show cursor for winner UI interaction
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
         }
     }
+
 
     /// <summary>
     /// Toggle profile visibility
     /// </summary>
+    /// 
+        // Called by a Restart or Continue button on the winner panel
+    public void ResumeAfterVictory()
+    {
+        // Resume time and gameplay
+        Time.timeScale = 1f;
+        PauseButton.canPause = true;
+        PauseButton.isPaused = false;
+
+        // Hide winner panel
+        if (winnerPanel != null)
+            winnerPanel.SetActive(false);
+
+        // Optionally hide cursor again if returning to gameplay
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
     public void SetProfilesVisible(bool visible)
     {
         if (player1Profile != null) player1Profile.gameObject.SetActive(visible);
