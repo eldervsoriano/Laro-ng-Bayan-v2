@@ -2349,13 +2349,13 @@ public class TurompoPreChallenge : MonoBehaviour
         if (instructionText != null)
         {
             string instruction = enablePlayer2AI ?
-                "Tug of War!\nPull the trophy toward your side by pressing the shown key!\nYou vs AI" :
-                "Tug of War!\nPull the trophy toward your side by pressing the shown key!";
+                "Tug of War!\nPull the Star toward your side by pressing the shown key! <color=orange>WASD Keys for Player 1</color>\nYou vs AI" :
+                "Tug of War!\nPull the Star toward your side by pressing the shown key! <color=orange>WASD Keys for Player 1</color> and <color=#8CA6FF>Arrow Keys for Player 2</color>";
             instructionText.text = instruction;
         }
 
         isCountingDown = true;
-        for (int i = 3; i > 0; i--)
+        for (int i = 5; i > 0; i--)
         {
             if (countdownText != null)
                 countdownText.text = i.ToString();

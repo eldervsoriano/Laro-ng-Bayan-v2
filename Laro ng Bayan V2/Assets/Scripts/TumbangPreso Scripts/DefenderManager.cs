@@ -400,7 +400,7 @@ public class DefenderManager : MonoBehaviour
             if (isDefenderAI)
                 promptText.text = $"<color=orange>AI Player {defendingPlayer} is defending...</color>";
             else
-                promptText.text = "PRESS <color=yellow>SPACE</color> when the slider hits the target line!";
+                promptText.text = "PRESS <color=yellow>SPACE</color> when the yellow bar hits the <color=red>red bar!</color>";
         }
 
         int playerScore = (defendingPlayer == 1)
