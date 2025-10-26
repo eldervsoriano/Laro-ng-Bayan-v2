@@ -1543,9 +1543,9 @@ GameObject:
   - component: {fileID: 124471928}
   - component: {fileID: 124471927}
   - component: {fileID: 124471935}
-  - component: {fileID: 124471937}
-  - component: {fileID: 124471936}
   - component: {fileID: 124471938}
+  - component: {fileID: 124471940}
+  - component: {fileID: 124471939}
   m_Layer: 0
   m_Name: 'PamatoP1 '
   m_TagString: Pamato
@@ -1567,7 +1567,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shooter: {fileID: 124471929}
   arrowSprite: {fileID: 235414992}
-  maxLength: 1
+  maxLength: 1.5
 --- !u!120 &124471928
 LineRenderer:
   serializedVersion: 2
@@ -1813,7 +1813,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d1b876a53a5ee6498350867a44fc796, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &124471936
+--- !u!114 &124471938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 124471925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 0, g: 0.9307804, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
+--- !u!114 &124471939
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1828,7 +1846,7 @@ MonoBehaviour:
   tickSound: {fileID: 8300000, guid: e15b2af32352daa4c9fad51c8c54301b, type: 3}
   minVelocity: 5
   volume: 0.7
---- !u!82 &124471937
+--- !u!82 &124471940
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1924,24 +1942,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &124471938
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 124471925}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 0, g: 0.9307804, b: 1, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
 --- !u!1 &129876196
 GameObject:
   m_ObjectHideFlags: 0
@@ -3657,7 +3657,7 @@ Transform:
   m_GameObject: {fileID: 350311394}
   serializedVersion: 2
   m_LocalRotation: {x: -0.70710677, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -43.7, y: -18, z: -3.6}
+  m_LocalPosition: {x: -17.5, y: -3.8, z: -3.6}
   m_LocalScale: {x: 179.39076, y: 86.460266, z: 0.38328284}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6985,7 +6985,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 16.2, y: 0.9}
+  m_AnchoredPosition: {x: 16.2, y: -9}
   m_SizeDelta: {x: 115.34875, y: 50}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &647040333
@@ -7497,7 +7497,7 @@ Light:
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
-    m_Bias: 0.05
+    m_Bias: 0.088
     m_NormalBias: 0.4
     m_NearPlane: 0.2
     m_CullingMatrixOverride:
@@ -7545,13 +7545,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.2351815, y: -0.117173895, z: 0.4928879, w: 0.8294706}
-  m_LocalPosition: {x: 5.61, y: 69.43, z: -3.46}
+  m_LocalRotation: {x: 0.8296921, y: -0.48118415, z: 0.15851581, w: 0.23440483}
+  m_LocalPosition: {x: 5.61, y: 26.84, z: -0.79}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 30.375, y: 362.488, z: 422.115}
+  m_LocalEulerAnglesHint: {x: 32.787, y: 537.446, z: 599.472}
 --- !u!1001 &705676485
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8088,7 +8088,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shooter: {fileID: 767854022}
   arrowSprite: {fileID: 743639495}
-  maxLength: 1
+  maxLength: 1.5
 --- !u!120 &767854021
 LineRenderer:
   serializedVersion: 2
@@ -9525,7 +9525,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &862556835
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11887,7 +11887,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 11.60001, y: 0.700004}
+  m_AnchoredPosition: {x: 11.60001, y: -9.2}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1040299781
@@ -12870,7 +12870,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 30899afc160370d4394eb0610530f3b9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.23
+      value: 0.11
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 30899afc160370d4394eb0610530f3b9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -13087,7 +13087,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.7, z: -0.00000011703}
-  m_LocalScale: {x: 9.666182, y: 1, z: 9.6506}
+  m_LocalScale: {x: 9.666182, y: 1.1261, z: 9.6506}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 495943487}
@@ -16107,7 +16107,7 @@ GameObject:
   - component: {fileID: 1502700697}
   m_Layer: 0
   m_Name: Audio manager
-  m_TagString: Untagged
+  m_TagString: SFX
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18644,7 +18644,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1772064350
 RectTransform:
   m_ObjectHideFlags: 0

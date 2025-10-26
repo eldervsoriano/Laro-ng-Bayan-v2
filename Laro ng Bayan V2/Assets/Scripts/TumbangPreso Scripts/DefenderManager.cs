@@ -439,12 +439,12 @@ public class DefenderManager : MonoBehaviour
 
     private IEnumerator AIDefenseMonitor(AIPlayer aiPlayer)
     {
-        // Wait for reaction time
-        yield return new WaitForSeconds(aiPlayer.defenseReactionTime * Random.Range(0.8f, 1.2f));
+        // Wait for initial reaction
+        yield return new WaitForSeconds(aiPlayer.defenseReactionTime * Random.Range(0.9f, 1.5f));
 
-        Debug.Log($"🤖 AI started monitoring slider. Target: {targetPosition:F2}, Threshold: {successThreshold:F2}");
+        Debug.Log($"🤖 AI DEFENSE: Monitoring started for Player {aiPlayer.playerNumber}");
 
-        // Calculate AI accuracy
+        // Base defense accuracy
         float currentDefenseAccuracy = aiPlayer.defenseAccuracy;
         if (aiPlayer.scaleDifficulty)
         {
@@ -456,19 +456,25 @@ public class DefenderManager : MonoBehaviour
             currentDefenseAccuracy = Mathf.Lerp(aiPlayer.minAccuracy, aiPlayer.maxAccuracy, difficultyProgress);
         }
 
-        // Calculate AI target with some error
-        float timingError = aiPlayer.perfectTimingWindow * (1f - currentDefenseAccuracy);
-        float aiTargetTiming = targetPosition + Random.Range(-timingError, timingError);
+        // 🎲 1. Random fail chance — sometimes just too slow or off-timed
+        if (Random.value > currentDefenseAccuracy)
+        {
+            float failDelay = Random.Range(0.2f, 0.5f);
+            Debug.Log($"💤 AI failed to react properly! Delaying press by {failDelay:F2}s (Acc: {currentDefenseAccuracy:F2})");
+            yield return new WaitForSeconds(failDelay);
+        }
+
+        // 🎯 2. Increase timing error range
+        float baseError = Mathf.Lerp(0.15f, 0.02f, currentDefenseAccuracy); // 0.15 (bad) to 0.02 (good)
+        float aiTargetTiming = targetPosition + Random.Range(-baseError, baseError);
         aiTargetTiming = Mathf.Clamp01(aiTargetTiming);
 
-        Debug.Log($"🎯 AI target timing: {aiTargetTiming:F2} (accuracy: {currentDefenseAccuracy:F2})");
+        Debug.Log($"🎯 AI target timing set to {aiTargetTiming:F2} (def acc: {currentDefenseAccuracy:F2})");
 
-        // Monitor slider
+        // 🎛️ 3. AI tries to press only once per defense window
         bool hasPressed = false;
-        float timeout = maxCycles * sliderCycleTime + 2f;
         float elapsed = 0f;
-        float lastValue = -1f;
-        bool wasMovingToTarget = false;
+        float timeout = maxCycles * sliderCycleTime + 1.0f;
 
         while (!hasPressed && elapsed < timeout && inputAllowed)
         {
@@ -479,47 +485,35 @@ public class DefenderManager : MonoBehaviour
             }
 
             float currentValue = defenseSlider.value;
-            float distanceToTarget = Mathf.Abs(currentValue - aiTargetTiming);
+            float distance = Mathf.Abs(currentValue - aiTargetTiming);
 
-            // Check if slider is moving towards target
-            bool isMovingToTarget = false;
-            if (lastValue >= 0)
-            {
-                float lastDistance = Mathf.Abs(lastValue - aiTargetTiming);
-                isMovingToTarget = distanceToTarget < lastDistance;
-            }
-
-            // Press when:
-            // 1. Within threshold
-            // 2. Moving towards or at target
-            // 3. Add some randomness based on accuracy
-            float pressThreshold = successThreshold * Random.Range(0.8f, 1.3f);
-
-            if (distanceToTarget <= pressThreshold && (isMovingToTarget || wasMovingToTarget))
+            // Add some delay to simulate "thinking"
+            if (distance <= successThreshold)
             {
                 hasPressed = true;
-                Debug.Log($"✅ AI PRESSED! Target: {targetPosition:F2}, AI aimed: {aiTargetTiming:F2}, Actual: {currentValue:F2}, Distance: {distanceToTarget:F3}");
 
-                // Simulate space press
-                if (inputAllowed)
-                {
-                    bool success = IsSliderInTargetZone();
-                    Debug.Log($"Result: {(success ? "SUCCESS" : "FAIL")}");
-                    EndMiniGame(success);
-                }
+                // 💥 Add random reaction jitter
+                float jitterDelay = Random.Range(0f, 0.1f * (1f - currentDefenseAccuracy));
+                yield return new WaitForSeconds(jitterDelay);
+
+                bool success = IsSliderInTargetZone();
+
+                // Add small chance of missing even when inside target zone
+                if (success && Random.value > currentDefenseAccuracy)
+                    success = false;
+
+                Debug.Log($"🤖 AI pressed (Acc: {currentDefenseAccuracy:F2}) | Target: {targetPosition:F2}, Actual: {currentValue:F2}, Result: {(success ? "SUCCESS" : "FAIL")}");
+                EndMiniGame(success);
             }
 
-            wasMovingToTarget = isMovingToTarget;
-            lastValue = currentValue;
             elapsed += Time.deltaTime;
             yield return null;
         }
 
         if (!hasPressed)
-        {
-            Debug.Log($"⏱️ AI timed out on defense (elapsed: {elapsed:F2}s)");
-        }
+            Debug.Log($"⏱️ AI failed to react in time (Acc: {currentDefenseAccuracy:F2})");
     }
+
 
     private void UpdateTargetLinePosition()
     {

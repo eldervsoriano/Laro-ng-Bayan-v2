@@ -128,7 +128,7 @@ public class AIPlayer : MonoBehaviour
 
     [Header("Defense AI")]
     public float defenseReactionTime = 0.3f; // Seconds delay before AI reacts
-    public float defenseAccuracy = 0.75f; // 0-1, how good AI is at timing
+    public float defenseAccuracy = 0.1f; // 0-1, how good AI is at timing
     public float perfectTimingWindow = 0.05f; // How close AI tries to get to target
 
     [Header("Difficulty Scaling")]

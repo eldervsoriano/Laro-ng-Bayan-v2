@@ -339,7 +339,7 @@ public class AudioManager : MonoBehaviour
 
     private void ReconnectSceneAudioObjects()
     {
-        // Reconnect music source
+        // Reconnect the BGM source if it somehow broke
         if (musicSource == null)
         {
             var foundMusic = GameObject.FindWithTag("MusicSource");
@@ -347,8 +347,12 @@ public class AudioManager : MonoBehaviour
                 musicSource = foundMusic.GetComponent<AudioSource>();
         }
 
-        // Reconnect all tagged SFX sources
-        GameObject[] foundSFXObjects = GameObject.FindGameObjectsWithTag("SFXSource");
+
+        // Clear old null SFX sources to avoid duplicates
+        sfxSources.RemoveAll(src => src == null);
+
+        // Find all SFX-tagged objects in the scene
+        GameObject[] foundSFXObjects = GameObject.FindGameObjectsWithTag("SFX");
         foreach (var obj in foundSFXObjects)
         {
             AudioSource src = obj.GetComponent<AudioSource>();
@@ -478,6 +482,28 @@ public class AudioManager : MonoBehaviour
             }
         }
     }
+
+    private void RefreshSceneSFX()
+    {
+        // Remove any null entries (from destroyed scenes)
+        sfxSources.RemoveAll(src => src == null);
+
+        // Find all SFX sources in the current scene
+        GameObject[] foundSFXObjects = GameObject.FindGameObjectsWithTag("SFXSource");
+
+        foreach (var obj in foundSFXObjects)
+        {
+            AudioSource src = obj.GetComponent<AudioSource>();
+            if (src != null && !sfxSources.Contains(src))
+            {
+                sfxSources.Add(src);
+                src.volume = sfxVolume;
+            }
+        }
+
+        Debug.Log($"[AudioManager] Found {foundSFXObjects.Length} SFX sources in scene {SceneManager.GetActiveScene().name}");
+    }
+
 
     private System.Collections.IEnumerator ReconnectAfterDelay(string sceneName)
     {
