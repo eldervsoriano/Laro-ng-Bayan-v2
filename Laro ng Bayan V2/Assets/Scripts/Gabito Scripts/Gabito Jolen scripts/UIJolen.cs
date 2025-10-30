@@ -254,6 +254,8 @@ public class UIJolen : MonoBehaviour
 
     public void UpdateTurn(int currentPlayer)
     {
+        if (!canShowTurn) return; // Prevent showing during tutorial/countdown
+
         if (turnText != null)
         {
             turnText.gameObject.SetActive(true);

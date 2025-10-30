@@ -32,6 +32,12 @@ public class PamatoShooter : MonoBehaviour
 
     void OnMouseDown()
     {
+        // --- NEW: Prevent input if not this pamato's turn ---
+        int activePlayer = JolenGameManager.Instance.GetCurrentPlayer();
+        if ((activePlayer == 1 && gameObject != JolenGameManager.Instance.player1Pamato) ||
+            (activePlayer == 2 && gameObject != JolenGameManager.Instance.player2Pamato))
+            return;
+
         if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out RaycastHit hit))
         {
             if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Roof"))
@@ -60,6 +66,12 @@ public class PamatoShooter : MonoBehaviour
 
     void OnMouseDrag()
     {
+        // --- NEW: Prevent input if not this pamato's turn ---
+        int activePlayer = JolenGameManager.Instance.GetCurrentPlayer();
+        if ((activePlayer == 1 && gameObject != JolenGameManager.Instance.player1Pamato) ||
+            (activePlayer == 2 && gameObject != JolenGameManager.Instance.player2Pamato))
+            return;
+
         if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out RaycastHit hit))
         {
             if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Roof"))
@@ -90,6 +102,12 @@ public class PamatoShooter : MonoBehaviour
 
     void OnMouseUp()
     {
+        // --- NEW: Prevent input if not this pamato's turn ---
+        int activePlayer = JolenGameManager.Instance.GetCurrentPlayer();
+        if ((activePlayer == 1 && gameObject != JolenGameManager.Instance.player1Pamato) ||
+            (activePlayer == 2 && gameObject != JolenGameManager.Instance.player2Pamato))
+            return;
+
         if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out RaycastHit hit))
         {
             if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Roof"))

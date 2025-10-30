@@ -64,22 +64,17 @@ public class CountdownManager : MonoBehaviour
 
         // Unfreeze time
         Time.timeScale = 1f;
-
-        // Re-enable pause after countdown finishes
         PauseButton.canPause = true;
 
-        // Optional: only Jolen cares about UIJolen, so wrap it in null check
+        // --- Delay showing UIJolen panels a bit ---
+        yield return new WaitForSecondsRealtime(0.5f);
+
         if (UIJolen.Instance != null)
         {
             UIJolen.Instance.SetProfilesVisible(true);
+            UIJolen.Instance.AllowTurnUI();   // add this line
             UIJolen.Instance.UpdateTurn(1);
         }
 
-        // for delay spawning in turumpo
-        TurompoRhythmController[] controllers = FindObjectsOfType<TurompoRhythmController>();
-        foreach (var c in controllers)
-        {
-            c.BeginSpawning();
-        }
     }
 }
