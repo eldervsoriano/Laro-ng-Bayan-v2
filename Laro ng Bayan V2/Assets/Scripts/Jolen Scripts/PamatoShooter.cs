@@ -32,6 +32,8 @@ public class PamatoShooter : MonoBehaviour
 
     void OnMouseDown()
     {
+        if (CountdownManager.InputLocked) return; // prevent aiming
+
         // --- NEW: Prevent input if not this pamato's turn ---
         int activePlayer = JolenGameManager.Instance.GetCurrentPlayer();
         if ((activePlayer == 1 && gameObject != JolenGameManager.Instance.player1Pamato) ||
@@ -66,6 +68,8 @@ public class PamatoShooter : MonoBehaviour
 
     void OnMouseDrag()
     {
+        if (CountdownManager.InputLocked) return; // prevent aiming
+
         // --- NEW: Prevent input if not this pamato's turn ---
         int activePlayer = JolenGameManager.Instance.GetCurrentPlayer();
         if ((activePlayer == 1 && gameObject != JolenGameManager.Instance.player1Pamato) ||
@@ -102,6 +106,8 @@ public class PamatoShooter : MonoBehaviour
 
     void OnMouseUp()
     {
+        if (CountdownManager.InputLocked) return; // prevent aiming
+
         // --- NEW: Prevent input if not this pamato's turn ---
         int activePlayer = JolenGameManager.Instance.GetCurrentPlayer();
         if ((activePlayer == 1 && gameObject != JolenGameManager.Instance.player1Pamato) ||

@@ -36,6 +36,7 @@ public class TutorialPanel : MonoBehaviour
 
     void Start()
     {
+            
         PauseButton.canPause = false;
         countdownManager = FindObjectOfType<CountdownManager>();
 
@@ -44,6 +45,8 @@ public class TutorialPanel : MonoBehaviour
         {
             tutorialPanel.SetActive(true);
             Time.timeScale = 0f; // Pause game during tutorial
+            CountdownManager.InputLocked = true; // Lock pamato controls during tutorial
+
             currentIndex = 0;
             ShowPage(currentIndex);
         }
@@ -153,6 +156,8 @@ public class TutorialPanel : MonoBehaviour
         PauseButton.canPause = true;
 
         TurompoGameManager.IsInputLocked = false; // unlock input
+        CountdownManager.InputLocked = false; // Unlock inputs
+
 
 
         // Start countdown with a slight delay (2 seconds for smoother transition)

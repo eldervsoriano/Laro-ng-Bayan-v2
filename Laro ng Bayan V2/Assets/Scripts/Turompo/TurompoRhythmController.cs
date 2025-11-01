@@ -829,6 +829,7 @@ public class TurompoRhythmController : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("Rythm Controller Script Started (From void start)");
         if (playerIndex == 1)
             playerKeys = new KeyCode[] { KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D };
         else
@@ -851,8 +852,12 @@ public class TurompoRhythmController : MonoBehaviour
     // Public method you call AFTER countdown ends. Also Gabito edits
     public void BeginSpawning()
     {
+        Debug.Log("BeginSpawning() called.");
         if (isSpawning)
+        {
+            Debug.Log("Already spawning.");
             return; // Already spawning — prevent duplicates
+        }
 
         isSpawning = true;
         spawnRoutine = StartCoroutine(SpawnNotesRoutine());
@@ -872,10 +877,12 @@ public class TurompoRhythmController : MonoBehaviour
     // Gabito edits
     IEnumerator SpawnNotesRoutine()
     {
+        Debug.Log("SpawnNotesRoutine started");
         yield return new WaitForSeconds(1f);
 
         while (TurompoGameManager.Instance != null && TurompoGameManager.Instance.IsGameActive())
         {
+            Debug.Log("Spawning note...");
             SpawnRandomNote();
             yield return new WaitForSeconds(spawnRate);
         }

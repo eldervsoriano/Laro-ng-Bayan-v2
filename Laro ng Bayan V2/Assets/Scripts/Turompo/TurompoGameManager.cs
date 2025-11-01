@@ -1001,6 +1001,14 @@ public class TurompoGameManager : MonoBehaviour
 
         // Start the progressive difficulty system
         StartCoroutine(ProgressiveDifficulty());
+
+        // Start rhythm spawning for both players
+        if (player1Rhythm != null)
+            player1Rhythm.BeginSpawning();
+
+        if (player2Rhythm != null)
+            player2Rhythm.BeginSpawning();
+
     }
 
     // Method called by pre-challenge when it wants to start the main game

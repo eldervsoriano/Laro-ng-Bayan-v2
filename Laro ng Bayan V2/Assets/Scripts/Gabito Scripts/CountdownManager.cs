@@ -12,6 +12,8 @@ public class CountdownManager : MonoBehaviour
     [Header("Gameplay References")]
     [Tooltip("Drop any scripts that should be disabled during countdown.")]
     public MonoBehaviour[] scriptsToDisable; // works for any component
+    public static bool InputLocked = false; // add this at the top of CountdownManager
+
 
     [Header("Options")]
     [Tooltip("Check if this level has a tutorial panel.")]
@@ -43,6 +45,8 @@ public class CountdownManager : MonoBehaviour
         foreach (var script in scriptsToDisable)
             if (script != null) script.enabled = false;
 
+        CountdownManager.InputLocked = true; // Lock inputs globally
+
         countdownPanel.SetActive(true);
 
         float timer = countdownTime;
@@ -65,6 +69,7 @@ public class CountdownManager : MonoBehaviour
         // Unfreeze time
         Time.timeScale = 1f;
         PauseButton.canPause = true;
+        CountdownManager.InputLocked = false; // Unlock inputs
 
         // --- Delay showing UIJolen panels a bit ---
         yield return new WaitForSecondsRealtime(0.5f);
