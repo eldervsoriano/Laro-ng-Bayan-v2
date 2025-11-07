@@ -790,6 +790,7 @@ public class TurompoGameManager : MonoBehaviour
     public static bool IsInputLocked = false;
 
 
+
     private void Awake()
     {
         // Singleton pattern
@@ -1121,12 +1122,12 @@ public class TurompoGameManager : MonoBehaviour
             winnerName = enableSinglePlayerMode ? "AI" : "Player 2";
         }
 
-        if (winnerText != null)
-            winnerText.text = winnerName + " Wins!";
+        // Stop all coroutines to prevent further difficulty increases
+        StopAllCoroutines();
 
-        // Make sure the game over panel is active
-        if (gameOverPanel != null)
-            gameOverPanel.SetActive(true);
+        // Delay showing winner panel
+        StartCoroutine(ShowWinnerPanelWithDelay(winnerName));
+
 
         Debug.Log("Game Over: " + winnerName + " Wins!");
 
@@ -1137,8 +1138,7 @@ public class TurompoGameManager : MonoBehaviour
         }
         /// GABITO, ITO LANG DINAGDAG KO
 
-        // Stop all coroutines to prevent further difficulty increases
-        StopAllCoroutines();
+
     }
 
     public void GameTimeOver()
@@ -1182,12 +1182,11 @@ public class TurompoGameManager : MonoBehaviour
                 player2Torompo.StopSpinning();
         }
 
-        if (winnerText != null)
-            winnerText.text = winnerName + " Wins!";
+        // Stop progression
+        StopAllCoroutines();
 
-        // Make sure the game over panel is active
-        if (gameOverPanel != null)
-            gameOverPanel.SetActive(true);
+        // Delay showing winner panel
+        StartCoroutine(ShowWinnerPanelWithDelay(winnerName));
 
         Debug.Log("Time's Up! " + winnerName + " Wins!");
 
@@ -1204,8 +1203,7 @@ public class TurompoGameManager : MonoBehaviour
         }
         /// GABITO, ITO LANG DINAGDAG KO
 
-        // Stop progression
-        StopAllCoroutines();
+
     }
 
     public void RestartGame()
@@ -1295,6 +1293,21 @@ public class TurompoGameManager : MonoBehaviour
             Debug.Log($"Difficulty increased to level {currentLevel}");
         }
     }
+
+    private IEnumerator ShowWinnerPanelWithDelay(string winnerName)
+    {
+        // Optional: you can play a sound or animation here before showing the panel
+        yield return new WaitForSeconds(4); // type the second delay before showing panel
+
+        if (winnerText != null)
+            winnerText.text = winnerName + " Wins!";
+
+        if (gameOverPanel != null)
+            gameOverPanel.SetActive(true);
+
+        Debug.Log("Game Over: " + winnerName + " Wins!");
+    }
+
 
     // Public methods for external AI configuration
     public void SetSinglePlayerMode(bool enabled)
