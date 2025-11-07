@@ -1,21 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using UnityEngine.Video;
 
 public class CutsceneManager : MonoBehaviour
 {
     [Header("Cutscene Settings")]
-    public Image displayImage;           // The UI Image that displays the cutscene visuals
-    public Sprite[] cutsceneSprites;     // The sequence of images
-    public float displayDuration = 3f;   // How long each image shows before changing
+    public VideoPlayer videoPlayer;           // Assign your VideoPlayer component
+    public string nextSceneName = "LoadingScene";  // Next scene to load after video or skip
 
     [Header("UI")]
-    public Button skipButton;            // Button for skipping the cutscene
-    public string nextSceneName = "LoadingScene";  // Scene to load after cutscene or skip
+    public Button skipButton;                 // Button to skip the cutscene
 
-    private int currentIndex = 0;
     private bool isSkipping = false;
 
     private void Start()
@@ -23,34 +19,32 @@ public class CutsceneManager : MonoBehaviour
         if (skipButton != null)
             skipButton.onClick.AddListener(SkipCutscene);
 
-        if (cutsceneSprites.Length > 0)
+        if (videoPlayer != null)
         {
-            displayImage.sprite = cutsceneSprites[0];
-            StartCoroutine(PlayCutscene());
+            videoPlayer.loopPointReached += OnVideoEnd;  // Detect when the video finishes
+            videoPlayer.Play();                          // Start playback
         }
         else
         {
-            Debug.LogWarning("No cutscene sprites assigned!");
+            Debug.LogWarning("No VideoPlayer assigned!");
+            LoadNextScene(); // fail-safe
         }
     }
 
-    private IEnumerator PlayCutscene()
+    private void OnVideoEnd(VideoPlayer vp)
     {
-        while (currentIndex < cutsceneSprites.Length && !isSkipping)
-        {
-            displayImage.sprite = cutsceneSprites[currentIndex];
-            yield return new WaitForSeconds(displayDuration);
-            currentIndex++;
-        }
-
-        LoadNextScene();
+        if (!isSkipping)
+            LoadNextScene();
     }
 
     public void SkipCutscene()
     {
         if (isSkipping) return;
         isSkipping = true;
-        StopAllCoroutines();
+
+        if (videoPlayer.isPlaying)
+            videoPlayer.Stop();
+
         LoadNextScene();
     }
 
