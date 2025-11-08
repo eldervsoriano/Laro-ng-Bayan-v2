@@ -2023,7 +2023,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tickSound: {fileID: 8300000, guid: e15b2af32352daa4c9fad51c8c54301b, type: 3}
   minVelocity: 5
-  volume: 0.7
+  localVolumeMultiplier: 0.7
+  customSFXSource: {fileID: 0}
 --- !u!82 &124471940
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6625,13 +6626,13 @@ GameObject:
   - component: {fileID: 538721365}
   - component: {fileID: 538721364}
   - component: {fileID: 538721363}
-  m_Layer: 0
-  m_Name: Roof (1)
+  m_Layer: 11
+  m_Name: Invisible roof
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &538721361
 Transform:
   m_ObjectHideFlags: 0
@@ -7282,8 +7283,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.44313726, g: 0.21568628, b: 0, a: 0.392}
-  m_RaycastTarget: 1
+  m_Color: {r: 0.6037736, g: 0.30410472, b: 0.019935932, a: 0.392}
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -8707,7 +8708,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tickSound: {fileID: 8300000, guid: e15b2af32352daa4c9fad51c8c54301b, type: 3}
   minVelocity: 5
-  volume: 0.7
+  localVolumeMultiplier: 0.7
+  customSFXSource: {fileID: 0}
 --- !u!82 &767854030
 AudioSource:
   m_ObjectHideFlags: 0
@@ -19905,7 +19907,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.111590445, g: 0, b: 0.9547169, a: 0.2784314}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -20621,7 +20623,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -21993,7 +21995,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:

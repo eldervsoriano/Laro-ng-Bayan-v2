@@ -355,15 +355,9 @@ public class JolenGameManager : MonoBehaviour
 
     private void SetActivePlayer(int player)
     {
-        // Both pamatos always stay visible
-        player1Pamato.SetActive(true);
-        player2Pamato.SetActive(true);
-
-        // Stop both before switching
         StopPamato(player1Pamato);
         StopPamato(player2Pamato);
 
-        // Disable all controls first
         if (player1Pamato.TryGetComponent<PamatoShooter>(out var shooter1))
             shooter1.enabled = false;
 
@@ -373,45 +367,42 @@ public class JolenGameManager : MonoBehaviour
         if (player2Pamato.TryGetComponent<PamatoAI>(out var aiShooter))
             aiShooter.enabled = false;
 
-        // Enable only the current player's controls
+        StartCoroutine(DelayedActivatePlayer(player)); //  new safe activation
+    }
+
+    private IEnumerator DelayedActivatePlayer(int player)
+    {
+        yield return new WaitForFixedUpdate(); // ensures physics frame completes
+
         if (player == 1)
         {
-            if (shooter1 != null)
-            {
-                shooter1.enabled = true;
-                shooter1.ResetTurn();
-            }
+            var shooter = player1Pamato.GetComponent<PamatoShooter>();
+            shooter.enabled = true;
+            shooter.ResetTurn();
         }
-        else if (player == 2)
+        else
         {
-            UpdatePlayer2Controls(); // ensure correct AI/manual setup
-
             if (isAIEnabled)
             {
-                if (player2Pamato.TryGetComponent<PamatoAI>(out var ai))
-                {
-                    ai.enabled = true;
-                    ai.ResetTurn();
-                    Invoke(nameof(TriggerAITurn), 0.5f);
-                }
+                var ai = player2Pamato.GetComponent<PamatoAI>();
+                ai.enabled = true;
+                ai.ResetTurn();
+                Invoke(nameof(TriggerAITurn), 0.5f);
             }
             else
             {
-                if (shooter2 != null)
-                {
-                    shooter2.enabled = true;
-                    shooter2.ResetTurn();
-                }
+                var shooter = player2Pamato.GetComponent<PamatoShooter>();
+                shooter.enabled = true;
+                shooter.ResetTurn();
             }
         }
 
-        // Update UI
         UIJolen.Instance.UpdateTurn(player);
-
         currentRb = null;
         isWaitingForStop = false;
         lowSpeedTimer = 0f;
     }
+
 
     private void StopPamato(GameObject pamato)
     {
