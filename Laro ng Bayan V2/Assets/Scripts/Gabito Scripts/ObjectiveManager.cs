@@ -1,6 +1,7 @@
 using System;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ObjectiveManager : MonoBehaviour
 {
@@ -29,6 +30,12 @@ public class ObjectiveManager : MonoBehaviour
     public bool spiderDerbyCompleted;
     public bool showFinalPanel; // new flag
 
+    //[Header("Final Cutscene")]
+    //private bool isCutsceneLoading = false;
+    //private bool pendingFinalCutscene = false;
+
+
+
     // Event for quest updates
     public event Action<string> OnQuestUpdated;
 
@@ -45,6 +52,7 @@ public class ObjectiveManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
 
     private void OnApplicationQuit()
     {
@@ -172,11 +180,51 @@ public class ObjectiveManager : MonoBehaviour
         showFinalPanel = true; // set the flag
         Debug.Log("Spider Derby complete! You’ve finished all quests!");
 
+
         OnQuestUpdated?.Invoke("<color=yellow>Congratulations!</color> You’ve completed all Larong Pinoy challenges!");
 
         SaveProgress();
 
+        //// Instead of loading the cutscene now, set a flag to play later
+        //PlayerPrefs.SetInt("ShouldPlayFinalCutscene", 1);
+        //PlayerPrefs.Save();
+
+        //// === Play the Final Cutscene ===
+        //LoadFinalCutscene();
     }
+
+    //private void OnEnable()
+    //{
+    //    UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
+    //}
+
+    //private void OnDisable()
+    //{
+    //    UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
+    //}
+
+    //private void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode mode)
+    //{
+    //    // When the player returns to the hub after Spider Derby
+    //    if (scene.name == "GabitoOpenWorld" && pendingFinalCutscene)
+    //    {
+    //        pendingFinalCutscene = false; // prevent looping
+    //        LoadFinalCutscene();
+    //    }
+    //}
+
+    //private void LoadFinalCutscene()
+    //{
+    //    // Optional: if you want to prevent multiple triggers
+    //    if (isCutsceneLoading) return;
+    //    isCutsceneLoading = true;
+
+    //    // Make sure you have a scene called "FinalCutscene"
+    //    UnityEngine.SceneManagement.SceneManager.LoadScene("FinalCutscene");
+    //}
+
+
+
 
 
     // == DELETE ALL PROGRESS ==
@@ -199,8 +247,11 @@ public class ObjectiveManager : MonoBehaviour
         spiderDerbyCompleted = false;
         showFinalPanel = false;
 
-        // Clear saves
-        PlayerPrefs.DeleteAll();
+        //isCutsceneLoading = false;
+        //pendingFinalCutscene = false;
+
+    // Clear saves
+    PlayerPrefs.DeleteAll();
         PlayerPrefs.Save();
 
         Debug.Log("Progress has been reset.");
