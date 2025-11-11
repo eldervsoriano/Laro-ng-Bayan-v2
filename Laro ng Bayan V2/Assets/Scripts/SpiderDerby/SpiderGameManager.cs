@@ -990,6 +990,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class SpiderGameManager : MonoBehaviour
 {
@@ -1033,6 +1034,13 @@ public class SpiderGameManager : MonoBehaviour
     [SerializeField] private float damageAnimationDelay = 0.3f;
     [SerializeField] private float deathAnimationDelay = 0.5f;
     [SerializeField] private float drawDelay = 2.0f;
+
+    [Header("Scene Names")]
+    public string exploreHubSceneName = "GabitoOpenWorld";
+    public string finalCutsceneSceneName = "FinalCutscene";
+
+    private bool shouldPlayFinalCutscene = false;
+
 
     private bool gameOver = false;
     private int round = 1;
@@ -1374,7 +1382,7 @@ public class SpiderGameManager : MonoBehaviour
     }
 
     // Check if game is over
-    private void CheckGameOver()
+    public void CheckGameOver()
     {
         if (player1Health <= 0)
         {
@@ -1405,11 +1413,35 @@ public class SpiderGameManager : MonoBehaviour
         }
 
         // At the end of CheckGameOver(), when the game is truly over:
-        if (gameOver && ObjectiveManager.Instance != null)
+        if (gameOver)
         {
-            ObjectiveManager.Instance.CompleteSpiderDerby();
+            shouldPlayFinalCutscene = true;
+
+            if (ObjectiveManager.Instance != null)
+            {
+                ObjectiveManager.Instance.CompleteSpiderDerby();
+                Debug.Log("Spider Derby complete! ObjectiveManager updated and cutscene flag set.");
+            }
+
+            Debug.Log("Spider Derby complete — will play final cutscene after returning to hub.");
+        }
+
+
+    }
+
+    public void ReturnToHub()
+    {
+        // If the final cutscene should be played after finishing Spider Derby
+        if (shouldPlayFinalCutscene)
+        {
+            SceneManager.LoadScene(finalCutsceneSceneName);
+        }
+        else
+        {
+            SceneManager.LoadScene(exploreHubSceneName);
         }
     }
+
 
     // Method to start a new round
     void StartNewRound()

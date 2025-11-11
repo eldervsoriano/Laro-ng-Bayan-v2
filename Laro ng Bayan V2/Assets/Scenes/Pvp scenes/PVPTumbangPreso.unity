@@ -23878,7 +23878,7 @@ MonoBehaviour:
   promptText: {fileID: 1941358280}
   sliderCycleTime: 1
   successThreshold: 0.1
-  maxCycles: 2
+  maxCycles: 4
   minTargetPosition: 0.1
   maxTargetPosition: 0.9
   minCycleTime: 0.7
@@ -24692,6 +24692,51 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -8264766115119967290, guid: 83de38e8f1087884084b8a6941deaf17, type: 3}
+--- !u!1 &1959308712
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1959308714}
+  - component: {fileID: 1959308715}
+  m_Layer: 0
+  m_Name: Tumbang debug tool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1959308714
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1959308712}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -11.08686, y: -0.5375492, z: -2.119746}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1959308715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1959308712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a75d5239eeb616346b47338fa7e7129f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toggleKey: 291
 --- !u!1 &1968709989
 GameObject:
   m_ObjectHideFlags: 0
@@ -26546,3 +26591,4 @@ SceneRoots:
   - {fileID: 1399710335}
   - {fileID: 415836394}
   - {fileID: 1136406161}
+  - {fileID: 1959308714}

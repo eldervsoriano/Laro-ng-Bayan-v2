@@ -53,7 +53,7 @@ public class SimpleCharacterController : MonoBehaviour
             characterController.radius = controllerRadius;
             characterController.skinWidth = controllerSkinWidth;
             characterController.stepOffset = controllerStepOffset;
-            characterController.center = new Vector3(0, controllerHeight / 2, 0);
+            characterController.center = new Vector3(0, controllerHeight / 1.6f, 0);
         }
 
         // If animator wasn't assigned in inspector, try to get it

@@ -293,15 +293,29 @@ public class JolenGameManager : MonoBehaviour
     {
         if (isWaitingForStop && currentRb != null)
         {
-            if (currentRb.velocity.magnitude > 0.1f)
+            // Detect any movement start
+            if (currentRb.velocity.magnitude > 0.05f)
                 hasStartedMoving = true;
 
+            // If the pamato never moved at all (weak drag or bug), end the turn anyway
+            if (!hasStartedMoving && !Input.GetMouseButton(0))
+            {
+                lowSpeedTimer += Time.deltaTime;
+                if (lowSpeedTimer > 1.5f)
+                {
+                    Debug.Log("Pamato never moved, forcing end turn...");
+                    ForceStopPamato();
+                    EndTurn();
+                    return;
+                }
+            }
+
+            // Regular stall detection
             if (hasStartedMoving)
             {
                 if (currentRb.velocity.magnitude < lowSpeedThreshold)
                 {
                     lowSpeedTimer += Time.deltaTime;
-
                     if (lowSpeedTimer >= stallTimeLimit)
                     {
                         Debug.Log("Pamato stalled too long, ending turn...");
@@ -315,19 +329,26 @@ public class JolenGameManager : MonoBehaviour
                 }
             }
 
+            // Natural stop detection
             if (hasStartedMoving && currentRb.velocity.magnitude < 0.05f)
             {
                 Debug.Log("Pamato stopped naturally, ending turn...");
-                isWaitingForStop = false;
-                hasStartedMoving = false;
-                lowSpeedTimer = 0f;
+                ForceStopPamato();
                 EndTurn();
             }
         }
+
     }
 
     public void NotifyShot(Rigidbody rb)
     {
+        if (isWaitingForStop)
+        {
+            Debug.LogWarning("Double NotifyShot detected, forcing reset");
+            EndTurn();
+            return;
+        }
+
         currentRb = rb;
         isWaitingForStop = true;
         hasStartedMoving = false;
