@@ -42,7 +42,7 @@ public class UIManager : MonoBehaviour
 
     private IEnumerator ShowWinnerWithDelay(int player)
     {
-        yield return new WaitForSeconds(2f); // suspense before victory screen
+        yield return new WaitForSeconds(1f); // suspense before victory screen
 
         winnerPanel.SetActive(true);
         winnerText.text = $"Player {player} Wins!";
