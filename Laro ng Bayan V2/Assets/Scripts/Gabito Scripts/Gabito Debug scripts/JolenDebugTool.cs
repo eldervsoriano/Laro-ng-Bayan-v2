@@ -83,7 +83,7 @@ public class JolenDebugTool : MonoBehaviour
         GUILayout.EndHorizontal();
 
         GUILayout.Space(10);
-        GUILayout.Label("<i>Press F9 to toggle</i>");
+        GUILayout.Label("<i>Press F10 to toggle</i>");
 
         GUILayout.EndVertical();
         GUILayout.EndScrollView();

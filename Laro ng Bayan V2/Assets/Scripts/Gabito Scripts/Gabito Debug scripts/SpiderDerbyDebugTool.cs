@@ -10,7 +10,7 @@ public class SpiderDerbyDebugTool : MonoBehaviour
     private Vector2 scrollPos;
     private SpiderGameManager gameManager;
 
-    private Rect windowRect = new Rect(350, 20, 340, 480);
+    private Rect windowRect = new Rect(350, 20, 360, 500);
 
     private void Start()
     {
@@ -27,7 +27,6 @@ public class SpiderDerbyDebugTool : MonoBehaviour
     {
         if (!showDebugPanel || gameManager == null) return;
 
-        // Wrap the window in try/catch so layout mismatches don’t crash GUI
         try
         {
             windowRect = GUI.Window(654321, windowRect, DrawWindow, "Spider Derby Debug Tool");
@@ -42,7 +41,7 @@ public class SpiderDerbyDebugTool : MonoBehaviour
     {
         try
         {
-            scrollPos = GUILayout.BeginScrollView(scrollPos, GUILayout.Width(320), GUILayout.Height(400));
+            scrollPos = GUILayout.BeginScrollView(scrollPos, GUILayout.Width(windowRect.width - 10), GUILayout.Height(windowRect.height - 20));
             GUILayout.BeginVertical("box");
 
             GUILayout.Label("<b>Player Settings</b>");
@@ -69,13 +68,24 @@ public class SpiderDerbyDebugTool : MonoBehaviour
             GUILayout.Space(5);
             GUILayout.Label("Game Mode: " + (gameManager.isSinglePlayerMode ? "Single Player" : "Two Player"));
 
+            GUILayout.Space(10);
+            GUILayout.Label("<b>Reduce Health</b>");
+            GUILayout.BeginHorizontal();
+            if (GUILayout.Button("Damage P2", GUILayout.Height(25)))
+                ForceWin(1);
+            if (GUILayout.Button("Damage P1", GUILayout.Height(25)))
+                ForceWin(2);
+            GUILayout.EndHorizontal();
+
+            GUILayout.Space(10);
+            GUILayout.Label("<i>Press F10 to toggle</i>");
+
             GUILayout.EndVertical();
             GUILayout.EndScrollView();
         }
         catch (System.Exception e)
         {
             Debug.LogWarning("SpiderDerbyDebugTool GUI Error: " + e.Message);
-            // Make sure to always close any open layout sections if something failed
             GUILayout.EndScrollView();
         }
 
@@ -119,5 +129,19 @@ public class SpiderDerbyDebugTool : MonoBehaviour
         }
         return f;
     }
-}
 
+    private void ForceWin(int player)
+    {
+        if (player == 1)
+        {
+            gameManager.TakeDamage(2); // Reduce P2 to 0 health
+            gameManager.CheckGameOver();
+        }
+        else
+        {
+            gameManager.TakeDamage(1); // Reduce P1 to 0 health
+            gameManager.CheckGameOver();
+        }
+        Debug.Log($"Forced Player {player} to win!");
+    }
+}
